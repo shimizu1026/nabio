@@ -102,6 +102,13 @@
 		z-index: -1;
 		/* display: none; */
 
+		img {
+			@media (max-width: 768px) {
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
 		.copy {
 			position: absolute;
 			top: 24%;
@@ -112,13 +119,6 @@
 
 			@media (max-width: 768px) {
 				gap: 1rem;
-			}
-
-			img {
-				@media (max-width: 768px) {
-					height: 100%;
-					object-fit: cover;
-				}
 			}
 
 			.text {
