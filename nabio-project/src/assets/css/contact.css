@@ -1,0 +1,260 @@
+.sub_page {
+	&::before {
+		background-image: url(../images/heading_contact.jpg);
+	}
+}
+
+.inner_contact {
+	max-width: var(--main-width);
+	width: 100%;
+	margin-inline: auto;
+
+	@media (max-width: 768px) {
+		padding: 0 1rem;
+	}
+}
+
+.title_center {
+	font-size: calc(30 * var(--rem-ratio));
+	text-align: center;
+}
+
+.form_wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	column-gap: 64px;
+	margin-top: 64px;
+
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.form_steps {
+	width: 100%;
+	max-width: 200px;
+
+	@media (max-width: 768px) {
+		margin-inline: auto;
+		margin-bottom: 32px;
+	}
+}
+
+.form_step_list {
+	display: flex;
+	flex-direction: column;
+	row-gap: 40px;
+}
+
+.form_step {
+	width: 200px;
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	column-gap: 10px;
+	color: var(--white-color);
+	background-color: var(--base-color);
+	border-radius: 100vmax;
+	padding: 10px;
+	position: relative;
+
+	.en {
+		font-family: var(--font-family-en);
+	}
+
+	&:not(:last-child)::after {
+		content: "";
+		background-image: url(../images/icon_down_arrow.svg);
+		background-repeat: no-repeat;
+		width: 22px;
+		height: 22px;
+		position: absolute;
+		bottom: -30px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.select {
+	background-color: var(--accent-color);
+}
+
+.complete {
+	.form_steps {
+		display: grid;
+		place-content: center;
+	}
+}
+
+.form {
+	width: 100%;
+	max-width: 850px;
+	display: grid;
+	row-gap: 50px;
+
+	.form_row {
+		display: flex;
+		flex-direction: column;
+	}
+
+	input,
+	textarea {
+		border: 1px solid var(--border-color);
+		border-radius: 4px;
+	}
+
+	input {
+		height: 70px;
+	}
+
+	label {
+		display: flex;
+		align-items: center;
+		column-gap: 8px;
+		margin-bottom: 30px;
+	}
+
+	.required {
+		&::before {
+			content: '必須';
+			color: var(--white-color);
+			background-color: var(--accent-color);
+			border-radius: 4px;
+			width: 60px;
+			padding: 5px 14px;
+			text-align: center;
+			line-height: 1;
+		}
+	}
+
+	.optional {
+		&::before {
+			content: '任意';
+			color: var(--white-color);
+			background-color: #A9A9A9;
+			border-radius: 4px;
+			width: 60px;
+			padding: 5px 14px;
+			text-align: center;
+			line-height: 1;
+		}
+	}
+}
+
+.agree_checkbox {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 8px;
+	margin-top: 1rem;
+}
+
+.agree_checkbox input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.agree_checkbox label {
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+	margin-bottom: 0;
+
+	padding-left: 28px;
+	position: relative;
+	cursor: pointer;
+}
+
+/* カスタムチェックボックス本体（ラベルの::beforeで表現） */
+.agree_checkbox label::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+
+	/* サイズと枠線 */
+	width: 20px;
+	height: 20px;
+	border: 1px solid var(--base-color);
+	border-radius: 4px;
+	background-color: var(--white-color);
+}
+
+/* チェックが入った時のスタイル (ラベルの::afterでチェックマークを表現) */
+.agree_checkbox input[type="checkbox"]:checked+label::after {
+	content: '✓';
+	/* チェックマークの文字 */
+	color: var(--white-color);
+	line-height: 1;
+	position: absolute;
+	left: 4px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/* チェックが入った時のボックスの色 */
+.agree_checkbox input[type="checkbox"]:checked+label::before {
+	background-color: var(--base-color);
+	border-color: var(--base-color);
+}
+
+/* プライバシーポリシーの表示エリア */
+.privacy_policy_box {
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	height: 250px;
+	overflow-y: scroll;
+	padding: 20px;
+	background-color: var(--white-color);
+}
+
+.privacy_policy_content {
+	display: grid;
+	row-gap: 20px;
+}
+
+.privacy_policy_title {
+	font-size: calc(18 * var(--rem-ratio));
+}
+
+.circle_list {
+	list-style: disc;
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	padding-left: 2rem;
+}
+
+.privacy_policy_text {
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	text-indent: 1rem;
+}
+
+
+.contact_info {
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	margin-top: 10px;
+}
+
+.info_row {
+	display: flex;
+
+	dt {
+		font-weight: 400;
+	}
+}
+
+.confirm_buttons {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 32px;
+	margin-top: 64px;
+}

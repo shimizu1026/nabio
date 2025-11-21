@@ -1,0 +1,850 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+
+/* ===共通設定==== */
+
+:root {
+	--main-width: 1200px;
+	/* color */
+	--accent-color: #DB3B3F;
+	--base-color: #141414;
+	--white-color: #fff;
+	--border-color: #A9A9A9;
+	--gray-color: #F6F6F6;
+	--gold-color: #C3AC80;
+
+	/* font */
+	--font-color: #141414;
+	--font-family-en: "Montserrat", sans-serif;
+	--font-family-noto-sans: "Noto Sans JP", sans-serif;
+
+	--heading03: calc(40 * var(--rem-ratio));
+	--heading04: calc(32 * var(--rem-ratio));
+
+	/* Not Sansのフォントウエイト */
+	--font-weight-r: 400;
+	--font-weight-m: 500;
+	--font-weight-b: 600;
+
+	--base-font-size: 16;
+	--rem-ratio: calc(1rem / var(--base-font-size));
+	/* アニメーション */
+	--hover: all 0.3s ease-in-out;
+}
+
+.center {
+	margin-inline: auto;
+}
+
+.mb8 {
+	margin-bottom: 0.5rem;
+}
+
+.mt36 {
+	margin-top: 36px;
+}
+
+.mt40 {
+	margin-top: 40px;
+}
+
+.mt48 {
+	margin-top: 3rem;
+}
+
+.mt64 {
+	margin-top: 4rem;
+}
+
+.fs18 {
+	font-size: calc(18 * var(--rem-ratio));
+}
+
+img {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
+}
+
+html {
+	width: 100%;
+}
+
+body {
+	color: var(--font-color);
+	font-family: var(--font-family-noto-sans);
+	font-size: calc(16 * var(--rem-ratio));
+	font-feature-settings: "palt";
+	width: 100%;
+	height: 100%;
+}
+
+/* 画面幅が 1600px 以下になったら、主要なコンテンツ幅を 980 を基準に計算した値に設定する。 */
+@media (max-width: 1600px) {
+	:root {
+		--main-width: calc(980 * var(--rem-ratio));
+	}
+}
+
+/* 画面幅が 1350px 以下になったら、主要なコンテンツ幅を 800 を基準に計算した値に設定する。（1600pxの時の設定を上書き） */
+@media (max-width: 1350px) {
+	:root {
+		--main-width: calc(800 * var(--rem-ratio));
+	}
+}
+
+/* 画面幅が 900px 以下になったら、主要なコンテンツ幅を**画面いっぱいの100%**に設定する。 */
+@media (max-width: 900px) {
+	:root {
+		--main-width: 100%;
+	}
+}
+
+/* 画面幅が 768px 以下になったら、主要なコンテンツ幅を**画面いっぱいの100%**に設定する。（900pxの時の設定を再確認/維持） */
+@media (max-width: 768px) {
+	:root {
+		--main-width: 100%;
+	}
+}
+
+.pc_only {
+	display: block;
+}
+
+@media (max-width: 768px) {
+	.pc_only {
+		display: none;
+	}
+}
+
+.sp_only {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.sp_only {
+		display: block;
+	}
+}
+
+/* PCからは電話を発信できないようにする */
+@media screen and (min-width: 768px) {
+	a[href^='tel:'] {
+		pointer-events: none;
+	}
+}
+
+.button {
+	width: 100%;
+	max-width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	border-radius: 100vmax;
+	color: var(--white-color);
+	background-color: var(--base-color);
+	padding: 16px 0;
+}
+
+/* ヘッダー */
+.header {
+	width: 100%;
+	height: 80px;
+	position: fixed;
+	padding-top: 30px;
+	padding-right: 40px;
+	padding-left: 40px;
+	z-index: 99;
+
+	@media (max-width: 768px) {
+		padding-top: 1rem;
+		padding-right: 1rem;
+		padding-left: 1rem;
+	}
+
+	.header_inner {
+		background-color: var(--white-color);
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 15px 45px;
+
+		@media (max-width: 768px) {
+			width: 100%;
+			padding: 15px;
+		}
+
+		.header_logo {
+			img {
+				width: 114px;
+				height: auto;
+
+				@media (max-width: 768px) {
+					width: 70px;
+				}
+			}
+		}
+
+		.nav_wrapper {
+			display: flex;
+			align-items: center;
+			gap: 32px;
+
+			.nav {
+				@media (max-width: 768px) {
+					display: none;
+				}
+			}
+
+			.nav_list {
+				display: flex;
+				gap: 40px;
+			}
+
+			.nav_item {
+				display: grid;
+			}
+
+			.nav_link {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 4px;
+
+				.en {
+					font-size: calc(14 * var(--rem-ratio));
+					font-family: var(--font-family-en);
+				}
+			}
+		}
+
+
+	}
+}
+
+.header_contact {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+
+	.header_contact_inner {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+
+
+		@media (max-width: 768px) {
+			display: none;
+		}
+
+		.tel {
+			font-size: 24px;
+			font-family: var(--font-family-en);
+			font-weight: 500;
+			display: grid;
+			grid-auto-flow: column;
+			gap: 8px;
+
+			@media (max-width: 1400px) {
+				display: none;
+			}
+		}
+
+		&::before {
+			background-image: url(../images/icon_tel.svg);
+			background-repeat: no-repeat;
+			width: 32px;
+			height: 32px;
+			content: "";
+			display: block;
+		}
+
+		.mail {
+			background-color: var(--accent-color);
+			background-repeat: no-repeat;
+			border-radius: 50%;
+			display: grid;
+			place-items: center;
+			width: 48px;
+			height: 48px;
+
+			img {
+				aspect-ratio: 1 / 1;
+				object-fit: contain;
+				width: 25px;
+				height: auto;
+			}
+		}
+	}
+
+
+}
+
+.link_box {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.lang_links {
+	display: flex;
+
+	li {
+		position: relative;
+		font-family: var(--font-family-en);
+		padding-right: 8px;
+
+		&:not(:first-child) {
+			padding-left: 8px;
+		}
+
+		&:not(:last-child)::after {
+			display: block;
+			content: "|";
+			color: var(--base-color);
+			position: absolute;
+
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+}
+
+/* ハンバーガーメニュー */
+.hamburger_button {
+	display: grid;
+	gap: 5px;
+	padding: 10px;
+	position: fixed;
+	top: 56px;
+	right: 38px;
+	z-index: 999999;
+}
+
+.hamburger_button .button_line_top,
+.hamburger_button .button_line_bottom {
+	background-color: var(--border-color);
+	width: 30px;
+	height: 2px;
+	transition: transform 0.3s ease;
+}
+
+.header.menu_active .hamburger_button .button_line_top {
+	transform: translateY(5px) rotate(45deg);
+}
+
+.header.menu_active .hamburger_button .button_line_bottom {
+	transform: translateY(-5px) rotate(-45deg);
+}
+
+.hamburger_contents {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	max-width: 500px;
+	height: 100vh;
+	background-color: var(--white-color);
+	padding: 0;
+	z-index: 98;
+	overflow-y: auto;
+	flex-direction: column;
+	/* transform: translateX(100%); */
+	opacity: 0;
+	visibility: hidden;
+}
+
+.MenuIsOpen {
+	/* transform: translateX(0); */
+	opacity: 1;
+}
+
+.hamburger_list {
+	display: grid;
+	gap: 32px;
+	padding: 48px 20px;
+}
+
+.hamburger_item {
+
+	a {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 4px;
+
+		.en {
+			font-size: calc(14 * var(--rem-ratio));
+			font-family: var(--font-family-en);
+		}
+
+		.ja {
+			font-weight: 500;
+		}
+	}
+}
+
+.hamburger_top_bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding: 8px 20px;
+
+	.hamburger_logo img {
+		width: 114px;
+	}
+}
+
+.hamburger_contact_area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 48px 20px 0;
+
+
+}
+
+.hamburger_contact {
+	display: grid;
+	place-content: center;
+	text-align: center;
+	width: 100%;
+
+	.mail {
+		margin-top: 24px;
+
+		&::before {
+			content: "";
+			background-image: url(../images/icon_mail.svg);
+			background-repeat: no-repeat;
+			width: 25px;
+			height: 25px;
+
+		}
+	}
+
+	.tel {
+		display: grid;
+		grid-auto-flow: column;
+		place-content: center;
+		gap: 8px;
+		font-family: var(--font-family-en);
+		font-size: calc(24 * var(--rem-ratio));
+		font-weight: 500;
+		margin-bottom: 0.5rem;
+
+		&::before {
+			background-image: url(../images/icon_tel.svg);
+			background-repeat: no-repeat;
+			width: 32px;
+			height: 32px;
+			content: "";
+			display: block;
+		}
+	}
+
+	p {
+		font-size: calc(14 * var(--rem-ratio));
+		color: var(--base-color);
+		letter-spacing: 0.05em;
+	}
+
+
+}
+
+
+
+/* コンタクト */
+.footer_contact {
+	background-color: var(--white-color);
+	max-width: var(--main-width);
+	margin-inline: auto;
+	border-radius: 16px;
+	box-shadow: 0 0 40px rgba(20, 20, 20, 0.7);
+	padding: 40px 80px;
+	position: relative;
+	z-index: 1;
+	transform: translateY(170px);
+
+	@media (max-width: 768px) {
+		padding: 40px;
+	}
+
+	.title_box {
+		display: grid;
+		gap: 8px;
+
+		.title_en {
+			font-size: calc(64 * var(--rem-ratio));
+			font-family: var(--font-family-en);
+			line-height: 1;
+			font-weight: 700;
+		}
+	}
+
+	.text {
+		margin-top: 36px;
+		line-height: 1.5;
+	}
+
+	.link_box {
+		display: flex;
+		justify-content: center;
+		column-gap: 70px;
+		margin-top: 36px;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+			row-gap: 24px;
+			margin-top: 24px;
+		}
+
+		.tel,
+		.fax {
+			display: flex;
+			gap: 4px;
+			font-family: var(--font-family-en);
+			font-weight: 600;
+			font-size: calc(24 * var(--rem-ratio));
+		}
+
+		.flex {
+			display: flex;
+			column-gap: 32px;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+			}
+		}
+
+		.tel {
+			&::before {
+				content: "";
+				background-image: url(../images/icon_tel.svg);
+				width: 32px;
+				height: 32px;
+				background-repeat: no-repeat;
+			}
+		}
+
+		.fax {
+			&::before {
+				content: "";
+				background-image: url(../images/icon_fax.svg);
+				width: 32px;
+				height: 32px;
+				background-repeat: no-repeat;
+			}
+		}
+
+		.time {
+			margin-top: 8px;
+		}
+
+		.contact_button {
+			width: 100%;
+			max-width: 300px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 4px;
+			border-radius: 100vmax;
+			color: var(--white-color);
+			background-color: var(--base-color);
+			padding: 16px 0;
+
+			&::before {
+				content: "";
+				background-image: url(../images/icon_mail.svg);
+				width: 24px;
+				height: 24px;
+				background-repeat: no-repeat;
+			}
+		}
+	}
+}
+
+/* フッター */
+.footer {
+	color: var(--white-color);
+	background-image: linear-gradient(to top, var(--accent-color), var(--white-color));
+	padding-top: 230px;
+
+	.footer_inner {
+		display: grid;
+		gap: 64px;
+		max-width: var(--main-width);
+		margin-inline: auto;
+
+		.footer_logo img {
+			width: 180px;
+		}
+
+		.lang_links {
+			display: flex;
+			font-family: var(--font-family-en);
+
+			li {
+				position: relative;
+				padding-right: 8px;
+
+				&:not(:first-child) {
+					padding-left: 8px;
+				}
+
+				&:not(:last-child)::after {
+					display: block;
+					content: "|";
+					color: var(--white-color);
+					position: absolute;
+
+					right: 0;
+					top: 50%;
+					transform: translateY(-50%);
+				}
+			}
+		}
+
+		.container {
+			display: flex;
+			justify-content: space-between;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+				row-gap: 32px;
+			}
+
+			.flex {
+				display: flex;
+				gap: 24px;
+
+				@media (max-width: 768px) {
+					flex-direction: column;
+				}
+
+				.tel,
+				.fax {
+					font-family: var(--font-family-en);
+				}
+
+				.add_box {
+					line-height: 1.5;
+
+					.company_name {
+						font-size: calc(18 * var(--rem-ratio));
+					}
+
+				}
+
+				.add_box_china {
+					display: grid;
+					gap: 24px;
+
+					.inner {
+						line-height: 1.5;
+
+						.company_name {
+							font-size: calc(18 * var(--rem-ratio));
+							margin-bottom: 4px;
+						}
+					}
+				}
+			}
+
+			.footer_nav {
+				.footer_list {
+					display: grid;
+					gap: 16px;
+
+					.footer_item {
+						display: grid;
+
+						.footer_link {
+							display: grid;
+							grid-template-columns: 1fr;
+							gap: 4px;
+
+							.ja {
+								font-size: calc(18 * var(--rem-ratio));
+							}
+
+							.en {
+								font-size: calc(15 * var(--rem-ratio));
+								font-family: var(--font-family-en);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.footer_bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 24px;
+		padding: 40px 0;
+		border-top: 1px solid var(--white-color);
+
+		.footer_copy {
+			font-size: calc(15 * var(--rem-ratio));
+			font-family: var(--font-family-en);
+		}
+	}
+
+}
+
+.top_button {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 100%;
+	max-width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	border-radius: 100vmax;
+	color: var(--white-color);
+	font-family: var(--font-family-en);
+	font-weight: 500;
+	background-color: var(--base-color);
+	padding: 16px 0;
+
+	@media (max-width: 768px) {
+		right: 50%;
+		transform: translateX(50px);
+	}
+
+}
+
+/* 下層ページ */
+.sub_page {
+	width: 100%;
+	height: 370px;
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url(../images/heading_faq.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		clip-path: ellipse(100% 87% at 50% 0%);
+		z-index: -1;
+	}
+
+	.inner {
+		max-width: var(--main-width);
+		margin-inline: auto;
+		height: 100%;
+		position: relative;
+
+		.title {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+			padding-top: 160px;
+
+			.title_en {
+				font-size: calc(100 * var(--rem-ratio));
+				font-weight: 500;
+				line-height: 1;
+				color: var(--white-color);
+				font-family: var(--font-family-en);
+
+				@media (max-width: 768px) {
+					font-size: calc(56 * var(--rem-ratio));
+				}
+			}
+
+			.title_ja {
+				position: relative;
+				display: flex;
+				align-items: center;
+				font-size: calc(24 * var(--rem-ratio));
+				color: var(--white-color);
+				letter-spacing: 0.1em;
+				padding-left: 30px;
+				z-index: 1;
+
+				@media (max-width: 768px) {
+					font-size: calc(16 * var(--rem-ratio));
+				}
+
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 0;
+					z-index: -1;
+					transform: translateY(-50%);
+					background-image: url(../images/icon_red_circle.svg);
+					content: "";
+					width: 60px;
+					height: 56px;
+					background-repeat: no-repeat;
+					background-size: contain;
+				}
+			}
+		}
+	}
+}
+
+
+.bread {
+	width: 100%;
+	max-width: var(--main-width);
+	margin-inline: auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 40px;
+
+	li {
+		position: relative;
+		font-size: calc(15 * var(--rem-ratio));
+		padding-left: 0;
+
+
+		&:not(:last-child) {
+			padding-right: 40px;
+
+			/* ::after で縦棒を生成し、右側（要素間）に配置 */
+			&::after {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				transform: translateY(-50%);
+				content: "";
+				width: 1px;
+				height: 14px;
+				/* 縦棒の高さ */
+				background-color: var(--font-color);
+			}
+		}
+	}
+}
+
+.title_en {
+	font-size: calc(40 * var(--rem-ratio));
+	font-family: var(--font-family-en);
+	font-weight: 600;
+
+	&::before {
+		content: "";
+		background-image: url(../images/icon_red_circle.svg);
+		background-repeat: no-repeat;
+		width: 80px;
+		height: 78px;
+	}
+}
+
+.title_ja {
+	font-size: calc(16 * var(--rem-ratio));
+	letter-spacing: 0.1em;
+}

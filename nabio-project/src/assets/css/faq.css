@@ -1,0 +1,290 @@
+.sub_page {
+	width: 100%;
+	height: 370px;
+	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url(../images/heading_faq.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
+		clip-path: ellipse(100% 87% at 50% 0%);
+		z-index: -1;
+	}
+
+	.inner {
+		max-width: var(--main-width);
+		margin-inline: auto;
+		height: 100%;
+		position: relative;
+
+		.title {
+			display: flex;
+			flex-direction: column;
+			gap: 14px;
+			padding-top: 160px;
+
+			.title_en {
+				font-size: calc(100 * var(--rem-ratio));
+				font-weight: 500;
+				line-height: 1;
+				color: var(--white-color);
+				font-family: var(--font-family-en);
+			}
+
+			.title_ja {
+				position: relative;
+				display: flex;
+				align-items: center;
+				font-size: calc(24 * var(--rem-ratio));
+				color: var(--white-color);
+				letter-spacing: 0.1em;
+				padding-left: 30px;
+				z-index: 1;
+
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 0;
+					z-index: -1;
+					transform: translateY(-50%);
+					background-image: url(../images/icon_red_circle.svg);
+					content: "";
+					width: 60px;
+					height: 56px;
+					background-repeat: no-repeat;
+					background-size: contain;
+				}
+			}
+		}
+	}
+}
+
+.bread {
+	width: 100%;
+	max-width: var(--main-width);
+	margin-inline: auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 40px;
+
+	li {
+		position: relative;
+		font-size: calc(15 * var(--rem-ratio));
+		padding-left: 0;
+
+
+		&:not(:last-child) {
+			padding-right: 40px;
+
+			/* ::after で縦棒を生成し、右側（要素間）に配置 */
+			&::after {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				transform: translateY(-50%);
+
+				content: "";
+				width: 1px;
+				height: 14px;
+				/* 縦棒の高さ */
+				background-color: var(--font-color);
+			}
+		}
+
+
+	}
+
+}
+
+.contents {
+	max-width: var(--main-width);
+	margin-inline: auto;
+
+	.accordion_wrapper {
+		display: grid;
+		gap: 40px;
+	}
+
+	/* --- アコーディオンの基本設定 --- */
+	.accordion {
+		/* アニメーションの時間（300ミリ秒）をCSS変数として定義 */
+		--_duration: 300ms;
+
+		background-color: #fff;
+		box-shadow: 0 2 2 rgba(20, 20, 20, 0.2);
+
+		/* --- 開閉するコンテンツ部分（最新のCSS機能） --- */
+		/* * ::details-content は <details> の中身（<summary>以外）を指します。
+ * これを使ってアニメーションを実現しています。
+ */
+		&::details-content {
+			content-visibility: unset;
+			/* * display: grid; とほぼ同じ意味です。
+   * これと grid-template-rows を組み合わせて高さをアニメーションさせます。
+   */
+			display: block grid;
+
+			/* アニメーションの設定：grid-template-rows が 300ms かけて変化する */
+			@media (prefers-reduced-motion: no-preference) {
+				transition-duration: var(--_duration);
+				transition-property: grid-template-rows;
+			}
+		}
+
+		/* --- 閉じている時のコンテンツ --- */
+		/* :not([open]) で「open属性がない時（閉じている時）」を指定 */
+		&:not([open])::details-content {
+			grid-template-rows: 0fr;
+		}
+
+		/* :not([open]) で「open属性がない時（閉じている時）」を指定 */
+		&[open] {
+			&::details-content {
+				grid-template-rows: 0fr;
+			}
+
+			/* --- 開いている時のコンテンツ --- */
+			&::details-content {
+				grid-template-rows: 1fr;
+			}
+		}
+	}
+
+	/* --- アニメーションのためのラッパー --- */
+	.content_wrapper {
+		overflow: hidden;
+	}
+
+	/* --- 見出し（クリックする部分） --- */
+	.summary {
+		/* --- 色の変数を定義 --- */
+		--_foreground-default: var(--font-color)
+			/* 通常時の文字色 */
+			--_background-default: var(--white-color);
+		/* 通常時の背景色  */
+
+		--_background-interactive: var(--gray-color);
+		box-shadow: 0 2px 2px rgba(20, 20, 20, 0.25);
+
+
+		.question_wrap {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.icon_question {
+			font-size: calc(30 * var(--rem-ratio));
+		}
+
+		/* --- レイアウト --- */
+		display: grid;
+		gap: 1rem;
+		grid-template: ". icon" / 1fr max-content;
+		align-items: center;
+		padding-block: 1lh;
+		/* 上下の余白（1行分の高さ） */
+		padding-inline: 1rem;
+		/* 左右の余白 */
+
+		/* --- デザイン --- */
+		background-color: var(--_background-default);
+		color: var(--_foreground-default);
+		letter-spacing: 0.1em;
+		cursor: pointer;
+		/* カーソルを手の形に */
+
+		/* 色が変わる時のアニメーション設定 */
+		transition-duration: var(--_duration);
+		transition-property: background-color,
+		color;
+
+		/* --- 見出しの「＋」アイコン（横棒） --- */
+		&::before {
+			content: "";
+			grid-area: icon;
+			/* グリッドの "icon" の位置に配置 */
+			inline-size: 1em;
+			/* 幅 */
+			border-block-end: 1px solid;
+			/* 下線（実際には横棒） */
+			writing-mode: initial;
+		}
+
+		/* --- 見出しの「＋」アイコン（縦棒） --- */
+		&::after {
+			content: "";
+			grid-area: icon;
+			/* グリッドの "icon" の位置に配置 */
+			inline-size: 1em;
+			/* 幅 */
+			border-block-end: 1px solid;
+			/* 下線（横棒）を作り… */
+			rotate: 90deg;
+			/* …それを90度回転させて縦棒にする */
+		}
+
+		&:focus-visible {
+			background-color: var(--_background-interactive);
+			/* 少し暗い背景色に */
+			color: var(--_foreground-interactive);
+		}
+
+		/* --- マウスが乗った時（PCのみ） --- */
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: var(--_background-interactive);
+				/* 少し暗い背景色に */
+				color: var(--font-color);
+				/* color: var(--_foreground-interactive); */
+			}
+		}
+	}
+
+	/* --- アコーディオンが開いている時の見出し --- */
+	details[open]>summary.summary {
+		background-color: var(--white-color);
+		box-shadow: 0 2px 2px rgba(20, 20, 20, 0.25);
+		/* color: var(--_foreground-opened); */
+
+	}
+
+	/* --- アコーディオンが開いている時の「＋」アイコン（縦棒を消す）--- */
+	details[open]>summary.summary::after {
+		/* 縦棒を透明にする（「＋」が「ー」になる） */
+		opacity: 0;
+	}
+
+	/* --- 実際の中身のスタイル --- */
+	.content {
+		padding-block: 1lh;
+		background-color: var(--gray-color);
+
+		.answer_wrap {
+			display: flex;
+			align-items: flex-start;
+			gap: 1rem;
+			padding-inline: 1rem;
+
+			.icon_answer {
+				font-size: calc(30 * var(--rem-ratio));
+				color: var(--accent-color);
+				line-height: 1;
+			}
+
+			p {
+				line-height: 1.8;
+				letter-spacing: 0.05em;
+			}
+		}
+
+	}
+
+}
