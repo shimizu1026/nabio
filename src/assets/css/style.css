@@ -141,6 +141,9 @@
 
 .section_home_products {
 	padding-top: 120px;
+	height: 400vh;
+	position: relative;
+	/* 子要素の固定基準 */
 }
 
 .inner_home_product {
@@ -148,6 +151,13 @@
 	margin-inline: auto;
 	width: 100%;
 	display: flex;
+	position: sticky;
+	top: 0;
+	/* 画面の上端で固定 */
+	height: 100vh;
+	/* 固定中は画面いっぱいの高さを使う */
+	overflow: hidden;
+
 
 	.text_inner {
 		display: flex;
@@ -156,6 +166,7 @@
 		justify-content: center;
 		row-gap: 24px;
 		flex: 1;
+		height: 100%;
 
 		/* .button {
 			margin-inline: auto;
@@ -164,6 +175,37 @@
 
 	.img_box {
 		flex: 1;
+		position: relative;
+		height: 100%;
+	}
+.product_img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 中央に配置 */
+            opacity: 0; /* 最初はすべて非表示 */
+            transition: opacity 0.5s; /* フェードイン・アウトのアニメーション */
+            
+            /* 画像が枠をはみ出さないためのサイズ調整 */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* JSで付与する「表示中」のクラス */
+        .product_img.is-active {
+            opacity: 1;
+        }
+	figure {
+		figcaption {
+			display: grid;
+			row-gap: 14px;
+			margin-top: 14px;
+		}
+
+		.product_name {
+			font-size: calc(24 * var(--rem-ratio));
+		}
 	}
 }
 
