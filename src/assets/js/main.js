@@ -8,7 +8,7 @@ import Swiper from 'swiper';
 import 'swiper/css'; 
 import 'swiper/css/navigation'; 
 import 'swiper/css/pagination'; 
-import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
+import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
 
 document.addEventListener('componentsLoaded', function() {
@@ -29,10 +29,8 @@ document.addEventListener('componentsLoaded', function() {
         toggleMenu();
       });
 
+  //  Swiper　ファーストビュー
 
-  // --------------------------------------------------
-  //  Swiper (スライダー) の処理
-  // --------------------------------------------------
   const swiperElement = document.querySelector('.mySwiper');
   
   if (swiperElement) {
@@ -53,4 +51,35 @@ document.addEventListener('componentsLoaded', function() {
       });
   }
 
+  //  historySwiper
+
+// 1. 要素を取得（変数名をわかりやすく変更）
+const historySwiperElement = document.querySelector('.historySwiper');
+
+// 2. 要素が存在するかチェック（変数名を合わせる）
+if (historySwiperElement) {
+    // 3. 初期化（変数名を変えるか、constをつけずに実行）
+    const historySwiper = new Swiper('.historySwiper', {
+        modules: [Navigation, Pagination],
+        
+        // --- 基本設定 ---
+        loop: false,
+        spaceBetween: 0, // 線をつなげるために隙間は0にする
+        
+        slidesPerView: 1, // スマホは1つ表示
+        breakpoints: {
+            768: {
+                slidesPerView: 3,
+            }
+        },
+        // --- 矢印ボタンの設定 ---
+        navigation: {
+            nextEl: '.history-next',
+            prevEl: '.history-prev',
+        },
+    });
+}
+
+
 });
+

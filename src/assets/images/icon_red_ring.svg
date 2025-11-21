@@ -1,4 +1,10 @@
 <svg width="80" height="78" viewBox="0 0 80 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="23.4719" cy="32.579" rx="23.4719" ry="32.579" transform="matrix(0.645962 0.763369 -0.762395 0.647112 49.6758 0)" fill="#DB3B3F"/>
+<ellipse cx="23.4719" cy="32.579" rx="23.4719" ry="32.579" transform="matrix(0.645962 0.763369 -0.762395 0.647112 49.6758 0)" fill="url(#paint0_linear_364_81960)"/>
 <ellipse cx="17.2288" cy="23.9136" rx="17.2288" ry="23.9136" transform="matrix(0.645962 0.763369 -0.762395 0.647112 47.1016 10.3734)" fill="white"/>
+<defs>
+<linearGradient id="paint0_linear_364_81960" x1="-0.162163" y1="12.5539" x2="46.7751" y2="52.2216" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DB3B3F"/>
+<stop offset="1" stop-color="#FFB7B8"/>
+</linearGradient>
+</defs>
 </svg>

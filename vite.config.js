@@ -32,7 +32,10 @@ export default defineConfig({
           index: resolve(__dirname, './src/index.html'),
 
 		//   複数HTMLページを出力したい時にここへ追記していく
-        about: resolve(__dirname, './src/about.html'),
+        company: resolve(__dirname, './src/company.html'),
+        contact: resolve(__dirname, './src/contact.html'),
+        faq: resolve(__dirname, './src/faq.html'),
+        products: resolve(__dirname, './src/products.html'),
 
 
         },

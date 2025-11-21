@@ -4,6 +4,10 @@
 	}
 }
 
+.section_contact {
+	padding-top: 80px;
+}
+
 .inner_contact {
 	max-width: var(--main-width);
 	width: 100%;

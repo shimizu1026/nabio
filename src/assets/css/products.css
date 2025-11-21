@@ -11,9 +11,15 @@
 
 .inner_product {
 	width: 100%;
+	padding-top: 120px;
+
+	/* &:first-child {
+		padding-top: 0;
+	} */
 
 	@media (max-width: 768px) {
-		padding: 0 20px;
+		padding-right: 20px;
+		padding-left: 20px;
 	}
 }
 
@@ -28,7 +34,7 @@
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
-	font-size: calc(29 * var(--rem-ratio));
+	font-size: calc(20 * var(--rem-ratio));
 
 	&::before {
 		content: "";
@@ -44,7 +50,11 @@
 	display: flex;
 	align-items: center;
 	column-gap: 0.5rem;
-	font-size: var(--heading03);
+	font-size: calc((40 * var(--rem-ratio)));
+
+	@media (max-width: 768px) {
+		font-size: calc((32 * var(--rem-ratio)));
+	}
 
 	&::before {
 		content: "";
@@ -52,6 +62,11 @@
 		background-repeat: no-repeat;
 		width: 80px;
 		height: 78px;
+
+		@media (max-width: 768px) {
+			width: 80px;
+			height: 78px;
+		}
 	}
 }
 
@@ -70,7 +85,7 @@
 	}
 
 	.ja {
-		font-size: var(--heading04);
+		font-size: calc((32 * var(--rem-ratio)));
 	}
 }
 
@@ -78,11 +93,12 @@
 	.contents_inner {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
+		column-gap: 80px;
 		margin-top: 56px;
 
 		@media (max-width: 768px) {
 			grid-template-columns: 1fr;
-
+			column-gap: 40px;
 		}
 	}
 }
@@ -96,6 +112,10 @@
 .grid_container {
 	display: grid;
 	row-gap: 40px;
+
+	@media (max-width: 768px) {
+		margin-top: 40px;
+	}
 }
 
 .product_content {
@@ -114,8 +134,14 @@
 			font-weight: 400;
 		}
 
+		dd {
+			flex: 1;
+		}
+
 		dt,
 		dd {
+			letter-spacing: 0.05em;
+			line-height: 1.5;
 			padding: 20px 0;
 		}
 	}
@@ -126,6 +152,8 @@
 	p {
 		text-align: center;
 		margin-top: 40px;
+		letter-spacing: 0.05em;
+		line-height: 1.5;
 	}
 }
 
@@ -133,13 +161,20 @@
 	font-size: calc(32 * var(--rem-ratio));
 	font-weight: 500;
 	text-align: center;
+	letter-spacing: 0.05em;
+	line-height: 1.3;
+
+	@media (max-width: 768px) {
+		font-size: calc(26 * var(--rem-ratio));
+	}
 }
 
-/* .point_wrapper {
-	@media (max-width: 768px) {
+.point_wrapper {
+	margin-top: 80px;
+	/* @media (max-width: 768px) {
 		padding: 0 20px;
-	}
-} */
+	} */
+}
 
 .section_point {
 	display: flex;
@@ -172,5 +207,15 @@
 		font-size: calc(30 * var(--rem-ratio));
 		color: var(--accent-color);
 		font-weight: 500;
+		letter-spacing: 0.05em;
+
+		@media (max-width: 768px) {
+			font-size: calc(24 * var(--rem-ratio));
+		}
+	}
+
+	.point_text {
+		letter-spacing: 0.05em;
+		line-height: 1.5;
 	}
 }

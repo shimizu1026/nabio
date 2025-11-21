@@ -17,9 +17,6 @@
 	--font-family-en: "Montserrat", sans-serif;
 	--font-family-noto-sans: "Noto Sans JP", sans-serif;
 
-	--heading03: calc(40 * var(--rem-ratio));
-	--heading04: calc(32 * var(--rem-ratio));
-
 	/* Not Sansのフォントウエイト */
 	--font-weight-r: 400;
 	--font-weight-m: 500;
@@ -53,6 +50,10 @@
 
 .mt64 {
 	margin-top: 4rem;
+}
+
+.mb80 {
+	margin-bottom: 80px;
 }
 
 .fs18 {
@@ -453,8 +454,6 @@ body {
 
 }
 
-
-
 /* コンタクト */
 .footer_contact {
 	background-color: var(--white-color);
@@ -471,7 +470,7 @@ body {
 		padding: 40px;
 	}
 
-	.title_box {
+	.title {
 		display: grid;
 		gap: 8px;
 
@@ -576,6 +575,10 @@ body {
 		gap: 64px;
 		max-width: var(--main-width);
 		margin-inline: auto;
+
+		@media (max-width: 768px) {
+			padding: 0 20px;
+		}
 
 		.footer_logo img {
 			width: 180px;
@@ -750,6 +753,7 @@ body {
 			flex-direction: column;
 			gap: 14px;
 			padding-top: 160px;
+			padding-left: 20px;
 
 			.title_en {
 				font-size: calc(100 * var(--rem-ratio));
@@ -803,7 +807,11 @@ body {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */
+
+	@media (max-width: 768px) {
+		padding: 0 20px;
+	}
 
 	li {
 		position: relative;
@@ -830,6 +838,8 @@ body {
 	}
 }
 
+
+
 .title_en {
 	font-size: calc(40 * var(--rem-ratio));
 	font-family: var(--font-family-en);
@@ -847,4 +857,43 @@ body {
 .title_ja {
 	font-size: calc(16 * var(--rem-ratio));
 	letter-spacing: 0.1em;
+}
+
+.title_box {
+	display: flex;
+	column-gap: 0.5rem;
+	font-size: calc((40 * var(--rem-ratio)));
+
+	@media (max-width: 768px) {
+		font-size: calc((32 * var(--rem-ratio)));
+	}
+
+	&::before {
+		content: "";
+		background-image: url(../images/icon_red_ring.svg);
+		background-repeat: no-repeat;
+		width: 80px;
+		height: 78px;
+		display: block;
+
+		@media (max-width: 768px) {
+			width: 80px;
+			height: 78px;
+		}
+	}
+
+	.en {
+		display: flex;
+		flex-direction: column;
+		row-gap: 0.5rem;
+		font-size: calc(40 * var(--rem-ratio));
+		font-family: var(--font-family-en);
+		font-weight: 600;
+	}
+
+	.ja {
+		font-size: calc(16 * var(--rem-ratio));
+		letter-spacing: 0.1em;
+		font-weight: 400;
+	}
 }
