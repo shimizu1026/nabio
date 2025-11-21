@@ -359,6 +359,7 @@ body {
 .MenuIsOpen {
 	/* transform: translateX(0); */
 	opacity: 1;
+	visibility: visible;
 }
 
 .hamburger_list {
@@ -538,6 +539,7 @@ body {
 		}
 
 		.time {
+			line-height: 1.5;
 			margin-top: 8px;
 		}
 

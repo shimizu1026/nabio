@@ -1,7 +1,10 @@
 .swiper {
 	width: 100%;
-	height: 100vh;
+	height: 95vh;
 
+	@media (max-width: 768px) {
+		height: 100vh;
+	}
 
 	.swiper-slide {
 		width: 100%;
@@ -11,17 +14,34 @@
 	.first {
 		position: relative;
 		z-index: -1;
+		/* display: none; */
+
+		img {
+			@media (max-width: 768px) {
+				height: 100%;
+				object-fit: cover;
+			}
+		}
 
 		.copy {
 			position: absolute;
 			top: 50%;
 			left: 96px;
+			transform: translateY(-50%);
 			display: grid;
 			gap: 30px;
+
+			@media (max-width: 768px) {
+				left: 1rem;
+			}
 
 			.text {
 				font-size: calc(96 * var(--rem-ratio));
 				color: var(--white-color);
+
+				@media (max-width: 768px) {
+					font-size: calc(48 * var(--rem-ratio));
+				}
 
 				.red {
 					color: var(--accent-color);
@@ -39,6 +59,14 @@
 	.second {
 		position: relative;
 		z-index: -1;
+		/* display: none; */
+
+		img {
+			@media (max-width: 768px) {
+				height: 100%;
+				object-fit: cover;
+			}
+		}
 
 		.copy {
 			position: absolute;
@@ -46,15 +74,25 @@
 			left: 96px;
 			display: grid;
 			gap: 45px;
+			text-align: center;
+			transform: translateY(-50%);
 
 			.text {
 				font-size: calc(96 * var(--rem-ratio));
+
+				@media (max-width: 768px) {
+					font-size: calc(48 * var(--rem-ratio));
+				}
 			}
 
 			.sub_text {
 				font-size: calc(24 * var(--rem-ratio));
 				line-height: 1.6;
 				letter-spacing: 0.05em;
+
+				@media (max-width: 768px) {
+					font-size: calc(18 * var(--rem-ratio));
+				}
 			}
 		}
 	}
@@ -62,23 +100,43 @@
 	.third {
 		position: relative;
 		z-index: -1;
+		/* display: none; */
 
 		.copy {
 			position: absolute;
-			top: 50%;
-			left: 96px;
+			top: 24%;
+			left: 10%;
 			color: var(--white-color);
 			display: grid;
 			gap: 45px;
 
+			@media (max-width: 768px) {
+				gap: 1rem;
+			}
+
+			img {
+				@media (max-width: 768px) {
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+
 			.text {
-				font-size: calc(96 * var(--rem-ratio));
+				font-size: calc(64 * var(--rem-ratio));
+
+				@media (max-width: 768px) {
+					font-size: calc(32 * var(--rem-ratio));
+				}
 			}
 
 			.sub_text {
 				font-size: calc(24 * var(--rem-ratio));
 				line-height: 1.6;
 				letter-spacing: 0.05em;
+
+				@media (max-width: 768px) {
+					font-size: calc(16 * var(--rem-ratio));
+				}
 			}
 		}
 	}
@@ -92,11 +150,20 @@
 	background-image: url(../images/bg_world_map.png);
 	background-repeat: no-repeat;
 	background-size: contain;
+
+	@media (max-width: 768px) {
+		background-size: cover;
+		background-position: center;
+	}
 }
 
 .intro_copy {
 	font-size: calc(60 * var(--rem-ratio));
 	letter-spacing: 0.05em;
+
+	@media (max-width: 768px) {
+		font-size: calc(32 * var(--rem-ratio));
+	}
 }
 
 .intro_text {
@@ -113,6 +180,10 @@
 		display: flex;
 		column-gap: 130px;
 		margin-top: 20px;
+
+		@media (max-width: 768px) {
+			column-gap: 30px;
+		}
 	}
 }
 
@@ -128,6 +199,10 @@
 	width: 650px;
 	margin-left: auto;
 	object-fit: cover;
+
+	@media (max-width: 768px) {
+		width: 300px;
+	}
 }
 
 /* 右下の画像の設定 */
@@ -137,13 +212,16 @@
 	width: 100%;
 	height: auto;
 	object-fit: cover;
+
+	@media (max-width: 768px) {
+		padding-right: 30px;
+	}
 }
 
 .section_home_products {
 	padding-top: 120px;
-	height: 400vh;
+	height: 350vh;
 	position: relative;
-	/* 子要素の固定基準 */
 }
 
 .inner_home_product {
@@ -151,13 +229,10 @@
 	margin-inline: auto;
 	width: 100%;
 	display: flex;
-	position: sticky;
+	position: relative;
 	top: 0;
-	/* 画面の上端で固定 */
 	height: 100vh;
-	/* 固定中は画面いっぱいの高さを使う */
 	overflow: hidden;
-
 
 	.text_inner {
 		display: flex;
@@ -177,25 +252,61 @@
 		flex: 1;
 		position: relative;
 		height: 100%;
-	}
-.product_img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* 中央に配置 */
-            opacity: 0; /* 最初はすべて非表示 */
-            transition: opacity 0.5s; /* フェードイン・アウトのアニメーション */
-            
-            /* 画像が枠をはみ出さないためのサイズ調整 */
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
 
-        /* JSで付与する「表示中」のクラス */
-        .product_img.is-active {
-            opacity: 1;
-        }
+		.product_step {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			/* 中央に配置 */
+			width: 100%;
+			height: 100%;
+
+			opacity: 0;
+			/* JS制御のため、最初は非表示 */
+			pointer-events: none;
+			/* 重なっていてもクリック不可に */
+
+			/* 画像自体の調整 */
+			img {
+				display: block;
+				max-width: 80%;
+				/* 中央に配置し、少し小さめに */
+				max-height: 80%;
+				margin: 0 auto;
+				object-fit: contain;
+			}
+
+			/* キャプションの配置調整 */
+			figcaption {
+				text-align: center;
+				margin-top: 10px;
+			}
+		}
+	}
+
+	.product_img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		/* 中央に配置 */
+		opacity: 0;
+		/* 最初はすべて非表示 */
+		transition: opacity 0.5s;
+		/* フェードイン・アウトのアニメーション */
+
+		/* 画像が枠をはみ出さないためのサイズ調整 */
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+	}
+
+	/* JSで付与する「表示中」のクラス */
+	.product_img.is-active {
+		opacity: 1;
+	}
+
 	figure {
 		figcaption {
 			display: grid;
@@ -212,6 +323,10 @@
 .section_features {
 	padding: 48px 148px 0;
 
+	@media (max-width: 768px) {
+		padding: 0 20px;
+	}
+
 	.button {
 		margin-inline: auto;
 	}
@@ -223,6 +338,10 @@
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 40px;
 
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+		row-gap: 20px;
+	}
 
 }
 
@@ -272,6 +391,13 @@
 	display: flex;
 	column-gap: 240px;
 
+	@media (max-width: 768px) {
+		flex-direction: column-reverse;
+
+	}
+
+
+
 	.text_inner {
 		display: flex;
 		align-items: center;
@@ -304,6 +430,12 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 60px;
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+		row-gap: 30px;
+		padding: 0 20px;
+	}
 }
 
 .faq_item {
