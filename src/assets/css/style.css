@@ -1,6 +1,12 @@
-.swiper {
+.swiper.mySwiper {
 	width: 100%;
-	height: 95vh;
+	height: 100vh;
+	position: -webkit-sticky;
+	/* Safari用 */
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	overflow: visible;
 
 	@media (max-width: 768px) {
 		height: 100vh;
@@ -143,18 +149,46 @@
 
 }
 
+.scroll_contents {
+	position: relative;
+	z-index: 2;
+	background-color: var(--white-color);
+
+	&:after {
+		content: "";
+		width: 100%;
+		height: 120px;
+		background-color: var(--white-color);
+		clip-path: ellipse(52% 87% at 50% 100%);
+		position: absolute;
+		top: -120px;
+		right: 0;
+		z-index: 100;
+	}
+}
+
 .intro {
+	width: 100%;
+	background-color: var(--white-color);
 	display: grid;
 	row-gap: 40px;
 	text-align: center;
 	background-image: url(../images/bg_world_map.png);
 	background-repeat: no-repeat;
 	background-size: contain;
+	background-position: 50% 0%;
+	transition: none;
+	overflow: hidden;
+	padding-bottom: 120px;
+	position: relative;
+
 
 	@media (max-width: 768px) {
 		background-size: cover;
 		background-position: center;
 	}
+
+
 }
 
 .intro_copy {
@@ -185,6 +219,12 @@
 			column-gap: 30px;
 		}
 	}
+}
+
+.img_woman,
+.img_man,
+.img_lab {
+	will-change: transform;
 }
 
 /* 左の縦長の画像の設定 */
@@ -219,9 +259,12 @@
 }
 
 .section_home_products {
+	/* background-image: url(../images/bg_exclude.png);
+	background-repeat: no-repeat;
+	background-position: bottom 160px right; */
 	padding-top: 120px;
-	height: 350vh;
-	position: relative;
+	/* height: 350vh; */
+	/* position: relative; */
 }
 
 .inner_home_product {
@@ -234,14 +277,20 @@
 	height: 100vh;
 	overflow: hidden;
 
+	/* 固定時に画面いっぱいに表示させるため */
+	height: 100vh;
+	align-items: center;
+	/* 垂直中央揃え */
+
 	.text_inner {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
-		row-gap: 24px;
+		/* row-gap: 24px;
 		flex: 1;
-		height: 100%;
+		height: 100%; */
+		width: 50%;
 
 		/* .button {
 			margin-inline: auto;
@@ -249,69 +298,57 @@
 	}
 
 	.img_box {
-		flex: 1;
+		/* flex: 1;
 		position: relative;
+		height: 100%; */
+		width: 50%;
 		height: 100%;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+
+
+		&::after {
+			content: "";
+			background-image: url(../images/bg_exclude.png);
+
+		}
 
 		.product_step {
 			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
-			/* 中央に配置 */
 			width: 100%;
-			height: 100%;
-
+			height: auto;
 			opacity: 0;
-			/* JS制御のため、最初は非表示 */
-			pointer-events: none;
-			/* 重なっていてもクリック不可に */
 
 			/* 画像自体の調整 */
 			img {
-				display: block;
-				max-width: 80%;
-				/* 中央に配置し、少し小さめに */
-				max-height: 80%;
-				margin: 0 auto;
+				width: 100%;
+				height: 100%;
 				object-fit: contain;
+				display: block;
+				margin: 0 auto;
 			}
 
-			/* キャプションの配置調整 */
-			figcaption {
-				text-align: center;
-				margin-top: 10px;
-			}
 		}
 	}
 
-	.product_img {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		/* 中央に配置 */
-		opacity: 0;
-		/* 最初はすべて非表示 */
-		transition: opacity 0.5s;
-		/* フェードイン・アウトのアニメーション */
-
-		/* 画像が枠をはみ出さないためのサイズ調整 */
-		max-width: 100%;
-		max-height: 100%;
-		object-fit: contain;
-	}
-
 	/* JSで付与する「表示中」のクラス */
-	.product_img.is-active {
+	/* .product_img.is-active {
 		opacity: 1;
-	}
+	} */
 
 	figure {
 		figcaption {
 			display: grid;
 			row-gap: 14px;
 			margin-top: 14px;
+			text-align: center;
+			margin-top: 10px;
 		}
 
 		.product_name {

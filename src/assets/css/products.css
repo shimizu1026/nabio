@@ -170,6 +170,7 @@
 }
 
 .point_wrapper {
+	background-image: url(../images/bg_pattern.png);
 	margin-top: 80px;
 	/* @media (max-width: 768px) {
 		padding: 0 20px;
