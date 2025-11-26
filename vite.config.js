@@ -9,13 +9,13 @@ export default defineConfig({
 		rollupOptions: { //ファイル出力設定
 			output: {
 				assetFileNames: (assetInfo) => {
-						let extType = assetInfo.name.split('.')[1];
+					let extType = assetInfo.name.split('.')[1];
 					//Webフォントファイルの振り分け
 					if (/ttf|otf|eot|woff|woff2/i.test(extType)) {
 						extType = 'fonts';
 					}
 					if (/png|jpe?g|svg|gif|glb|webp|mov|jp|center|com|tiff|bmp|ico|mp4/i.test(extType)) {
-						extType = 'img';
+						extType = 'images';
 					}
 					// if (/pdf/i.test(extType)) {
 					//   extType = 'pdf';
@@ -37,7 +37,9 @@ export default defineConfig({
 				contact: resolve(__dirname, './src/contact.html'),
 				faq: resolve(__dirname, './src/faq.html'),
 				products: resolve(__dirname, './src/products.html'),
-
+				header: resolve(__dirname, "./src/components/header.html"),
+				footer: resolve(__dirname, "./src/components/footer.html"),
+				component_contact: resolve(__dirname, "./src/components/contact.html"),
 
 			},
 
