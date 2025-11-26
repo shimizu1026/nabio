@@ -1,5 +1,6 @@
 // your_project/js/loadComponent.js
 
+
 document.addEventListener('DOMContentLoaded', function() {
     let componentsLoadedCount = 0; // 読み込み完了したコンポーネントの数
     const totalComponents = 3; // ヘッダーとフッター、コンタクト

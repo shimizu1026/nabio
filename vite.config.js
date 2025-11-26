@@ -40,7 +40,6 @@ export default defineConfig({
 				header: resolve(__dirname, "./src/components/header.html"),
 				footer: resolve(__dirname, "./src/components/footer.html"),
 				component_contact: resolve(__dirname, "./src/components/contact.html"),
-
 			},
 
 			//  list: resolve(__dirname, './src/list.html'),

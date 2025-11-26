@@ -1,6 +1,6 @@
 .sub_page {
 	&::before {
-		background-image: url(../images/heading_contact.jpg);
+		background-image: url(../images/heading_contact.webp);
 	}
 }
 
@@ -30,6 +30,7 @@
 	justify-content: center;
 	column-gap: 64px;
 	margin-top: 64px;
+	align-items: flex-start;
 
 
 	@media (max-width: 768px) {
@@ -41,7 +42,7 @@
 	width: 100%;
 	max-width: 200px;
 	position: sticky;
-	top: 0;
+	top: 150px;
 	right: 0;
 
 	@media (max-width: 768px) {
@@ -101,6 +102,7 @@
 	max-width: 850px;
 	display: grid;
 	row-gap: 50px;
+	flex-grow: 1;
 
 	.form_row {
 		display: flex;

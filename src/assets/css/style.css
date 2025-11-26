@@ -189,7 +189,7 @@
 	display: grid;
 	row-gap: 40px;
 	text-align: center;
-	background-image: url(../images/bg_world_map.png);
+	background-image: url(../images/bg_world_map.webp);
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: 50% 0%;
@@ -328,7 +328,7 @@
 
 		&::after {
 			content: "";
-			background-image: url(../images/bg_exclude.png);
+			background-image: url(../images/bg_exclude.webp);
 
 		}
 

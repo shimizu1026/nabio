@@ -22,81 +22,178 @@ document.addEventListener('componentsLoaded', function () {
 	// --------------------------------------------------
 	//  ハンバーガーメニューの処理
 	// --------------------------------------------------
+	// const header = document.querySelector(".header");
+	// const menu = document.querySelector(".hamburger_contents");
+	// const hamburgerButton = document.querySelector(".hamburger_button");
+
+	// const toggleMenu = () => {
+	// 	menu.classList.toggle("MenuIsOpen");
+	// 	header.classList.toggle("MenuIsActive");
+	// };
+
+	// hamburgerButton.addEventListener("click", () => {
+	// 	toggleMenu();
+	// });
+
 	const header = document.querySelector(".header");
 	const menu = document.querySelector(".hamburger_contents");
 	const hamburgerButton = document.querySelector(".hamburger_button");
 
-	const toggleMenu = () => {
-		menu.classList.toggle("MenuIsOpen");
-		header.classList.toggle("MenuIsActive");
-	};
+	// メニューリスト全体 (.hamburger_list) と個々のアイテム (.hamburger_item) を取得
+	const menuList = document.querySelector(".hamburger_list");
+	const menuItems = document.querySelectorAll(".hamburger_item");
+	const contactArea = document.querySelector(".hamburger_contact_area");
+	const topBar = document.querySelector(".hamburger_top_bar");
 
+
+	// Timelineのインスタンスを生成（一時停止状態で作成）
+	const menuTimeline = gsap.timeline({ paused: true });
+
+	// --- Timelineの定義 ---
+	// タイムラインにアニメーションを追加していきます。
+	// メニューが開く動作（上から下にスライド）を定義。
+menuTimeline.fromTo(menu,
+    { 
+        clipPath: "circle(10px at 100% 0%)", 
+        visibility: "hidden" 
+    },
+    {
+        clipPath: "circle(150% at 100% 0%)", 
+        duration: 1,
+        ease: "power3.inOut",
+        visibility: "visible"
+    },
+    0 // タイムライン開始位置
+);
+
+// 2. メニューが開いた後に、ロゴと言語選択 (.hamburger_top_bar) をフェードイン
+menuTimeline.fromTo(topBar,
+    { opacity: 0, y: 10 },
+    { opacity: 1, y: 0, duration: 0.3 },
+    0.3 // メイン展開開始から0.3秒後に開始
+);
+	// 1. メニュー本体 (.hamburger_contents) を上からスライドイン
+	// menuTimeline.fromTo(menu,
+	// 	{ y: "-100vh" }, // 画面外の上部から
+	// 	{
+	// 		y: "0vh", // 画面内にスライド
+	// 		duration: 0.6,
+	// 		ease: "power3.inOut"
+	// 	},
+	// 	0 // タイムライン開始位置
+	// );
+
+	// // 2. メニューが開いた後に、ロゴと言語選択 (.hamburger_top_bar) をフェードイン
+	// menuTimeline.fromTo(topBar,
+	// 	{ opacity: 0, y: 10 },
+	// 	{ opacity: 1, y: 0, duration: 0.3 },
+	// 	0.3 // メインスライド開始から0.3秒後に開始
+	// );
+
+	// // 3. ナビゲーションリスト (.hamburger_item) を一つずつ順にフェードイン
+	// menuTimeline.fromTo(menuItems,
+	// 	{ opacity: 0, y: 20 },
+	// 	{
+	// 		opacity: 1,
+	// 		y: 0,
+	// 		duration: 0.4,
+	// 		stagger: 0.05, // 0.05秒ずつ遅らせる
+	// 		ease: "power2.out"
+	// 	},
+	// 	0.4 // メインスライド開始から0.4秒後に開始
+	// );
+
+	// // 4. コンタクトエリアを最後にフェードイン
+	menuTimeline.fromTo(contactArea,
+		{ opacity: 0, y: 20 },
+		{ opacity: 1, y: 0, duration: 0.4 },
+		0.6 // メインスライド開始から0.6秒後に開始
+	);
+
+	// --- クリックイベントリスナー ---
 	hamburgerButton.addEventListener("click", () => {
-		toggleMenu();
+		// クラスをトグル（ヘッダーアイコンの変形などに使用）
+		hamburgerButton.classList.toggle("MenuIsActive");
+		// header.classList.toggle("MenuIsActive"); // 必要に応じて残す
+		header.classList.toggle("MenuIsActive");
+		// メニュー本体の表示/非表示クラスをトグル
+		menu.classList.toggle("MenuIsOpen");
+
+		// スクロール固定のトグル
+		// document.body.classList.toggle("NoScroll");
+
+		// Timelineを制御
+		if (menu.classList.contains("MenuIsOpen")) {
+			// メニューが開くとき: タイムラインを最初から再生
+			menuTimeline.timeScale(1).play();
+		} else {
+			// メニューが閉じるとき: タイムラインを逆再生
+			menuTimeline.timeScale(1).reverse();
+		}
 	});
 
 	// スプリットテキスト
-const navItems = document.querySelectorAll(".nav_item");
+	const navItems = document.querySelectorAll(".nav_item");
 
-const timelines = new Map();
-const splitInstances = new Map();
+	const timelines = new Map();
+	const splitInstances = new Map();
 
-/**
- * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
- * @param {HTMLElement} item - .nav_item要素
- * @returns {gsap.Timeline} アニメーション用Timeline
- */
-function getTimeline(item) {
-    if (timelines.has(item)) {
-        return timelines.get(item);
-    }
+	/**
+	 * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
+	 * @param {HTMLElement} item - .nav_item要素
+	 * @returns {gsap.Timeline} アニメーション用Timeline
+	 */
+	function getTimeline(item) {
+		if (timelines.has(item)) {
+			return timelines.get(item);
+		}
 
-    const jaText = item.querySelector(".nav_link .ja");
-    if (!jaText) return null;
+		const jaText = item.querySelector(".nav_link .ja");
+		if (!jaText) return null;
 
-    if (splitInstances.has(item)) {
-        splitInstances.get(item).revert();
-    }
-    const split = new SplitText(jaText, {
-        type: "chars",
-        charsClass: "char",
-    });
-    splitInstances.set(item, split);
+		if (splitInstances.has(item)) {
+			splitInstances.get(item).revert();
+		}
+		const split = new SplitText(jaText, {
+			type: "chars",
+			charsClass: "char",
+		});
+		splitInstances.set(item, split);
 
-    const tl_nav = gsap.timeline({ paused: true });
+		const tl_nav = gsap.timeline({ paused: true });
 
-    tl_nav.fromTo(split.chars, 
-        { 
-            opacity: 0, 
-            y: "100%",
-        }, 
-        {
-            opacity: 1,
-            y: "0%", 
-            stagger: 0.05, // 1文字ごとの遅延
-            duration: 0.4, // 短くしてホバーに反応しやすく
-            ease: "power3.out",
-        }
-    );
+		tl_nav.fromTo(split.chars,
+			{
+				opacity: 0,
+				y: "100%",
+			},
+			{
+				opacity: 1,
+				y: "0%",
+				stagger: 0.05, // 1文字ごとの遅延
+				duration: 0.4, // 短くしてホバーに反応しやすく
+				ease: "power3.out",
+			}
+		);
 
-    timelines.set(item, tl_nav);
-    return tl_nav;
-}
+		timelines.set(item, tl_nav);
+		return tl_nav;
+	}
 
-/**
- * マウスイベントリスナーの設定
- */
-navItems.forEach(item => {
-    // マウスエンター時の処理 (ホバー開始)
-    item.addEventListener('mouseenter', () => {
-        const tl = getTimeline(item);
-        if (tl) {
-            // アニメーションを最初から再生
-            tl.restart();
-        }
-    });
+	/**
+	 * マウスイベントリスナーの設定
+	 */
+	navItems.forEach(item => {
+		// マウスエンター時の処理 (ホバー開始)
+		item.addEventListener('mouseenter', () => {
+			const tl = getTimeline(item);
+			if (tl) {
+				// アニメーションを最初から再生
+				tl.restart();
+			}
+		});
 
-});
+	});
 
 	//  Swiper　ファーストビュー
 	const swiperElement = document.querySelector('.mySwiper');
@@ -244,8 +341,238 @@ navItems.forEach(item => {
 		});
 	}
 
+	// --------------------------------------------------
+	// 下層ページ見出し// --------------------------------------------------
+	function titleAnimation() {
+
+		const enTitle = document.querySelector(".title_en");
+		const jaTitle = document.querySelector(".title_ja");
+
+		if (!enTitle || !jaTitle) {
+			return;
+		}
+
+		if (window.splitTitle) {
+			window.splitTitle.revert();
+		}
+		window.splitTitle = new SplitText(enTitle, {
+			type: "chars",
+			charsClass: "char",
+		});
+
+		const tl = gsap.timeline({
+			delay: 0.5
+		});
+
+		tl.fromTo(window.splitTitle.chars,
+			{
+				opacity: 0,
+				y: "20%"
+			},
+			{
+				opacity: 1,
+				y: "0%",
+				stagger: 0.08,
+				duration: 0.4,
+				ease: "power2.out"
+			},
+			0
+		);
+
+		tl.to(jaTitle,
+			{
+				opacity: 1,
+				duration: 0.8,
+				ease: "power2.out"
+			},
+			// AとBを同時に開始したい場合は '<' を使用します。
+			// Contactの文字がすべて出終わってから少し遅れて開始したい場合は '>-0.2' などを使用します。
+			// ここでは、Contactのアニメーション中に徐々にフェードインするように調整します。
+			0.3// Contactのアニメーション開始から0.1秒後に開始
+		);
+	}
+
+	titleAnimation();
+
+	// --------------------------------------------------
+	// 下から上にフェイドイン// --------------------------------------------------
+	gsap.from(".fade_title", {
+		duration: 1,
+		y: 50,  // 下から50px上に移動
+		opacity: 0,
+		ease: "power2.out"
+	});
+
+	gsap.from(".fade_text", {
+		duration: 1,
+		y: 30,
+		opacity: 0,
+		delay: 0.2  // 0.2秒遅らせる
+	});
+	function setupFadeAnimation() {
+		// アニメーションを適用したい全ての要素を選択
+		const fadeTargets = gsap.utils.toArray(".fade_contents");
+
+		// 各要素に設定
+		fadeTargets.forEach((target, index) => {
+			gsap.from(target, {
+				// アニメーションの初期状態
+				duration: 1.0,
+				y: 30,
+				opacity: 0,
+				delay: index * 0.1,
+				ease: "power2.out",
+
+				scrollTrigger: {
+					trigger: target,
+					start: "top 90%",       // 要素の上端がビューポートの85%の位置に来たらアニメーション開始
+					toggleActions: "play none none none",
+					// play: 開始時にアニメーションを再生
+					// none: スクロールバックしても何もしない
+					// markers: true,
+				}
+			});
+		});
+	}
+
+	// 実行
+	setupFadeAnimation();
+
+const form = document.querySelector('.contact_form');
+    const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
+    const confirmSection = document.getElementById('confirm');
+    const completeSection = document.getElementById('complete');
+    const confirmContent = document.getElementById('confirm_content');
+    const backButton = document.getElementById('back_btn');
+    const sendButton = document.getElementById('send_btn');
+
+    // 初期表示設定
+    // 確認画面と完了画面を非表示にする
+    confirmSection.style.display = 'none';
+    completeSection.style.display = 'none';
+    
+    // フォームの送信（入力内容の確認ボタン）
+    form.addEventListener('submit', (event) => {
+        event.preventDefault(); // フォームの送信をキャンセル
+        
+        // 1. バリデーションチェックをここで行う (ここでは省略)
+        if (!validateForm()) {
+            return; // バリデーションに失敗したら処理を終了
+        }
+
+        // 2. 入力内容を確認画面に反映
+        displayConfirmContent();
+
+        // 3. 画面を切り替える
+        inputSection.style.display = 'none';  // 入力画面を非表示
+        confirmSection.style.display = 'block'; // 確認画面を表示
+        
+        // ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 戻るボタンの処理
+    backButton.addEventListener('click', () => {
+        // 画面を切り替える
+        confirmSection.style.display = 'none'; // 確認画面を非表示
+        inputSection.style.display = 'block';  // 入力画面を表示
+        
+        // ページトップにスクロール
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
+    sendButton.addEventListener('click', () => {
+        // 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
+        
+        // サーバーサイドの処理が成功したと仮定し、完了画面へ移行
+        
+        // 画面を切り替える
+        confirmSection.style.display = 'none'; // 確認画面を非表示
+        completeSection.style.display = 'block'; // 完了画面を表示
+        
+        // ページトップにスクロール
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
 
+    // --- 補助関数 ---
+
+    // 入力内容を整形して確認画面に表示する関数
+    function displayConfirmContent() {
+        let contentHTML = '<table>';
+
+        // フォーム内の各入力フィールドをループして値を取得
+        const fields = [
+            { id: 'name', label: '氏名' },
+            { id: 'company', label: '会社名' },
+            { id: 'address', label: '住所' },
+            { id: 'tel', label: '電話番号' },
+            { id: 'email', label: 'メールアドレス' },
+            { id: 'message', label: 'お問い合わせ内容' },
+        ];
+        
+        fields.forEach(field => {
+            const element = document.getElementById(field.id);
+            if (element) {
+                let value = element.value;
+                
+                // textareaの改行をHTMLの<br>に変換
+                if (field.id === 'message') {
+                    value = value.replace(/\n/g, '<br>');
+                }
+
+                contentHTML += `
+                    <tr>
+                        <th>${field.label}</th>
+                        <td>${value || '未入力'}</td>
+                    </tr>
+                `;
+            }
+        });
+
+        // プライバシーポリシーの同意チェック
+        const agreeChecked = document.getElementById('agree').checked;
+        contentHTML += `
+            <tr>
+                <th>プライバシーポリシー</th>
+                <td>${agreeChecked ? '同意済み' : '未同意'}</td>
+            </tr>
+        `;
+        
+        contentHTML += '</table>';
+        confirmContent.innerHTML = contentHTML;
+    }
+    
+    // 簡易バリデーション (必須項目のみ)
+    function validateForm() {
+        let isValid = true;
+        const requiredFields = ['name', 'tel', 'email', 'message'];
+        
+        requiredFields.forEach(id => {
+            const input = document.getElementById(id);
+            const errorElement = document.getElementById(id + '_error');
+            if (input.value.trim() === '') {
+                errorElement.textContent = '必須項目です。';
+                input.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                errorElement.textContent = '';
+                input.style.borderColor = '';
+            }
+        });
+
+        const agreeCheck = document.getElementById('agree');
+        const agreeError = document.getElementById('agree_error');
+        if (!agreeCheck.checked) {
+            agreeError.textContent = '同意が必要です。';
+            isValid = false;
+        } else {
+            agreeError.textContent = '';
+        }
+
+        return isValid;
+    }
 	// --------------------------------------------------
 	// フォーム送信処理 (追加するコード)// --------------------------------------------------
 	const contactForm = document.getElementById('contact_form');

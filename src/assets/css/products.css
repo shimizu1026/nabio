@@ -1,6 +1,6 @@
 .sub_page {
 	&::before {
-		background-image: url(../images/heading_products.jpg);
+		background-image: url(../images/heading_products.webp);
 	}
 }
 
@@ -170,7 +170,7 @@
 }
 
 .point_wrapper {
-	background-image: url(../images/bg_pattern.png);
+	background-image: url(../images/bg_pattern.webp);
 	margin-top: 80px;
 	/* @media (max-width: 768px) {
 		padding: 0 20px;
