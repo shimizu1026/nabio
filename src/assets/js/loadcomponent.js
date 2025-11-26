@@ -57,6 +57,28 @@ document.addEventListener('DOMContentLoaded', function() {
         // プレースホルダーがない場合もカウントを進める
         checkAllComponentsLoaded();
     }
+    // --- プライバシーポリシーの読み込み処理 ---
+    // const privacyPolicyContainer = document.getElementById('privacy_policy_placeholder');
+    // if (privacyPolicyContainer) {
+    //     fetch('components/contact.html')
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('プライバシーポリシーファイルの読み込みに失敗しました: ' + response.statusText);
+    //             }
+    //             return response.text();
+    //         })
+    //         .then(html => {
+    //             contactContainer.innerHTML = html;
+    //             checkAllComponentsLoaded(); // 読み込み完了を通知
+    //         })
+    //         .catch(error => {
+    //             console.error('ヘッダーの読み込み中にエラーが発生しました:', error);
+    //             checkAllComponentsLoaded(); // エラーでもカウントは進める（無限待ちを防ぐため）
+    //         });
+    // } else {
+    //     // プレースホルダーがない場合もカウントを進める
+    //     checkAllComponentsLoaded();
+    // }
 
     // --- フッターの読み込み処理 ---
     const footerContainer = document.getElementById('footer_placeholder');

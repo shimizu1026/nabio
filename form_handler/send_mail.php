@@ -49,7 +49,10 @@ try {
     $mail->Subject = '【Webサイトからお問い合わせ】' . $name;
     
     $body = "サイトから新しいお問い合わせがありました。\n\n";
-    $body .= "お名前: {$name}\n";
+    $body .= "氏名: {$name}\n";
+    $body .= "会社名: {$company}\n";
+    $body .= "住所: {$address}\n";
+    $body .= "電話番号 : {$tel}\n";
     $body .= "メールアドレス: {$email}\n";
     $body .= "お問い合わせ内容:\n{$message}\n";
     
