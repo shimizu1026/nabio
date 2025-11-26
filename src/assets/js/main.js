@@ -98,6 +98,27 @@ navItems.forEach(item => {
 
 });
 
+	//  Swiper　ファーストビュー
+	const swiperElement = document.querySelector('.mySwiper');
+
+	if (swiperElement) {
+		const swiper = new Swiper('.mySwiper', {
+			modules: [Autoplay, Pagination, EffectFade],
+			speed: 1200,
+			loop: true,
+			slidesPerView: 1,
+			effect: 'fade',
+			autoplay: {
+				delay: 3000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+		});
+	}
+
 	//  historySwiper
 	const historySwiperElement = document.querySelector('.historySwiper');
 
