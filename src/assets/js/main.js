@@ -5,8 +5,10 @@ import '../css/style.css';
 // gsap
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText);
 
 // Swiperのインポート
 import Swiper from 'swiper';
@@ -33,27 +35,68 @@ document.addEventListener('componentsLoaded', function () {
 		toggleMenu();
 	});
 
+	// スプリットテキスト
+const navItems = document.querySelectorAll(".nav_item");
 
-	//  Swiper　ファーストビュー
-	const swiperElement = document.querySelector('.mySwiper');
+const timelines = new Map();
+const splitInstances = new Map();
 
-	if (swiperElement) {
-		const swiper = new Swiper('.mySwiper', {
-			modules: [Autoplay, Pagination, EffectFade],
-			speed: 1200,
-			loop: true,
-			slidesPerView: 1,
-			effect: 'fade',
-			autoplay: {
-				delay: 3000,
-				disableOnInteraction: false,
-			},
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-			},
-		});
-	}
+/**
+ * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
+ * @param {HTMLElement} item - .nav_item要素
+ * @returns {gsap.Timeline} アニメーション用Timeline
+ */
+function getTimeline(item) {
+    if (timelines.has(item)) {
+        return timelines.get(item);
+    }
+
+    const jaText = item.querySelector(".nav_link .ja");
+    if (!jaText) return null;
+
+    if (splitInstances.has(item)) {
+        splitInstances.get(item).revert();
+    }
+    const split = new SplitText(jaText, {
+        type: "chars",
+        charsClass: "char",
+    });
+    splitInstances.set(item, split);
+
+    const tl_nav = gsap.timeline({ paused: true });
+
+    tl_nav.fromTo(split.chars, 
+        { 
+            opacity: 0, 
+            y: "100%",
+        }, 
+        {
+            opacity: 1,
+            y: "0%", 
+            stagger: 0.05, // 1文字ごとの遅延
+            duration: 0.4, // 短くしてホバーに反応しやすく
+            ease: "power3.out",
+        }
+    );
+
+    timelines.set(item, tl_nav);
+    return tl_nav;
+}
+
+/**
+ * マウスイベントリスナーの設定
+ */
+navItems.forEach(item => {
+    // マウスエンター時の処理 (ホバー開始)
+    item.addEventListener('mouseenter', () => {
+        const tl = getTimeline(item);
+        if (tl) {
+            // アニメーションを最初から再生
+            tl.restart();
+        }
+    });
+
+});
 
 	//  historySwiper
 	const historySwiperElement = document.querySelector('.historySwiper');

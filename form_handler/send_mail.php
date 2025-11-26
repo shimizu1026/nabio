@@ -1,11 +1,21 @@
 <?php
-// Composerのオートローダーを読み込む
-// ※ vendorフォルダは通常 form_handler の「一つ上」にあるため、パスを調整
+
+// 1. PHPMailerのメインクラスファイルを読み込む
+require_once 'PHPMailer-master/src/PHPMailer.php';
+
+// 2. 例外処理用のクラスファイルを読み込む
+require_once 'PHPMailer-master/src/Exception.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+require 'vendor/autoload.php';
+
 // vendorフォルダへの正しいパスを設定（form_handlerフォルダの外側へ）
-require __DIR__ . '/../vendor/autoload.php'; 
+// require __DIR__ . '/../vendor/autoload.php'; 
+require('path/to/PHPMailer/src/PHPMailer.php');
+require('path/to/PHPMailer/src/Exception.php');
+require('path/to/PHPMailer/src/SMTP.php');
 
 // POSTリクエストかどうかを確認
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -31,7 +41,7 @@ try {
     $mail->SMTPAuth   = true;
     $mail->Username   = 'your-smtp-username';        // メールアドレス (SMTP認証ID)
     $mail->Password   = 'your-smtp-password';        // SMTPパスワード
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // PHPMailer::ENCRYPTION_STARTTLS または SMTPS
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_STARTTLS または SMTPS
     $mail->Port       = 465;                         // 465 (SMTPS) または 587 (STARTTLS)
     $mail->CharSet = 'UTF-8';                         // 文字化け防止
 
