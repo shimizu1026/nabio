@@ -5,12 +5,12 @@
 }
 
 .section_products {
-	max-width: var(--main-width);
-	margin-inline: auto;
+	width: 100%;
 }
 
 .inner_product {
-	width: 100%;
+	max-width: var(--main-width);
+	margin-inline: auto;
 	padding-top: 120px;
 
 	/* &:first-child {
@@ -40,8 +40,8 @@
 		content: "";
 		background-image: url(../images/icon_under_arrow.svg);
 		background-repeat: no-repeat;
-		width: 10px;
-		height: 6px;
+		width: 30px;
+		height: 30px;
 		display: block;
 	}
 }
@@ -170,11 +170,20 @@
 }
 
 .point_wrapper {
+	width: 100%;
 	background-image: url(../images/bg_pattern.webp);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-size: 40%;
 	margin-top: 80px;
 	/* @media (max-width: 768px) {
 		padding: 0 20px;
 	} */
+}
+
+.point_inner {
+	max-width: var(--main-width);
+	margin-inline: auto;
 }
 
 .section_point {

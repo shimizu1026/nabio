@@ -1,8 +1,9 @@
 .swiper.mySwiper {
 	width: 100%;
-	height: 100vh;
+	height: 90vh;
 	position: sticky;
 	top: 0;
+	left: 0;
 	z-index: 1;
 	/* overflow: visible; */
 
@@ -13,6 +14,19 @@
 	.swiper-slide {
 		width: 100%;
 		height: 100%;
+
+		&::after {
+			background-image: url(../images/fv_exclude.webp);
+			content: "";
+			background-repeat: no-repeat;
+			display: block;
+			position: absolute;
+			top: 0;
+			right: 6%;
+			z-index: 10;
+			width: 1227px;
+			height: 1166px;
+		}
 	}
 
 	.first {
@@ -24,10 +38,13 @@
 		background-position: center center; */
 
 		img {
+			height: 100%;
+			object-fit: cover;
+
 			@media (max-width: 768px) {
 				width: 100%;
 				height: 100%;
-				object-fit: cover;
+
 			}
 		}
 
@@ -41,6 +58,7 @@
 			/* padding-top: 270px;
 			padding-left: 96px; */
 			row-gap: 30px;
+			z-index: 12;
 
 			@media (max-width: 768px) {
 				left: 1rem;
@@ -74,13 +92,19 @@
 		height: 100%;
 		display: grid;
 		place-items: center;
-		background-image: url(../images/fv_2.jpg);
+		background-image: url(../images/fv_2.webp);
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-size: cover;
 		/* display: none; */
 
 		img {
+			height: 100%;
+			object-fit: cover;
+
 			@media (max-width: 768px) {
 				height: 100%;
-				object-fit: cover;
+
 			}
 		}
 
@@ -88,6 +112,8 @@
 			display: grid;
 			gap: 45px;
 			text-align: center;
+			position: relative;
+			z-index: 12;
 
 			.text {
 				font-size: calc(96 * var(--rem-ratio));
@@ -115,16 +141,19 @@
 		/* display: none; */
 
 		img {
+			height: 100%;
+			object-fit: cover;
+
 			@media (max-width: 768px) {
 				height: 100%;
-				object-fit: cover;
+
 			}
 		}
 
 		.copy {
 			position: absolute;
-			top: 24%;
-			left: 10%;
+			top: 16%;
+			left: 8%;
 			color: var(--white-color);
 			display: grid;
 			gap: 45px;
@@ -155,14 +184,32 @@
 
 }
 
+.top_curve {
+	width: 100%;
+	height: 150px;
+	position: relative;
+
+	&:before {
+		content: "";
+		width: 100%;
+		height: 150px;
+		background-color: var(--white-color);
+		clip-path: ellipse(55% 87% at 50% 100%);
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		z-index: 100;
+	}
+}
+
 #scroll_wrapper {
-    /* スライダー（100vh）の下からスタートさせるための高さ */
-    height: 100vh;
-    /* この要素を上に120px引き上げることで、疑似要素の高さ分を相殺し、
-       ファーストビュー（スライダー）の上にカーブ部分を重ねます。 */
-    margin-top: -120px; 
-    position: relative;
-    z-index: 2; /* スライダーより前面に */
+	height: 100vh;
+	width: 100%;
+	margin-top: -150px;
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 2;
 }
 
 .scroll_contents {
@@ -170,17 +217,17 @@
 	z-index: 2;
 	background-color: var(--white-color);
 
-	&:after {
+	/* &:before {
 		content: "";
 		width: 100%;
-		height: 120px;
+		height: 150px;
 		background-color: var(--white-color);
 		clip-path: ellipse(55% 87% at 50% 100%);
 		position: absolute;
-		top: -120px;
+		top: -150px;
 		right: 0;
 		z-index: 100;
-	}
+	} */
 }
 
 .intro {
@@ -292,11 +339,12 @@
 	top: 0;
 	height: 100vh;
 	overflow: hidden;
-
-	/* 固定時に画面いっぱいに表示させるため */
 	height: 100vh;
 	align-items: center;
-	/* 垂直中央揃え */
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 
 	.text_inner {
 		display: flex;
@@ -307,6 +355,13 @@
 		flex: 1;
 		height: 100%; */
 		width: 50%;
+
+		@media (max-width: 768px) {
+			width: 100%;
+			align-items: center;
+			margin-right: auto;
+			padding: 0 1rem;
+		}
 
 		/* .button {
 			margin-inline: auto;
@@ -324,7 +379,12 @@
 		align-items: center;
 		justify-content: center;
 
-
+		@media (max-width: 768px) {
+			width: 100%;
+			align-items: center;
+			margin-right: auto;
+			padding: 0 1rem;
+		}
 
 		&::after {
 			content: "";
@@ -438,18 +498,25 @@
 	}
 }
 
+
+.section2 {
+	.section_home_company {
+		background-color: var(--base-color);
+	}
+}
+
+
 .inner_home_company {
 	max-width: var(--main-width);
 	margin-inline: auto;
 	display: flex;
-	column-gap: 240px;
+	column-gap: 80px;
+	position: relative;
 
 	@media (max-width: 768px) {
 		flex-direction: column-reverse;
-
+		margin-top: 48px;
 	}
-
-
 
 	.text_inner {
 		display: flex;
@@ -457,17 +524,49 @@
 		flex-direction: column;
 		justify-content: center;
 		row-gap: 48px;
-		/* flex: 0.5; */
+		flex: 1;
+		position: relative;
+		z-index: 2;
 	}
 
 	/* img {
-		flex: 1;
+		flex: 2;
 	} */
+
+	.img_wrapper {
+		position: relative;
+		z-index: 0;
+		width: fit-content;
+		height: fit-content;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to bottom right, var(--white-color), var(--accent-color));
+			z-index: -1;
+			filter: url(#noiseFilter);
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+	
 }
 
 .section_faq {
 	background-color: var(--gray-color);
 	padding: 80px 0;
+
+	.title_box {
+		justify-content: center;
+	}
 }
 
 .inner_faq {
@@ -495,8 +594,18 @@
 	display: grid;
 	row-gap: 20px;
 	place-content: center;
+	clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 75% 85%, 75% 100%, 65% 85%, 0 85%);
 	background-color: var(--white-color);
-	padding: 40px 30px;
+	padding: 40px 30px 80px;
+}
+
+.faq_item_wrap {
+	/* ここに影を設定します。box-shadowではなくfilterを使います。 */
+	/* filter: drop-shadow(offsetX offsetY blur color); */
+	filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.15));
+
+	/* 必要に応じて、ラッパー自体の配置調整 */
+	display: grid;
 }
 
 .faq_deco {

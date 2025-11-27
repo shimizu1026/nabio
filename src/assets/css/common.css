@@ -11,6 +11,7 @@
 	--border-color: #A9A9A9;
 	--gray-color: #F6F6F6;
 	--gold-color: #C3AC80;
+	--hover-dark-color: #B22F32;
 
 	/* font */
 	--font-color: #141414;
@@ -54,6 +55,10 @@
 
 .mt64 {
 	margin-top: 4rem;
+}
+
+.mt80 {
+	margin-top: 80px;
 }
 
 .mb80 {
@@ -217,7 +222,7 @@ body {
 
 		@media (max-width: 768px) {
 			width: 100%;
-			padding: 15px 56px 15px 45px;
+			padding: 15px 74px 15px 24px;
 		}
 
 		.header_logo {
@@ -252,7 +257,7 @@ body {
 
 				&:hover {
 					color: var(--accent-color);
-					transition: all 0.4s ease-in-out;
+					transition: var(--hover);
 				}
 			}
 
@@ -302,7 +307,6 @@ body {
 		align-items: center;
 		gap: 1rem;
 
-
 		@media (max-width: 768px) {
 			display: none;
 		}
@@ -338,6 +342,11 @@ body {
 			width: 48px;
 			height: 48px;
 
+			&:hover {
+				background-color: var(--hover-dark-color);
+				transition: var(--hover);
+			}
+
 			img {
 				aspect-ratio: 1 / 1;
 				object-fit: contain;
@@ -346,8 +355,6 @@ body {
 			}
 		}
 	}
-
-
 }
 
 .link_box {
@@ -392,6 +399,11 @@ body {
 	top: 48px;
 	right: 56px;
 	z-index: 999999;
+
+	@media (max-width: 768px) {
+		top: 25px;
+		right: 40px;
+	}
 }
 
 .hamburger_button .button_line_top,
@@ -450,6 +462,11 @@ body {
 }
 
 .hamburger_item {
+
+	&:hover {
+		color: var(--accent-color);
+		transition: var(--hover);
+	}
 
 	a {
 		display: grid;
@@ -533,7 +550,7 @@ body {
 }
 
 .NoScroll {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 /* コンタクト */
@@ -853,7 +870,7 @@ body {
 
 			.title_en {
 				font-size: calc(100 * var(--rem-ratio));
-				font-weight: 500;
+				font-weight: 600;
 				line-height: 1;
 				color: var(--white-color);
 				font-family: var(--font-family-en);
@@ -917,7 +934,7 @@ body {
 
 	.hover_color:hover {
 		color: var(--accent-color);
-		transition: all 0.3s ease;
+		transition: var(--hover);
 	}
 
 	li {
