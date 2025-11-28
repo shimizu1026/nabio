@@ -500,8 +500,27 @@
 
 
 .section2 {
+	background-color: var(--base-color);
+
 	.section_home_company {
-		background-color: var(--base-color);
+		position: relative;
+		background-image: url(../images/gold_blur.png);
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-position: top right;
+		/* &::before {
+			content: "";
+			background-image: url(../images/gold_blur.png);
+			background-repeat: no-repeat;
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 593px;
+			height: 456px;
+			background-size: 100%;
+
+			z-index: 10;
+		} */
 	}
 }
 
@@ -511,7 +530,7 @@
 	margin-inline: auto;
 	display: flex;
 	column-gap: 80px;
-	position: relative;
+	/* position: relative; */
 
 	@media (max-width: 768px) {
 		flex-direction: column-reverse;
@@ -525,8 +544,8 @@
 		justify-content: center;
 		row-gap: 48px;
 		flex: 1;
-		position: relative;
-		z-index: 2;
+		/* position: relative;
+		z-index: 2; */
 	}
 
 	/* img {
@@ -534,12 +553,11 @@
 	} */
 
 	.img_wrapper {
-		position: relative;
-		z-index: 0;
-		width: fit-content;
-		height: fit-content;
+		/* z-index: 0; */
+		/* width: fit-content;
+		height: fit-content; */
 
-		&::before {
+		/* &::before {
 			content: "";
 			position: absolute;
 			top: 20px;
@@ -549,7 +567,7 @@
 			background: linear-gradient(to bottom right, var(--white-color), var(--accent-color));
 			z-index: -1;
 			filter: url(#noiseFilter);
-		}
+		} */
 
 		img {
 			display: block;
@@ -557,7 +575,7 @@
 			height: auto;
 		}
 	}
-	
+
 }
 
 .section_faq {
