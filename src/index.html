@@ -14,7 +14,7 @@
 
 <body>
 	<div id="header_placeholder"></div>
-<svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+<!-- <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
   <filter id="noiseFilter" 
           filterUnits="objectBoundingBox" 
           x="0" 
@@ -24,18 +24,18 @@
     
     <feTurbulence 
       type="fractalNoise" 
-      baseFrequency="1.0"  numOctaves="3" 
+      baseFrequency="1.0"  numOctaves="4" 
       stitchTiles="stitch" />
     
     <feColorMatrix type="saturate" values="0" />
     <feComponentTransfer>
-        <feFuncA type="linear" slope="0.5"/> 
+        <feFuncA type="linear" slope="0.8"/> 
     </feComponentTransfer>
     
     <feBlend in="SourceGraphic" in2="BackgroundImage" mode="multiply" /> 
     
   </filter>
-</svg>
+</svg> -->
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide first">
@@ -159,7 +159,7 @@
 			</section>
 			<!-- /.product -->
 			<section class="section_features">
-				<div class="title_box">
+				<div class="title_box fade_title">
 					<h2 class="en">
 						Product Features<span class="ja">他社製品との違い</span>
 					</h2>
@@ -197,7 +197,7 @@
 
 				<div class="inner_home_company">
 					<div class="text_inner">
-						<div class="title_box">
+						<div class="title_box fade_title">
 							<h2 class="en">Company<span class="ja">会社概要</span></h2>
 						</div>
 						<p class="mt48">
@@ -213,7 +213,7 @@
 				<section class="section_home_company">
 					<div class="inner_home_company">
 						<div class="text_inner">
-							<div class="title_box" style="color: white;">
+							<div class="title_box fade_title" style="color: white;">
 								<h2 class="en">Company<span class="ja">会社概要</span></h2>
 							</div>
 							<p class="mt48" style="color: white; font-size: calc(42 * var(--rem-ratio)); line-height: 1.7; font-weight: 700; letter-spacing: 0.1em;">

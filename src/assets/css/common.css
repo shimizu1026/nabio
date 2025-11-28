@@ -272,12 +272,10 @@ body {
 				}
 
 				.ja .char {
-					/* 1. 不透明度を0にして隠す */
 					opacity: 0;
 					/* 2. 下から出現させるために、文字の高さ分だけ下にずらす */
-					transform: translateY(100%);
-					/* SplitTextで分割される文字(char)は、wordの中でinline要素になるため、
-       transformを効かせるためにinline-blockにするのが確実です。 */
+					transform: translateY(50%);
+					/* SplitTextで分割される文字(char)は、wordの中でinline要素になるため、transformを効かせるためにinline-blockにするのが確実です。 */
 					display: inline-block;
 				}
 
@@ -396,7 +394,7 @@ body {
 	border-radius: 100vmax;
 	padding: 20px 10px;
 	position: fixed;
-	top: 48px;
+	top: 46px;
 	right: 56px;
 	z-index: 999999;
 
@@ -565,7 +563,7 @@ body {
 	max-width: var(--main-width);
 	margin-inline: auto;
 	border-radius: 16px;
-	box-shadow: 0 0 40px rgba(20, 20, 20, 0.7);
+	box-shadow: 0 5px 40px rgba(20, 20, 20, 0.3);
 	padding: 40px 80px;
 	position: relative;
 	z-index: 3;
@@ -996,8 +994,8 @@ body {
 		content: "";
 		background-image: url(../images/icon_red_ring.svg);
 		background-repeat: no-repeat;
-		width: 80px;
-		height: 78px;
+		width: 56px;
+		height: 48px;
 		display: block;
 
 		@media (max-width: 768px) {

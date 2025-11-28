@@ -170,7 +170,7 @@ if (isMenuOpen) {
 		tl_nav.fromTo(split.chars,
 			{
 				opacity: 0,
-				y: "100%",
+				y: "50%",
 			},
 			{
 				opacity: 1,
@@ -452,12 +452,12 @@ function setupFaqAnimation() {
 
     gsap.from(faqWrappers, {
         // 【初期状態】
-        scale: 0, 
+        scale: 0.9, 
         opacity: 0, 
-        y: 50, 
+        y: 20, 
         duration: 0.8,
-        ease: "back.out(1.7)", 
-        stagger: 0.15,  
+        ease: "back.out(1)", 
+        stagger: 0.3,  
 
         // 【スクロールトリガー設定】
         scrollTrigger: {
