@@ -1,66 +1,9 @@
 .sub_page {
-	width: 100%;
-	height: 370px;
-	position: relative;
-
 	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
 		background-image: url(../images/heading_faq.webp);
-		background-repeat: no-repeat;
-		background-size: cover;
-		clip-path: ellipse(100% 87% at 50% 0%);
-		z-index: -1;
-	}
 
-	.inner {
-		max-width: var(--main-width);
-		margin-inline: auto;
-		height: 100%;
-		position: relative;
-
-		.title {
-			display: flex;
-			flex-direction: column;
-			gap: 14px;
-			padding-top: 160px;
-
-			.title_en {
-				font-size: calc(100 * var(--rem-ratio));
-				font-weight: 500;
-				line-height: 1;
-				color: var(--white-color);
-				font-family: var(--font-family-en);
-			}
-
-			.title_ja {
-				position: relative;
-				display: flex;
-				align-items: center;
-				font-size: calc(24 * var(--rem-ratio));
-				color: var(--white-color);
-				letter-spacing: 0.1em;
-				padding-left: 30px;
-				z-index: 1;
-
-				&::before {
-					position: absolute;
-					top: 50%;
-					left: 0;
-					z-index: -1;
-					transform: translateY(-50%);
-					background-image: url(../images/icon_red_circle.svg);
-					content: "";
-					width: 60px;
-					height: 56px;
-					background-repeat: no-repeat;
-					background-size: contain;
-				}
-			}
+		@media (max-width: 768px) {
+			background-position: bottom right 30%;
 		}
 	}
 }

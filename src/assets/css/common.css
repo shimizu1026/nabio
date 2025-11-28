@@ -399,8 +399,8 @@ body {
 	z-index: 999999;
 
 	@media (max-width: 768px) {
-		top: 25px;
-		right: 40px;
+		top: 20px;
+		right: 30px;
 	}
 }
 
@@ -432,7 +432,7 @@ body {
 	top: 30px;
 	right: 40px;
 	width: 100%;
-	max-width: 430px;
+	max-width: 343px;
 	height: 80vh;
 	background-color: var(--white-color);
 	border-radius: 10px;
@@ -443,6 +443,12 @@ body {
 	clip-path: inset(0 0 100% 0);
 	opacity: 0;
 	visibility: hidden;
+
+	@media (max-width: 768px) {
+		height: 100vh;
+		top: 15px;
+		right: 16px;
+	}
 }
 
 .MenuIsOpen {
@@ -453,7 +459,7 @@ body {
 
 .hamburger_list {
 	display: grid;
-	row-gap: 32px;
+	row-gap: 24px;
 	max-width: 300px;
 	margin-inline: auto;
 	padding: 48px 20px;
@@ -498,7 +504,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 48px 20px 0;
+	padding: 48px 1rem 0;
 }
 
 .hamburger_contact {
@@ -547,16 +553,18 @@ body {
 	}
 }
 
-.NoScroll {
-	overflow: hidden;
+.IsScrollAllowed {
+  overflow: hidden
 }
 
 /* コンタクト */
-/* #contact_placeholder {
-	background-color: var(--white-color);
+#contact_placeholder {
+	padding-right: 20px;
+	padding-left: 20px;
+	/* background-color: var(--white-color);
 	position: relative;
-	z-index: 2;
-} */
+	z-index: 2; */
+}
 
 .footer_contact {
 	background-color: var(--white-color);
@@ -839,6 +847,10 @@ body {
 	height: 370px;
 	position: relative;
 
+	@media (max-width: 768px) {
+		height: 315px;
+	}
+
 	&::before {
 		content: "";
 		position: absolute;
@@ -851,6 +863,11 @@ body {
 		background-size: cover;
 		clip-path: ellipse(100% 87% at 50% 0%);
 		z-index: -1;
+
+		@media (max-width: 768px) {
+			clip-path: ellipse(120% 85% at 50% 0%);
+
+		}
 	}
 
 	.inner {
@@ -998,10 +1015,10 @@ body {
 		height: 48px;
 		display: block;
 
-		@media (max-width: 768px) {
+		/* @media (max-width: 768px) {
 			width: 80px;
 			height: 78px;
-		}
+		} */
 	}
 
 	.en {

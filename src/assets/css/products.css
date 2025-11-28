@@ -1,6 +1,10 @@
 .sub_page {
 	&::before {
 		background-image: url(../images/heading_products.webp);
+
+		@media (max-width: 768px) {
+			background-position: bottom right 30%;
+		}
 	}
 }
 
@@ -63,10 +67,10 @@
 		width: 56px;
 		height: 48px;
 
-		@media (max-width: 768px) {
+		/* @media (max-width: 768px) {
 			width: 80px;
 			height: 78px;
-		}
+		} */
 	}
 }
 
@@ -179,11 +183,19 @@
 	/* @media (max-width: 768px) {
 		padding: 0 20px;
 	} */
+
+	@media (max-width: 768px) {
+		background-size: 100%;
+	}
 }
 
 .point_inner {
 	max-width: var(--main-width);
 	margin-inline: auto;
+
+	@media (max-width: 768px) {
+		padding: 0 1rem;
+	}
 }
 
 .section_point {
@@ -206,6 +218,10 @@
 		font-family: var(--font-family-en);
 		font-weight: 500;
 		writing-mode: vertical-rl;
+
+		@media (max-width: 768px) {
+			padding-left: 1rem;
+		}
 	}
 
 	.content {

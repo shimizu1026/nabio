@@ -18,7 +18,47 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
 
+import Lenis from '@studio-freight/lenis';
+
 document.addEventListener('componentsLoaded', function () {
+
+	// Lenis
+	const lenis = new Lenis({
+		duration: 1.2,
+		easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+		// タッチデバイスでも滑らかさを有効にする場合はtrue
+		smoothTouch: true,
+		// スクロール感度
+		touchMultiplier: 1.5,
+	});
+
+	function raf(time) {
+		lenis.raf(time);
+		requestAnimationFrame(raf);
+	}
+	requestAnimationFrame(raf);
+
+	// -------------------------------------------------------------------
+
+	// アンカーリンクの処理
+	const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+	anchorLinks.forEach(link => {
+		link.addEventListener("click", (e) => {
+			// デフォルトのジャンプ動作を停止
+			e.preventDefault();
+
+			const targetId = link.getAttribute('href');
+
+			lenis.scrollTo(targetId);
+		});
+	});
+	function raf(time) {
+		lenis.raf(time);
+		requestAnimationFrame(raf);
+	}
+	requestAnimationFrame(raf);
+
 	// --------------------------------------------------
 	//  ハンバーガーメニューの処理
 	// --------------------------------------------------
@@ -31,6 +71,7 @@ document.addEventListener('componentsLoaded', function () {
 	const menuItems = document.querySelectorAll(".hamburger_item");
 	const contactArea = document.querySelector(".hamburger_contact_area");
 	const topBar = document.querySelector(".hamburger_top_bar");
+	const body = document.body
 
 	const menuTimeline = gsap.timeline({ paused: true });
 
@@ -47,12 +88,12 @@ document.addEventListener('componentsLoaded', function () {
 			visibility: "visible",
 
 			onReverseComplete: () => {
-            // アニメーションが完全に終了した後に、
-            // メニューの表示を切り替えるクラスを削除する
-            menu.classList.remove("MenuIsOpen");
-            // スクロール固定が必要な場合は、ここでbodyのクラスを削除
-            // document.body.classList.remove("NoScroll");
-        }
+				// アニメーションが完全に終了した後に、
+				// メニューの表示を切り替えるクラスを削除する
+				menu.classList.remove("MenuIsOpen");
+				// スクロール固定が必要な場合は、ここでbodyのクラスを削除
+				// document.body.classList.remove("NoScroll");
+			}
 		},
 		0
 	);
@@ -118,23 +159,21 @@ document.addEventListener('componentsLoaded', function () {
 		const isMenuOpen = menu.classList.contains("MenuIsOpen");
 		hamburgerButton.classList.toggle("MenuIsActive");
 		// header.classList.toggle("MenuIsActive"); // 必要に応じて残す
-if (isMenuOpen) {
-        // --- 閉じる処理 (逆再生) ---
-        hamburgerButton.classList.remove("MenuIsActive");
-        header.classList.remove("MenuIsActive"); 
-        menuTimeline.timeScale(1).reverse();
-        
-    } else {
-        // --- 開く処理 (再生) ---
-        
-        // メニューが開いている状態を示すクラスを先に追加
-        hamburgerButton.classList.add("MenuIsActive");
-        header.classList.add("MenuIsActive");
-        menu.classList.add("MenuIsOpen");
-        // document.body.classList.add("NoScroll"); // スクロール固定が必要なら
-        
-        menuTimeline.timeScale(1).play();
-    }
+		if (isMenuOpen) {
+			// --- 閉じる処理 (逆再生) ---
+			hamburgerButton.classList.remove("MenuIsActive");
+			header.classList.remove("MenuIsActive");
+			document.body.classList.remove("IsScrollAllowed");
+			menuTimeline.timeScale(1).reverse();
+
+		} else {
+			// --- 開く処理 (再生) ---
+			hamburgerButton.classList.add("MenuIsActive");
+			header.classList.add("MenuIsActive");
+			menu.classList.add("MenuIsOpen");
+			document.body.classList.add("IsScrollAllowed");
+			menuTimeline.timeScale(1).play();
+		}
 	});
 
 	// スプリットテキスト
@@ -413,6 +452,7 @@ if (isMenuOpen) {
 		opacity: 0,
 		delay: 0.2  // 0.2秒遅らせる
 	});
+
 	function setupFadeAnimation() {
 		// アニメーションを適用したい全ての要素を選択
 		const fadeTargets = gsap.utils.toArray(".fade_contents");
@@ -444,33 +484,33 @@ if (isMenuOpen) {
 
 	// --------------------------------------------------
 	// TOP FAQアニメーション// --------------------------------------------------
-function setupFaqAnimation() {
-    // アニメーション対象のラッパー要素をすべて取得
-    const faqWrappers = document.querySelectorAll(".faq_list .faq_item_wrap");
+	function setupFaqAnimation() {
+		// アニメーション対象のラッパー要素をすべて取得
+		const faqWrappers = document.querySelectorAll(".faq_list .faq_item_wrap");
 
-    if (faqWrappers.length === 0) return;
+		if (faqWrappers.length === 0) return;
 
-    gsap.from(faqWrappers, {
-        // 【初期状態】
-        scale: 0.9, 
-        opacity: 0, 
-        y: 20, 
-        duration: 0.8,
-        ease: "back.out(1)", 
-        stagger: 0.3,  
+		gsap.from(faqWrappers, {
+			// 【初期状態】
+			scale: 0.9,
+			opacity: 0,
+			y: 20,
+			duration: 0.8,
+			ease: "back.out(1)",
+			stagger: 0.3,
 
-        // 【スクロールトリガー設定】
-        scrollTrigger: {
-            trigger: ".faq_list",
-            start: "top 80%", 
-            toggleActions: "play none none none", // 一度だけ再生
-            // markers: true,     // デバッグ用マーカーを表示（確認後削除）
-        }
-    });
-}
+			// 【スクロールトリガー設定】
+			scrollTrigger: {
+				trigger: ".faq_list",
+				start: "top 80%",
+				toggleActions: "play none none none", // 一度だけ再生
+				// markers: true,     // デバッグ用マーカーを表示（確認後削除）
+			}
+		});
+	}
 
-// 実行
-setupFaqAnimation();
+	// 実行
+	setupFaqAnimation();
 
 	// --------------------------------------------------
 	// 問い合わせフォームの画面切り替え// --------------------------------------------------

@@ -1,6 +1,10 @@
 .sub_page {
 	&::before {
 		background-image: url(../images/heading_contact.webp);
+
+		@media (max-width: 768px) {
+			background-position: bottom left 14%;
+		}
 	}
 }
 
@@ -46,6 +50,7 @@
 	right: 0;
 
 	@media (max-width: 768px) {
+		position: static;
 		margin-inline: auto;
 		margin-bottom: 32px;
 	}
@@ -259,6 +264,13 @@
 	dt {
 		font-weight: 400;
 	}
+}
+
+.note {
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	text-indent: 1em;
+	margin-top: 64px;
 }
 
 .confirm_buttons {

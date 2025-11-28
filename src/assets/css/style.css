@@ -199,6 +199,14 @@
 		right: 0;
 		bottom: 0;
 		z-index: 100;
+
+		@media (max-width: 768px) {
+			clip-path: ellipse(60% 87% at 50% 100%);
+		}
+
+		@media (max-width: 450px) {
+			clip-path: ellipse(80% 87% at 50% 100%);
+		}
 	}
 }
 
@@ -249,6 +257,8 @@
 	@media (max-width: 768px) {
 		background-size: cover;
 		background-position: center;
+		padding-right: 1rem;
+		padding-left: 1rem;
 	}
 
 
@@ -488,13 +498,17 @@
 }
 
 .section_home_company {
+	background-image: linear-gradient(to left, #752022, var(--accent-color));
+	background-size: 35% 90%;
+	background-position: right 7% center;
+	background-repeat: no-repeat;
 	padding-top: 120px;
 	padding-bottom: 120px;
 
 	.title_box {
-		max-width: var(--main-width);
-		margin-inline: auto;
-
+		/* max-width: var(--main-width);
+		margin-inline: auto; */
+		margin-right: auto;
 	}
 }
 
@@ -503,24 +517,10 @@
 	background-color: var(--base-color);
 
 	.section_home_company {
-		position: relative;
 		background-image: url(../images/gold_blur.png);
 		background-repeat: no-repeat;
-		background-size: 100%;
-		background-position: top right;
-		/* &::before {
-			content: "";
-			background-image: url(../images/gold_blur.png);
-			background-repeat: no-repeat;
-			position: absolute;
-			top: 0;
-			right: 0;
-			width: 593px;
-			height: 456px;
-			background-size: 100%;
-
-			z-index: 10;
-		} */
+		background-size: auto;
+		background-position: center;
 	}
 }
 
@@ -529,8 +529,8 @@
 	max-width: var(--main-width);
 	margin-inline: auto;
 	display: flex;
+	align-items: center;
 	column-gap: 80px;
-	/* position: relative; */
 
 	@media (max-width: 768px) {
 		flex-direction: column-reverse;
@@ -553,6 +553,7 @@
 	} */
 
 	.img_wrapper {
+		flex: 1;
 		/* z-index: 0; */
 		/* width: fit-content;
 		height: fit-content; */
@@ -621,6 +622,18 @@
 	/* filter: drop-shadow(offsetX offsetY blur color); */
 	filter: drop-shadow(0px 5px 15px rgba(20, 20, 20, 0.15));
 	display: grid;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+
+	&:nth-child(2) {
+		transform: translateY(40px) !important;
+
+		@media (max-width: 768px) {
+			transform: none !important;
+		}
+	}
 }
 
 .faq_deco {

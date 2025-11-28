@@ -1,10 +1,12 @@
 .sub_page {
 	&::before {
 		background-image: url(../images/heading_company.webp);
+
+		@media (max-width: 768px) {
+			background-position: bottom right 30%;
+		}
 	}
-
 }
-
 
 .contents {
 	.section_outline {
@@ -12,6 +14,11 @@
 		margin-inline: auto;
 		padding-top: 80px;
 		padding-bottom: 120px;
+
+		@media (max-width: 768px) {
+			padding-right: 20px;
+			padding-left: 20px;
+		}
 
 		.inner_outline {
 			display: flex;
@@ -61,6 +68,11 @@
 			display: flex;
 			align-items: flex-end;
 			line-height: 1.8;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
 		}
 	}
 
@@ -69,6 +81,10 @@
 		align-items: center;
 		gap: 8px;
 		padding-left: 1rem;
+
+		@media (max-width: 768px) {
+			padding-left: 0;
+		}
 
 		&::after {
 			content: "";
@@ -139,6 +155,10 @@
 	.title_box {
 		max-width: var(--main-width);
 		margin-inline: auto;
+
+		@media (max-width: 768px) {
+			padding-left: 20px;
+		}
 	}
 }
 
@@ -151,6 +171,10 @@
 	padding-top: 80px;
 	padding-bottom: 60px;
 	overflow: hidden;
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+	}
 }
 
 .historySwiper {
@@ -167,15 +191,16 @@
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	padding-top: 24px;
 
 	&::after {
 		content: "";
 		position: absolute;
-		top: 55px;
+		/* top: 55px; */
+		top: 0;
 		/* 丸の中心を通る高さに合わせる */
 		left: 0;
 		width: 100%;
-		/* 横幅いっぱいに線を引く */
 		height: 1px;
 		background-color: var(--border-color);
 		z-index: 1;
@@ -184,9 +209,11 @@
 	&::before {
 		content: "";
 		position: absolute;
-		top: 55px;
+		/* top: 55px; */
+		top: 0px;
 		/* 線と同じ高さ */
 		left: 8px;
+		/* left: 50%; */
 		/* 自分のエリアの中央に配置 */
 		transform: translate(-50%, -50%);
 		width: 1rem;
@@ -197,6 +224,7 @@
 	}
 
 	.year {
+		order: 2;
 		font-size: calc(24 * var(--rem-ratio));
 		font-weight: 500;
 		font-family: var(--font-family-en);
@@ -204,10 +232,12 @@
 	}
 
 	.text {
+		order: 1;
 		font-size: calc(20 * var(--rem-ratio));
 		line-height: 1.5;
 		letter-spacing: 0.05em;
-		margin-top: 64px;
+		margin-top: 24px;
+		/* margin-top: 64px; */
 	}
 }
 
@@ -249,6 +279,11 @@
 	background-size: contain;
 	background-position: right -178px bottom -15px;
 	padding-top: 120px;
+
+	@media (max-width: 768px) {
+		background-position: center bottom -15px;
+		background-size: cover;
+	}
 }
 
 .inner_access {
@@ -256,9 +291,14 @@
 	margin-inline: auto;
 	width: 100%;
 
+	@media (max-width: 768px) {
+		padding: 0 20px;
+	}
+
 	.address {
 		letter-spacing: 0.05em;
 		line-height: 1.5;
+
 	}
 
 }
