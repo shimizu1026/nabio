@@ -43,7 +43,7 @@
 	}
 }
 
-.contents {
+.faq_inner {
 	max-width: var(--main-width);
 	margin-inline: auto;
 	padding-top: 80px;

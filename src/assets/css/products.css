@@ -224,7 +224,7 @@
 		}
 	}
 
-	.content {
+	.point_content {
 		display: grid;
 		row-gap: 24px;
 	}

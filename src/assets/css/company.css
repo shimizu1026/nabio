@@ -8,6 +8,7 @@
 	}
 }
 
+
 .contents {
 	.section_outline {
 		max-width: var(--main-width);
@@ -35,6 +36,8 @@
 	}
 
 }
+
+
 
 .company_table {
 	width: 100%;
@@ -187,10 +190,10 @@
 }
 
 .history_item {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	position: relative;
+	/* display: flex; */
+	/* flex-direction: column;
+	align-items: center; */
+	/* position: relative; */
 	padding-top: 24px;
 
 	&::after {
