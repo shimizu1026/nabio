@@ -32,12 +32,6 @@ document.addEventListener('componentsLoaded', function () {
 		touchMultiplier: 1.5,
 	});
 
-	function raf(time) {
-		lenis.raf(time);
-		requestAnimationFrame(raf);
-	}
-	requestAnimationFrame(raf);
-
 	// -------------------------------------------------------------------
 
 	// アンカーリンクの処理
@@ -58,6 +52,39 @@ document.addEventListener('componentsLoaded', function () {
 		requestAnimationFrame(raf);
 	}
 	requestAnimationFrame(raf);
+
+	// --------------------------------------------------
+	// オープニング
+	// --------------------------------------------------
+const openingMask = document.querySelector(".opening_mask");
+    const fvSwiper = document.querySelector(".swiper.mySwiper");
+	
+
+    // タイムライン作成
+    const openingTl = gsap.timeline();
+
+    // アニメーション開始
+    openingTl
+        // 0. 初期設定
+        .set(fvSwiper, {
+            scale: 0.95,
+            opacity: 0, 
+            filter: "brightness(0)"
+        })
+
+        .to(openingMask, {
+            y: "-120%",
+            duration: 1.8,
+            ease: "power4.out",
+        })
+
+        .to(fvSwiper, {
+            scale: 1,
+            opacity: 1, 
+            filter: "brightness(1)", 
+            duration: 0.5,
+            ease: "power4.out",
+        }, "-=1.0"); // マスクのアニメーションが終わる「1.0秒前」から開始（少し重ねる）
 
 	// --------------------------------------------------
 	//  ハンバーガーメニューの処理
@@ -92,7 +119,8 @@ document.addEventListener('componentsLoaded', function () {
 				// メニューの表示を切り替えるクラスを削除する
 				menu.classList.remove("MenuIsOpen");
 				// スクロール固定が必要な場合は、ここでbodyのクラスを削除
-				// document.body.classList.remove("NoScroll");
+				document.body.classList.remove("IsScrollAllowed");
+				lenis.start();
 			}
 		},
 		0
@@ -163,7 +191,6 @@ document.addEventListener('componentsLoaded', function () {
 			// --- 閉じる処理 (逆再生) ---
 			hamburgerButton.classList.remove("MenuIsActive");
 			header.classList.remove("MenuIsActive");
-			document.body.classList.remove("IsScrollAllowed");
 			menuTimeline.timeScale(1).reverse();
 
 		} else {
@@ -172,6 +199,7 @@ document.addEventListener('componentsLoaded', function () {
 			header.classList.add("MenuIsActive");
 			menu.classList.add("MenuIsOpen");
 			document.body.classList.add("IsScrollAllowed");
+			lenis.stop();
 			menuTimeline.timeScale(1).play();
 		}
 	});
@@ -239,28 +267,135 @@ document.addEventListener('componentsLoaded', function () {
 
 	});
 
-	//  Swiper　ファーストビュー
-	const swiperElement = document.querySelector('.mySwiper');
+// -------------------------------------------------------------------
+// スプリットテキスト (フッターナビゲーション用)
 
-	if (swiperElement) {
-		const swiper = new Swiper('.mySwiper', {
-			modules: [Autoplay, Pagination, EffectFade],
-			speed: 1200,
-			loop: true,
-			slidesPerView: 1,
-			effect: 'fade',
-			autoplay: {
-				delay: 3000,
-				disableOnInteraction: false,
-			},
-			pagination: {
-				el: '.swiper-pagination',
-				clickable: true,
-			},
-		});
-	}
+// ★ 修正点1: 定数名に 'footer' を追加
+const footerNavItems = document.querySelectorAll(".footer_item");
 
+// ★ 修正点2: Map名に 'footer' を追加
+const footerTimelines = new Map();
+const footerSplitInstances = new Map();
+
+/**
+ * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
+ * @param {HTMLElement} item - .footer_item要素
+ * @returns {gsap.Timeline} アニメーション用Timeline
+ */
+// ★ 修正点3: 関数名に 'footer' を追加
+function getFooterTimeline(item) {
+    if (footerTimelines.has(item)) {
+        return footerTimelines.get(item);
+    }
+
+    const jaText = item.querySelector(".footer_link .ja"); 
+    if (!jaText) return null;
+
+    if (footerSplitInstances.has(item)) {
+        footerSplitInstances.get(item).revert();
+    }
+    const split = new SplitText(jaText, {
+        type: "chars",
+        charsClass: "char",
+    });
+    footerSplitInstances.set(item, split);
+
+    // ★ 修正点4: Timeline変数名に 'footer' を追加
+    const tl_footer_nav = gsap.timeline({ paused: true });
+
+    tl_footer_nav.fromTo(split.chars,
+        {
+            opacity: 0,
+            y: "50%",
+        },
+        {
+            opacity: 1,
+            y: "0%",
+            stagger: 0.05,
+            duration: 0.4,
+            ease: "power3.out",
+        }
+    );
+
+    footerTimelines.set(item, tl_footer_nav);
+    return tl_footer_nav;
+}
+
+/**
+ * マウスイベントリスナーの設定
+ */
+footerNavItems.forEach(item => {
+    // マウスエンター時の処理 (ホバー開始)
+    item.addEventListener('mouseenter', () => {
+        // ★ 修正点5: 呼び出す関数名を変更
+        const tl = getFooterTimeline(item); 
+        if (tl) {
+            tl.restart();
+        }
+    });
+
+});
+
+// -------------------------------------------------------------------
+	
+// ------------------------------------
+//  Swiper　ファーストビュー
+// ------------------------------------
+const swiperElement = document.querySelector('.mySwiper');
+
+if (swiperElement) {
+    const swiperInstance = new Swiper('.mySwiper', {
+        modules: [Autoplay, Pagination, EffectFade],
+        speed: 1200,
+        loop: true,
+        slidesPerView: 1,
+        effect: 'fade',
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        
+        on: {
+            init: function () {
+                startSlideZoom(this.slides[this.activeIndex]);
+            },
+            slideChangeTransitionEnd: function () {
+                startSlideZoom(this.slides[this.activeIndex]);
+            },
+            slideChangeTransitionStart: function () {
+                resetSlideZoom(this.slides[this.previousIndex]);
+            }
+        }
+    });
+    
+    /**
+     * 現在のアクティブスライド内の画像をズームインさせる
+     * @param {HTMLElement} slideEl - Swiperスライド要素
+     */
+    function startSlideZoom(slideEl) {
+        const target = slideEl.querySelector('img'); 
+        
+        if (target) {
+            gsap.fromTo(target, 
+                { scale: 1.0, transformOrigin: 'center center' }, 
+                { 
+                    scale: 1.1, 
+                    duration: 3.0,
+                    ease: "linear"
+                }
+            );
+        }
+    }
+    
+}
+// ------------------------------------
 	//  historySwiper
+// ------------------------------------
+
 	const historySwiperElement = document.querySelector('.historySwiper');
 
 	if (historySwiperElement) {
@@ -273,6 +408,7 @@ document.addEventListener('componentsLoaded', function () {
 			breakpoints: {
 				768: {
 					slidesPerView: 3,
+					
 				}
 			},
 			// --- 矢印ボタンの設定 ---
@@ -435,10 +571,16 @@ document.addEventListener('componentsLoaded', function () {
 		);
 	}
 
-	titleAnimation();
+const enTitleCheck = document.querySelector(".title_en");
+if (enTitleCheck) {
+    // .title_enが存在する場合のみ実行
+    titleAnimation();
+}
 
 	// --------------------------------------------------
 	// 下から上にフェイドイン// --------------------------------------------------
+const fadeTitleCheck = document.querySelector(".fade_title");
+if (fadeTitleCheck) {
 	gsap.from(".fade_title", {
 		duration: 1,
 		y: 50,  // 下から50px上に移動
@@ -452,6 +594,7 @@ document.addEventListener('componentsLoaded', function () {
 		opacity: 0,
 		delay: 0.2  // 0.2秒遅らせる
 	});
+	}
 
 	function setupFadeAnimation() {
 		// アニメーションを適用したい全ての要素を選択

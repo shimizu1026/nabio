@@ -15,7 +15,7 @@
 .inner_product {
 	max-width: var(--main-width);
 	margin-inline: auto;
-	padding-top: 120px;
+	padding-top: 144px;
 
 	/* &:first-child {
 		padding-top: 0;
@@ -157,7 +157,7 @@
 		text-align: center;
 		margin-top: 40px;
 		letter-spacing: 0.05em;
-		line-height: 1.5;
+		line-height: 1.8;
 	}
 }
 

@@ -1,11 +1,25 @@
+/* --- オープニングマスクの設定 --- */
+.opening_mask {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 150%;
+	height: 150vh;
+	background-color: var(--base-color);
+	/* background-color: var(--white-color); */
+	z-index: 9999;
+	clip-path: ellipse(100% 87% at 50% 0%);
+}
+
 .swiper.mySwiper {
 	width: 100%;
-	height: 98vh;
+	height: 100vh;
 	position: sticky;
 	top: 0;
 	left: 0;
 	z-index: 1;
-	/* overflow: visible; */
+	transform-origin: center center;
 
 	/* @media (max-width: 768px) {
 		height: 100vh;
@@ -59,6 +73,7 @@
 			padding-left: 96px; */
 			row-gap: 30px;
 			z-index: 12;
+			
 
 			@media (max-width: 768px) {
 				left: 1rem;
@@ -78,6 +93,7 @@
 			}
 
 			.sub_text {
+				font-size: calc(20 * var(--rem-ratio));
 				color: var(--white-color);
 				line-height: 2;
 				letter-spacing: 0.05em;
@@ -92,10 +108,10 @@
 		height: 100%;
 		display: grid;
 		place-items: center;
-		background-image: url(../images/fv_2.webp);
+		/* background-image: url(../images/fv_2.webp);
 		background-repeat: no-repeat;
 		background-size: 100%;
-		background-size: cover;
+		background-size: cover; */
 		/* display: none; */
 
 		img {
@@ -109,10 +125,16 @@
 		}
 
 		.copy {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+			display: flex;
+			flex-direction: column;
+			row-gap: 30px;
 			display: grid;
 			gap: 45px;
 			text-align: center;
-			position: relative;
 			z-index: 12;
 
 			.text {
@@ -124,7 +146,7 @@
 			}
 
 			.sub_text {
-				font-size: calc(24 * var(--rem-ratio));
+				font-size: calc(20 * var(--rem-ratio));
 				line-height: 1.6;
 				letter-spacing: 0.05em;
 
@@ -171,7 +193,7 @@
 			}
 
 			.sub_text {
-				font-size: calc(24 * var(--rem-ratio));
+				font-size: calc(20 * var(--rem-ratio));
 				line-height: 1.6;
 				letter-spacing: 0.05em;
 
@@ -184,15 +206,52 @@
 
 }
 
+/* ------------------------------------
+ * 1. スライド内の画像の初期設定
+ * ------------------------------------ */
+/* スライド内の<img>タグをターゲットにする */
+.swiper-slide img {
+	/* スライドの枠いっぱいに表示し、はみ出た部分は隠す設定が必要です */
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+
+	/* 初期状態: わずかに縮小しておく */
+	transform: scale(1.0);
+
+	/* 遷移の設定: 3秒間かけて滑らかに拡大 */
+	transition: transform 3000ms linear;
+	/* 3000ms = 3秒 */
+}
+
+/* ------------------------------------
+ * 2. Swiperのオプション設定
+ * ------------------------------------ */
+/* スライドの親要素（.swiper-slide）で、はみ出た画像を隠す */
+.swiper-slide {
+	overflow: hidden;
+	/* これが重要！拡大時に画像がスライド枠から出ないようにする */
+}
+
+
+/* ------------------------------------
+ * 3. スライドがアクティブになった時の設定
+ * ------------------------------------ */
+/* Swiperが自動で付与する `.swiper-slide-active` クラスをトリガーに拡大 */
+.swiper-slide-active img {
+	/* 最終状態: 1.15倍に拡大 */
+	transform: scale(1.15);
+}
+
 .top_curve {
 	width: 100%;
-	height: 150px;
+	height: 120px;
 	position: relative;
 
 	&:before {
 		content: "";
 		width: 100%;
-		height: 150px;
+		height: 120px;
 		background-color: var(--white-color);
 		clip-path: ellipse(55% 87% at 50% 100%);
 		position: absolute;
@@ -213,7 +272,7 @@
 #scroll_wrapper {
 	height: 100vh;
 	width: 100%;
-	margin-top: -150px;
+	margin-top: -120px;
 	position: sticky;
 	top: 0;
 	left: 0;
@@ -250,6 +309,7 @@
 	background-position: 50% 0%;
 	transition: none;
 	overflow: hidden;
+	padding-top: 100px;
 	padding-bottom: 120px;
 	position: relative;
 
@@ -497,30 +557,28 @@
 	letter-spacing: 0.05em;
 }
 
-.section_home_company {
-	background-image: linear-gradient(to left, #752022, var(--accent-color));
-	background-size: 35% 90%;
-	background-position: right 7% center;
-	background-repeat: no-repeat;
+.products_wrapper {
 	padding-top: 120px;
 	padding-bottom: 120px;
+}
+
+.section_home_company {
+	background-image: linear-gradient(to left, #752022, var(--accent-color));
+	background-size: 35% 100%;
+	background-position: right 7% center;
+	background-repeat: no-repeat;
+
+	@media (max-width: 768px) {
+		background-image: linear-gradient(to top, #752022, var(--accent-color));
+		background-size: 100% 30%;
+		background-position: bottom;
+		padding-bottom: 80px;
+	}
 
 	.title_box {
 		/* max-width: var(--main-width);
 		margin-inline: auto; */
 		margin-right: auto;
-	}
-}
-
-
-.section2 {
-	background-color: var(--base-color);
-
-	.section_home_company {
-		background-image: url(../images/gold_blur.png);
-		background-repeat: no-repeat;
-		background-size: auto;
-		background-position: center;
 	}
 }
 
@@ -533,8 +591,10 @@
 	column-gap: 80px;
 
 	@media (max-width: 768px) {
-		flex-direction: column-reverse;
+		flex-direction: column;
+		row-gap: 40px;
 		margin-top: 48px;
+		padding: 0 20px;
 	}
 
 	.text_inner {
@@ -547,6 +607,19 @@
 		/* position: relative;
 		z-index: 2; */
 	}
+
+	.company_copy {
+		font-size: calc(42 * var(--rem-ratio));
+		line-height: 1.7;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+
+			@media (max-width: 768px) {
+		font-size: calc(36 * var(--rem-ratio));
+	}
+	}
+
+
 
 	/* img {
 		flex: 2;
@@ -613,18 +686,17 @@
 	display: grid;
 	row-gap: 20px;
 	place-content: center;
-	clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 75% 85%, 75% 100%, 65% 85%, 0 85%);
+	clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 75% 100%, 65% 90%, 0 90%);
 	background-color: var(--white-color);
 	padding: 40px 30px 80px;
 }
 
 .faq_item_wrap {
-	/* filter: drop-shadow(offsetX offsetY blur color); */
 	filter: drop-shadow(0px 5px 15px rgba(20, 20, 20, 0.15));
 	display: grid;
 
 	@media (max-width: 768px) {
-		display: none;
+	clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 75% 90%, 75% 100%, 70% 90%, 0 90%);
 	}
 
 	&:nth-child(2) {

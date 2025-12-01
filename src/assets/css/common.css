@@ -516,14 +516,14 @@ body {
 	.mail {
 		margin-top: 24px;
 
-		&::before {
+		/* &::before {
 			content: "";
 			background-image: url(../images/icon_mail.svg);
 			background-repeat: no-repeat;
 			width: 25px;
 			height: 25px;
 			z-index: 10;
-		}
+		} */
 	}
 
 	.tel {
@@ -552,9 +552,23 @@ body {
 		letter-spacing: 0.05em;
 	}
 }
+.hamburger_contact, .footer_contact {
+	.mail {
+
+		&::before {
+			content: "";
+			background-image: url(../images/icon_mail.svg);
+			background-repeat: no-repeat;
+			width: 25px;
+			height: 25px;
+			z-index: 10;
+		}
+	}
+
+}
 
 .IsScrollAllowed {
-  overflow: hidden
+	overflow: hidden
 }
 
 /* コンタクト */
@@ -586,7 +600,7 @@ body {
 		gap: 8px;
 
 		.title_en {
-			font-size: calc(64 * var(--rem-ratio));
+			font-size: calc(48 * var(--rem-ratio));
 			font-family: var(--font-family-en);
 			line-height: 1;
 			font-weight: 700;
@@ -696,6 +710,10 @@ body {
 
 		@media (max-width: 768px) {
 			padding: 0 20px;
+		}
+
+		.footer_logo {
+			width: fit-content;
 		}
 
 		.footer_logo img {
@@ -818,25 +836,10 @@ body {
 }
 
 .top_button {
-	position: relative;
-	bottom: 30px;
-	right: 30px;
-	width: 100%;
-	max-width: 300px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 4px;
-	border-radius: 100vmax;
-	color: var(--white-color);
-	font-family: var(--font-family-en);
-	font-weight: 500;
-	background-color: var(--base-color);
-	padding: 16px 0;
+	margin-left: auto;
 
 	@media (max-width: 768px) {
-		right: 50%;
-		transform: translateX(50px);
+		margin-left: 0;
 	}
 
 }
@@ -1035,4 +1038,8 @@ body {
 		letter-spacing: 0.1em;
 		font-weight: 400;
 	}
+}
+
+.section_text {
+	line-height: 1.5;
 }
