@@ -1,6 +1,6 @@
-.sub_page {
+.sub_page.faq_header {
 	&::before {
-		background-image: url(../images/heading_faq.webp);
+		background-image: url(../images/heading_faq.webp) !important;
 
 		@media (max-width: 768px) {
 			background-position: bottom right 30%;

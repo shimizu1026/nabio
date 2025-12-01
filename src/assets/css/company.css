@@ -1,6 +1,6 @@
-.sub_page {
+.sub_page.company_header {
 	&::before {
-		background-image: url(../images/heading_company.webp);
+		background-image: url(../images/heading_company.webp) !important;
 
 		@media (max-width: 768px) {
 			background-position: bottom right 30%;

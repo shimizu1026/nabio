@@ -1,6 +1,6 @@
-.sub_page {
+.sub_page.contact_header {
 	&::before {
-		background-image: url(../images/heading_contact.webp);
+		background-image: url(../images/heading_contact.webp) !important;
 
 		@media (max-width: 768px) {
 			background-position: bottom left 14%;
