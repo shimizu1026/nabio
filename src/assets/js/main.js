@@ -49,6 +49,7 @@ document.addEventListener('componentsLoaded', function () {
 	});
 	function raf(time) {
 		lenis.raf(time);
+		//gsap.update(time / 1000); 追加
 		requestAnimationFrame(raf);
 	}
 	requestAnimationFrame(raf);
@@ -192,7 +193,10 @@ const openingMask = document.querySelector(".opening_mask");
 			// --- 閉じる処理 (逆再生) ---
 			hamburgerButton.classList.remove("MenuIsActive");
 			header.classList.remove("MenuIsActive");
+			lenis.start();/*追加*/
+			document.body.classList.remove("IsScrollAllowed");/*追加*/
 			menuTimeline.timeScale(1).reverse();
+			menu.classList.remove("MenuIsOpen");/*追加*/
 
 		} else {
 			// --- 開く処理 (再生) ---
