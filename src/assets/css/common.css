@@ -567,15 +567,14 @@ body {
 
 }
 
-body {
+/* body {
 	overflow: hidden;
-}
+} */
 
 body.IsScrollAllowed {
     /* スクロールを固定して無効にする */
-    /* overflow: hidden;  */
 	height: 100% !important;
-
+	overflow: hidden;
 }
 
 /* コンタクト */

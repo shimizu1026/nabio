@@ -2,6 +2,12 @@
 
 import '../css/destyle.css';
 import '../css/style.css';
+import '../css/common.css';
+import '../css/contact.css';
+import '../css/company.css';
+import '../css/faq.css';
+import '../css/products.css';
+
 // gsap
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -49,7 +55,7 @@ document.addEventListener('componentsLoaded', function () {
 	});
 	function raf(time) {
 		lenis.raf(time);
-		//gsap.update(time / 1000); 追加
+		ScrollTrigger.update(); //追加
 		requestAnimationFrame(raf);
 	}
 	requestAnimationFrame(raf);
@@ -57,36 +63,37 @@ document.addEventListener('componentsLoaded', function () {
 	// --------------------------------------------------
 	// オープニング
 	// --------------------------------------------------
-const openingMask = document.querySelector(".opening_mask");
-    const fvSwiper = document.querySelector(".swiper.mySwiper");
-	
 
-    // タイムライン作成
-    const openingTl = gsap.timeline();
+	const openingMask = document.querySelector(".opening_mask");
+	const fvSwiper = document.querySelector(".swiper.mySwiper");
 
-    // アニメーション開始
-    openingTl
-        // 0. 初期設定
-        .set(fvSwiper, {
-            scale: 0.95,
-            opacity: 0, 
-            filter: "brightness(0)"
-        })
+if (openingMask && fvSwiper) {
 
-        .to(openingMask, {
-            y: "-120%",
-            duration: 1.8,
-            ease: "power4.out",
-        })
+	const openingTl = gsap.timeline();
 
-        .to(fvSwiper, {
-            scale: 1,
-            opacity: 1, 
-            filter: "brightness(1)", 
-            duration: 0.5,
-            ease: "power4.out",
-        }, "-=1.0"); // マスクのアニメーションが終わる「1.0秒前」から開始（少し重ねる）
-		
+	// アニメーション開始
+	openingTl
+		// 0. 初期設定
+		.set(fvSwiper, {
+			scale: 0.95,
+			opacity: 0,
+			filter: "brightness(0)"
+		})
+
+		.to(openingMask, {
+			y: "-120%",
+			duration: 1.8,
+			ease: "power4.out",
+		})
+
+		.to(fvSwiper, {
+			scale: 1,
+			opacity: 1,
+			filter: "brightness(1)",
+			duration: 0.5,
+			ease: "power4.out",
+		}, "-=1.0"); // マスクのアニメーションが終わる「1.0秒前」から開始（少し重ねる）
+	}
 
 	// --------------------------------------------------
 	//  ハンバーガーメニューの処理
@@ -272,134 +279,131 @@ const openingMask = document.querySelector(".opening_mask");
 
 	});
 
-// -------------------------------------------------------------------
-// スプリットテキスト (フッターナビゲーション用)
+	// -------------------------------------------------------------------
+	// スプリットテキスト (フッターナビゲーション用)
 
-// ★ 修正点1: 定数名に 'footer' を追加
-const footerNavItems = document.querySelectorAll(".footer_item");
+	// ★ 修正点1: 定数名に 'footer' を追加
+	const footerNavItems = document.querySelectorAll(".footer_item");
 
-// ★ 修正点2: Map名に 'footer' を追加
-const footerTimelines = new Map();
-const footerSplitInstances = new Map();
+	// ★ 修正点2: Map名に 'footer' を追加
+	const footerTimelines = new Map();
+	const footerSplitInstances = new Map();
 
-/**
- * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
- * @param {HTMLElement} item - .footer_item要素
- * @returns {gsap.Timeline} アニメーション用Timeline
- */
-// ★ 修正点3: 関数名に 'footer' を追加
-function getFooterTimeline(item) {
-    if (footerTimelines.has(item)) {
-        return footerTimelines.get(item);
-    }
+	/**
+	 * SplitTextを適用し、ホバーアニメーションのTimelineを作成・取得する関数
+	 * @param {HTMLElement} item - .footer_item要素
+	 * @returns {gsap.Timeline} アニメーション用Timeline
+	 */
+	// ★ 修正点3: 関数名に 'footer' を追加
+	function getFooterTimeline(item) {
+		if (footerTimelines.has(item)) {
+			return footerTimelines.get(item);
+		}
 
-    const jaText = item.querySelector(".footer_link .ja"); 
-    if (!jaText) return null;
+		const jaText = item.querySelector(".footer_link .ja");
+		if (!jaText) return null;
 
-    if (footerSplitInstances.has(item)) {
-        footerSplitInstances.get(item).revert();
-    }
-    const split = new SplitText(jaText, {
-        type: "chars",
-        charsClass: "char",
-    });
-    footerSplitInstances.set(item, split);
+		if (footerSplitInstances.has(item)) {
+			footerSplitInstances.get(item).revert();
+		}
+		const split = new SplitText(jaText, {
+			type: "chars",
+			charsClass: "char",
+		});
+		footerSplitInstances.set(item, split);
 
-    // ★ 修正点4: Timeline変数名に 'footer' を追加
-    const tl_footer_nav = gsap.timeline({ paused: true });
+		// ★ 修正点4: Timeline変数名に 'footer' を追加
+		const tl_footer_nav = gsap.timeline({ paused: true });
 
-    tl_footer_nav.fromTo(split.chars,
-        {
-            opacity: 0,
-            y: "50%",
-        },
-        {
-            opacity: 1,
-            y: "0%",
-            stagger: 0.05,
-            duration: 0.4,
-            ease: "power3.out",
-        }
-    );
+		tl_footer_nav.fromTo(split.chars,
+			{
+				opacity: 0,
+				y: "50%",
+			},
+			{
+				opacity: 1,
+				y: "0%",
+				stagger: 0.05,
+				duration: 0.4,
+				ease: "power3.out",
+			}
+		);
 
-    footerTimelines.set(item, tl_footer_nav);
-    return tl_footer_nav;
-}
+		footerTimelines.set(item, tl_footer_nav);
+		return tl_footer_nav;
+	}
 
-/**
- * マウスイベントリスナーの設定
- */
-footerNavItems.forEach(item => {
-    // マウスエンター時の処理 (ホバー開始)
-    item.addEventListener('mouseenter', () => {
-        // ★ 修正点5: 呼び出す関数名を変更
-        const tl = getFooterTimeline(item); 
-        if (tl) {
-            tl.restart();
-        }
-    });
+	/**
+	 * マウスイベントリスナーの設定
+	 */
+	footerNavItems.forEach(item => {
+		// マウスエンター時の処理 (ホバー開始)
+		item.addEventListener('mouseenter', () => {
+			// ★ 修正点5: 呼び出す関数名を変更
+			const tl = getFooterTimeline(item);
+			if (tl) {
+				tl.restart();
+			}
+		});
 
-});
+	});
 
-// -------------------------------------------------------------------
-	
-// ------------------------------------
-//  Swiper　ファーストビュー
-// ------------------------------------
-const swiperElement = document.querySelector('.mySwiper');
+	// -------------------------------------------------------------------
 
-if (swiperElement) {
-    const swiperInstance = new Swiper('.mySwiper', {
-        modules: [Autoplay, Pagination, EffectFade],
-        speed: 1200,
-        loop: true,
-        slidesPerView: 1,
-        effect: 'fade',
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        
-        on: {
-            init: function () {
-                startSlideZoom(this.slides[this.activeIndex]);
-            },
-            slideChangeTransitionEnd: function () {
-                startSlideZoom(this.slides[this.activeIndex]);
-            },
-            slideChangeTransitionStart: function () {
-                resetSlideZoom(this.slides[this.previousIndex]);
-            }
-        }
-    });
-    
-    /**
-     * 現在のアクティブスライド内の画像をズームインさせる
-     * @param {HTMLElement} slideEl - Swiperスライド要素
-     */
-    function startSlideZoom(slideEl) {
-        const target = slideEl.querySelector('img'); 
-        
-        if (target) {
-            gsap.fromTo(target, 
-                { scale: 1.0, transformOrigin: 'center center' }, 
-                { 
-                    scale: 1.1, 
-                    duration: 3.0,
-                    ease: "linear"
-                }
-            );
-        }
-    }
-    
-}
-// ------------------------------------
+	// ------------------------------------
+	//  Swiper　ファーストビュー
+	// ------------------------------------
+	const swiperElement = document.querySelector('.mySwiper');
+
+	if (swiperElement) {
+		const swiperInstance = new Swiper('.mySwiper', {
+			modules: [Autoplay, Pagination, EffectFade],
+			speed: 1200,
+			loop: true,
+			slidesPerView: 1,
+			effect: 'fade',
+			autoplay: {
+				delay: 3000,
+				disableOnInteraction: false,
+			},
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+
+			on: {
+				init: function () {
+					startSlideZoom(this.slides[this.activeIndex]);
+				},
+				slideChangeTransitionEnd: function () {
+					startSlideZoom(this.slides[this.activeIndex]);
+				}
+			}
+		});
+
+		/**
+		 * 現在のアクティブスライド内の画像をズームインさせる
+		 * @param {HTMLElement} slideEl - Swiperスライド要素
+		 */
+		function startSlideZoom(slideEl) {
+			const target = slideEl.querySelector('img');
+
+			if (target) {
+				gsap.fromTo(target,
+					{ scale: 1.0, transformOrigin: 'center center' },
+					{
+						scale: 1.1,
+						duration: 3.0,
+						ease: "linear"
+					}
+				);
+			}
+		}
+
+	}
+	// ------------------------------------
 	//  historySwiper
-// ------------------------------------
+	// ------------------------------------
 
 	const historySwiperElement = document.querySelector('.historySwiper');
 
@@ -413,7 +417,7 @@ if (swiperElement) {
 			breakpoints: {
 				768: {
 					slidesPerView: 3,
-					
+
 				}
 			},
 			// --- 矢印ボタンの設定 ---
@@ -524,7 +528,7 @@ if (swiperElement) {
 
 		});
 	}
-	
+
 
 	// --------------------------------------------------
 	// 下層ページ見出し// --------------------------------------------------
@@ -577,29 +581,29 @@ if (swiperElement) {
 		);
 	}
 
-const enTitleCheck = document.querySelector(".title_en");
-if (enTitleCheck) {
-    // .title_enが存在する場合のみ実行
-    titleAnimation();
-}
+	const enTitleCheck = document.querySelector(".title_en");
+	if (enTitleCheck) {
+		// .title_enが存在する場合のみ実行
+		titleAnimation();
+	}
 
 	// --------------------------------------------------
 	// 下から上にフェイドイン// --------------------------------------------------
-const fadeTitleCheck = document.querySelector(".fade_title");
-if (fadeTitleCheck) {
-	gsap.from(".fade_title", {
-		duration: 1,
-		y: 50,  // 下から50px上に移動
-		opacity: 0,
-		ease: "power2.out"
-	});
+	const fadeTitleCheck = document.querySelector(".fade_title");
+	if (fadeTitleCheck) {
+		gsap.from(".fade_title", {
+			duration: 1,
+			y: 50,  // 下から50px上に移動
+			opacity: 0,
+			ease: "power2.out"
+		});
 
-	gsap.from(".fade_text", {
-		duration: 1,
-		y: 30,
-		opacity: 0,
-		delay: 0.2  // 0.2秒遅らせる
-	});
+		gsap.from(".fade_text", {
+			duration: 1,
+			y: 30,
+			opacity: 0,
+			delay: 0.2  // 0.2秒遅らせる
+		});
 	}
 
 	function setupFadeAnimation() {
@@ -662,177 +666,182 @@ if (fadeTitleCheck) {
 	setupFaqAnimation();
 
 	// --------------------------------------------------
-	// 問い合わせフォームの画面切り替え// --------------------------------------------------
+	// 問い合わせフォームの画面切り替え// 
+	// --------------------------------------------------
+
 	const form = document.querySelector('.contact_form');
-	const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
-	const confirmSection = document.getElementById('confirm');
-	const completeSection = document.getElementById('complete');
-	const confirmContent = document.getElementById('confirm_content');
-	const backButton = document.getElementById('back_btn');
-	const sendButton = document.getElementById('send_btn');
+	if (form) {
+		const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
+		const confirmSection = document.getElementById('confirm');
+		const completeSection = document.getElementById('complete');
+		const confirmContent = document.getElementById('confirm_content');
+		const backButton = document.getElementById('back_btn');
+		const sendButton = document.getElementById('send_btn');
 
-	// 初期表示設定
-	// 確認画面と完了画面を非表示にする
-	confirmSection.style.display = 'none';
-	completeSection.style.display = 'none';
+		// 初期表示設定
+		// 確認画面と完了画面を非表示にする
+		confirmSection.style.display = 'none';
+		completeSection.style.display = 'none';
 
-	// フォームの送信（入力内容の確認ボタン）
-	form.addEventListener('submit', (event) => {
-		event.preventDefault(); // フォームの送信をキャンセル
+		// フォームの送信（入力内容の確認ボタン）
+		form.addEventListener('submit', (event) => {
+			event.preventDefault(); // フォームの送信をキャンセル
 
-		// 1. バリデーションチェックをここで行う (ここでは省略)
-		if (!validateForm()) {
-			return; // バリデーションに失敗したら処理を終了
-		}
+			// 1. バリデーションチェックをここで行う (ここでは省略)
+			if (!validateForm()) {
+				return; // バリデーションに失敗したら処理を終了
+			}
 
-		// 2. 入力内容を確認画面に反映
-		displayConfirmContent();
+			// 2. 入力内容を確認画面に反映
+			displayConfirmContent();
 
-		// 3. 画面を切り替える
-		inputSection.style.display = 'none';  // 入力画面を非表示
-		confirmSection.style.display = 'block'; // 確認画面を表示
+			// 3. 画面を切り替える
+			inputSection.style.display = 'none';  // 入力画面を非表示
+			confirmSection.style.display = 'block'; // 確認画面を表示
 
-		// ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	});
+			// ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
 
-	// 戻るボタンの処理
-	backButton.addEventListener('click', () => {
-		// 画面を切り替える
-		confirmSection.style.display = 'none'; // 確認画面を非表示
-		inputSection.style.display = 'block';  // 入力画面を表示
+		// 戻るボタンの処理
+		backButton.addEventListener('click', () => {
+			// 画面を切り替える
+			confirmSection.style.display = 'none'; // 確認画面を非表示
+			inputSection.style.display = 'block';  // 入力画面を表示
 
-		// ページトップにスクロール
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	});
+			// ページトップにスクロール
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
 
-	// 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
-	sendButton.addEventListener('click', () => {
-		// 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
+		// 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
+		sendButton.addEventListener('click', () => {
+			// 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
 
-		// サーバーサイドの処理が成功したと仮定し、完了画面へ移行
+			// サーバーサイドの処理が成功したと仮定し、完了画面へ移行
 
-		// 画面を切り替える
-		confirmSection.style.display = 'none'; // 確認画面を非表示
-		completeSection.style.display = 'block'; // 完了画面を表示
+			// 画面を切り替える
+			confirmSection.style.display = 'none'; // 確認画面を非表示
+			completeSection.style.display = 'block'; // 完了画面を表示
 
-		// ページトップにスクロール
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	});
+			// ページトップにスクロール
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
 
-	// 入力内容を整形して確認画面に表示する関数
-	function displayConfirmContent() {
-		let contentHTML = '<table>';
+		// 入力内容を整形して確認画面に表示する関数
+		function displayConfirmContent() {
+			let contentHTML = '<table>';
 
-		// フォーム内の各入力フィールドをループして値を取得
-		const fields = [
-			{ id: 'name', label: '氏名' },
-			{ id: 'company', label: '会社名' },
-			{ id: 'address', label: '住所' },
-			{ id: 'tel', label: '電話番号' },
-			{ id: 'email', label: 'メールアドレス' },
-			{ id: 'message', label: 'お問い合わせ内容' },
-		];
+			// フォーム内の各入力フィールドをループして値を取得
+			const fields = [
+				{ id: 'name', label: '氏名' },
+				{ id: 'company', label: '会社名' },
+				{ id: 'address', label: '住所' },
+				{ id: 'tel', label: '電話番号' },
+				{ id: 'email', label: 'メールアドレス' },
+				{ id: 'message', label: 'お問い合わせ内容' },
+			];
 
-		fields.forEach(field => {
-			const element = document.getElementById(field.id);
-			if (element) {
-				let value = element.value;
+			fields.forEach(field => {
+				const element = document.getElementById(field.id);
+				if (element) {
+					let value = element.value;
 
-				// textareaの改行をHTMLの<br>に変換
-				if (field.id === 'message') {
-					value = value.replace(/\n/g, '<br>');
-				}
+					// textareaの改行をHTMLの<br>に変換
+					if (field.id === 'message') {
+						value = value.replace(/\n/g, '<br>');
+					}
 
-				contentHTML += `
+					contentHTML += `
                     <tr>
                         <th>${field.label}</th>
                         <td>${value || '未入力'}</td>
                     </tr>
                 `;
-			}
-		});
+				}
+			});
 
-		// プライバシーポリシーの同意チェック
-		const agreeChecked = document.getElementById('agree').checked;
-		contentHTML += `
+			// プライバシーポリシーの同意チェック
+			const agreeChecked = document.getElementById('agree').checked;
+			contentHTML += `
             <tr>
                 <th>プライバシーポリシー</th>
                 <td>${agreeChecked ? '同意済み' : '未同意'}</td>
             </tr>
         `;
 
-		contentHTML += '</table>';
-		confirmContent.innerHTML = contentHTML;
-	}
-
-	// 簡易バリデーション (必須項目のみ)
-	function validateForm() {
-		let isValid = true;
-		const requiredFields = ['name', 'tel', 'email', 'message'];
-
-		requiredFields.forEach(id => {
-			const input = document.getElementById(id);
-			const errorElement = document.getElementById(id + '_error');
-			if (input.value.trim() === '') {
-				errorElement.textContent = '必須項目です。';
-				input.style.borderColor = 'red';
-				isValid = false;
-			} else {
-				errorElement.textContent = '';
-				input.style.borderColor = '';
-			}
-		});
-
-		const agreeCheck = document.getElementById('agree');
-		const agreeError = document.getElementById('agree_error');
-		if (!agreeCheck.checked) {
-			agreeError.textContent = '同意が必要です。';
-			isValid = false;
-		} else {
-			agreeError.textContent = '';
+			contentHTML += '</table>';
+			confirmContent.innerHTML = contentHTML;
 		}
 
-		return isValid;
-	}
-	// --------------------------------------------------
-	// フォーム送信処理 (追加するコード)// --------------------------------------------------
-	const contactForm = document.getElementById('contact_form');
-	const phpEndpoint = 'form_handler/send_mail.php'; // ★ PHPファイルへのアクセスパス
+		// 簡易バリデーション (必須項目のみ)
+		function validateForm() {
+			let isValid = true;
+			const requiredFields = ['name', 'tel', 'email', 'message'];
 
-	if (contactForm) {
-		contactForm.addEventListener('submit', async function (e) {
-			e.preventDefault();
-
-			// 送信ボタンを無効化して多重送信を防ぐ
-			const submitButton = e.submitter;
-			submitButton.disabled = true;
-
-			const formData = new FormData(contactForm);
-
-			try {
-				const response = await fetch(phpEndpoint, {
-					method: 'POST',
-					body: formData,
-				});
-
-				const result = await response.json();
-
-				if (response.ok && result.success) {
-					alert('お問い合わせを正常に送信しました。');
-					contactForm.reset();
+			requiredFields.forEach(id => {
+				const input = document.getElementById(id);
+				const errorElement = document.getElementById(id + '_error');
+				if (input.value.trim() === '') {
+					errorElement.textContent = '必須項目です。';
+					input.style.borderColor = 'red';
+					isValid = false;
 				} else {
-					alert('送信に失敗しました。');
-					console.error('サーバーエラー:', result.message);
+					errorElement.textContent = '';
+					input.style.borderColor = '';
 				}
-			} catch (error) {
-				alert('通信エラーが発生しました。ネットワークを確認してください。');
-				console.error('通信エラー:', error);
-			} finally {
-				// 送信ボタンを元に戻す
-				submitButton.disabled = false;
+			});
+
+			const agreeCheck = document.getElementById('agree');
+			const agreeError = document.getElementById('agree_error');
+			if (!agreeCheck.checked) {
+				agreeError.textContent = '同意が必要です。';
+				isValid = false;
+			} else {
+				agreeError.textContent = '';
 			}
-		});
+
+			return isValid;
+		}
+
+		// --------------------------------------------------
+		// フォーム送信処理 // --------------------------------------------------
+		const contactForm = document.getElementById('contact_form');
+		const phpEndpoint = 'form_handler/send_mail.php'; // ★ PHPファイルへのアクセスパス
+
+		if (contactForm) {
+			contactForm.addEventListener('submit', async function (e) {
+				e.preventDefault();
+
+				// 送信ボタンを無効化して多重送信を防ぐ
+				const submitButton = e.submitter;
+				submitButton.disabled = true;
+
+				const formData = new FormData(contactForm);
+
+				try {
+					const response = await fetch(phpEndpoint, {
+						method: 'POST',
+						body: formData,
+					});
+
+					const result = await response.json();
+
+					if (response.ok && result.success) {
+						alert('お問い合わせを正常に送信しました。');
+						contactForm.reset();
+					} else {
+						alert('送信に失敗しました。');
+						console.error('サーバーエラー:', result.message);
+					}
+				} catch (error) {
+					alert('通信エラーが発生しました。ネットワークを確認してください。');
+					console.error('通信エラー:', error);
+				} finally {
+					// 送信ボタンを元に戻す
+					submitButton.disabled = false;
+				}
+			});
+		}
 	}
 });
 
