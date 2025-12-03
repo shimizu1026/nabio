@@ -122,15 +122,6 @@ if (openingMask && fvSwiper) {
 			duration: 1,
 			ease: "power3.inOut",
 			visibility: "visible",
-
-			onReverseComplete: () => {
-				// アニメーションが完全に終了した後に、
-				// メニューの表示を切り替えるクラスを削除する
-				menu.classList.remove("MenuIsOpen");
-				// スクロール固定が必要な場合は、ここでbodyのクラスを削除
-				document.body.classList.remove("IsScrollAllowed");
-				lenis.start();
-			}
 		},
 		0
 	);
@@ -165,22 +156,19 @@ if (openingMask && fvSwiper) {
 	hamburgerButton.addEventListener("click", () => {
 		const isMenuOpen = menu.classList.contains("MenuIsOpen");
 		hamburgerButton.classList.toggle("MenuIsActive");
-		// header.classList.toggle("MenuIsActive"); // 必要に応じて残す
+
 		if (isMenuOpen) {
 			// --- 閉じる処理 (逆再生) ---
 			hamburgerButton.classList.remove("MenuIsActive");
 			header.classList.remove("MenuIsActive");
-			lenis.start();/*追加*/
-			document.body.classList.remove("IsScrollAllowed");/*追加*/
+			lenis.start();
 			menuTimeline.timeScale(1).reverse();
-			menu.classList.remove("MenuIsOpen");/*追加*/
 
 		} else {
 			// --- 開く処理 (再生) ---
 			hamburgerButton.classList.add("MenuIsActive");
 			header.classList.add("MenuIsActive");
 			menu.classList.add("MenuIsOpen");
-			document.body.classList.add("IsScrollAllowed");
 			lenis.stop();
 			menuTimeline.timeScale(1).play();
 		}
