@@ -153,36 +153,6 @@ if (openingMask && fvSwiper) {
 		},
 		0.5
 	);
-	// 1. メニュー本体 (.hamburger_contents) を上からスライドイン
-	// menuTimeline.fromTo(menu,
-	// 	{ y: "-100vh" }, // 画面外の上部から
-	// 	{
-	// 		y: "0vh", // 画面内にスライド
-	// 		duration: 0.6,
-	// 		ease: "power3.inOut"
-	// 	},
-	// 	0 // タイムライン開始位置
-	// );
-
-	// // 2. メニューが開いた後に、ロゴと言語選択 (.hamburger_top_bar) をフェードイン
-	// menuTimeline.fromTo(topBar,
-	// 	{ opacity: 0, y: 10 },
-	// 	{ opacity: 1, y: 0, duration: 0.3 },
-	// 	0.3 // メインスライド開始から0.3秒後に開始
-	// );
-
-	// // 3. ナビゲーションリスト (.hamburger_item) を一つずつ順にフェードイン
-	// menuTimeline.fromTo(menuItems,
-	// 	{ opacity: 0, y: 20 },
-	// 	{
-	// 		opacity: 1,
-	// 		y: 0,
-	// 		duration: 0.4,
-	// 		stagger: 0.05, // 0.05秒ずつ遅らせる
-	// 		ease: "power2.out"
-	// 	},
-	// 	0.4 // メインスライド開始から0.4秒後に開始
-	// );
 
 	// // 4. コンタクトエリアを最後にフェードイン
 	menuTimeline.fromTo(contactArea,
@@ -282,10 +252,8 @@ if (openingMask && fvSwiper) {
 	// -------------------------------------------------------------------
 	// スプリットテキスト (フッターナビゲーション用)
 
-	// ★ 修正点1: 定数名に 'footer' を追加
 	const footerNavItems = document.querySelectorAll(".footer_item");
 
-	// ★ 修正点2: Map名に 'footer' を追加
 	const footerTimelines = new Map();
 	const footerSplitInstances = new Map();
 
@@ -294,7 +262,7 @@ if (openingMask && fvSwiper) {
 	 * @param {HTMLElement} item - .footer_item要素
 	 * @returns {gsap.Timeline} アニメーション用Timeline
 	 */
-	// ★ 修正点3: 関数名に 'footer' を追加
+
 	function getFooterTimeline(item) {
 		if (footerTimelines.has(item)) {
 			return footerTimelines.get(item);
@@ -312,7 +280,6 @@ if (openingMask && fvSwiper) {
 		});
 		footerSplitInstances.set(item, split);
 
-		// ★ 修正点4: Timeline変数名に 'footer' を追加
 		const tl_footer_nav = gsap.timeline({ paused: true });
 
 		tl_footer_nav.fromTo(split.chars,
@@ -339,7 +306,6 @@ if (openingMask && fvSwiper) {
 	footerNavItems.forEach(item => {
 		// マウスエンター時の処理 (ホバー開始)
 		item.addEventListener('mouseenter', () => {
-			// ★ 修正点5: 呼び出す関数名を変更
 			const tl = getFooterTimeline(item);
 			if (tl) {
 				tl.restart();

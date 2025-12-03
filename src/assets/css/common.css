@@ -552,7 +552,9 @@ body {
 		letter-spacing: 0.05em;
 	}
 }
-.hamburger_contact, .footer_contact {
+
+.hamburger_contact,
+.footer_contact {
 	.mail {
 
 		&::before {
@@ -572,7 +574,7 @@ body {
 } */
 
 body.IsScrollAllowed {
-    /* スクロールを固定して無効にする */
+	/* スクロールを固定して無効にする */
 	height: 100% !important;
 	overflow: hidden;
 }
@@ -884,63 +886,64 @@ body.IsScrollAllowed {
 		height: 100%;
 		position: relative;
 
-		.title {
-			display: flex;
-			flex-direction: column;
-			gap: 14px;
-			padding-top: 160px;
-			padding-left: 20px;
 
-			.title_en {
-				font-size: calc(100 * var(--rem-ratio));
-				font-weight: 600;
-				line-height: 1;
-				color: var(--white-color);
-				font-family: var(--font-family-en);
-
-				@media (max-width: 768px) {
-					font-size: calc(56 * var(--rem-ratio));
-				}
-
-				.char {
-					opacity: 0;
-					display: inline-block;
-				}
-			}
-
-			.title_ja {
-				position: relative;
-				display: flex;
-				align-items: center;
-				font-size: calc(24 * var(--rem-ratio));
-				color: var(--white-color);
-				letter-spacing: 0.1em;
-				padding-left: 30px;
-				z-index: 1;
-				opacity: 0;
-
-				@media (max-width: 768px) {
-					font-size: calc(16 * var(--rem-ratio));
-				}
-
-				&::before {
-					position: absolute;
-					top: 50%;
-					left: 0;
-					z-index: -1;
-					transform: translateY(-50%);
-					background-image: url(../images/icon_red_circle.svg);
-					content: "";
-					width: 60px;
-					height: 56px;
-					background-repeat: no-repeat;
-					background-size: contain;
-				}
-			}
-		}
 	}
 }
 
+.sub_page .title {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding-top: 160px;
+	padding-left: 20px;
+
+	.title_en {
+		font-size: calc(100 * var(--rem-ratio));
+		font-weight: 600;
+		line-height: 1;
+		color: var(--white-color);
+		font-family: var(--font-family-en);
+
+		@media (max-width: 768px) {
+			font-size: calc(56 * var(--rem-ratio));
+		}
+
+		.char {
+			opacity: 0;
+			display: inline-block;
+		}
+	}
+
+	.title_ja {
+		position: relative;
+		display: flex;
+		align-items: center;
+		font-size: calc(24 * var(--rem-ratio));
+		color: var(--white-color);
+		letter-spacing: 0.1em;
+		padding-left: 30px;
+		z-index: 1;
+		opacity: 0;
+
+		@media (max-width: 768px) {
+			font-size: calc(16 * var(--rem-ratio));
+		}
+
+		&::before {
+			position: absolute;
+			top: 65%;
+			left: 8px;
+			z-index: -1;
+			transform: translateY(-50%);
+			background-image: url(../images/icon_red_circle.svg);
+			content: "";
+			width: 60px;
+			height: 56px;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+	}
+}
 
 .bread {
 	width: 100%;
