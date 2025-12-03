@@ -67,7 +67,7 @@ document.addEventListener('componentsLoaded', function () {
 
 	const openingMask = document.querySelector(".opening_mask");
 	const fvSwiper = document.querySelector(".swiper.mySwiper");
-	
+
 	if (openingMask && fvSwiper) {
 		const openingTl = gsap.timeline();
 
@@ -504,7 +504,7 @@ document.addEventListener('componentsLoaded', function () {
 		});
 
 		const tl = gsap.timeline({
-			delay: 0.5
+			delay: 0.2
 		});
 
 		tl.fromTo(window.splitTitle.chars,
@@ -525,7 +525,7 @@ document.addEventListener('componentsLoaded', function () {
 		tl.to(jaTitle,
 			{
 				opacity: 1,
-				duration: 0.8,
+				duration: 0.5,
 				ease: "power2.out"
 			},
 			// AとBを同時に開始したい場合は '<' を使用します。
@@ -543,43 +543,62 @@ document.addEventListener('componentsLoaded', function () {
 
 	// --------------------------------------------------
 	// 下から上にフェイドイン// --------------------------------------------------
-	const fadeTitleCheck = document.querySelector(".fade_title");
-	if (fadeTitleCheck) {
-		gsap.from(".fade_title", {
-			duration: 1,
-			y: 50,  // 下から50px上に移動
-			opacity: 0,
-			ease: "power2.out"
-		});
+// 1. .fade_title のアニメーション設定
+const fadeTitles = gsap.utils.toArray(".fade_title");
 
-		gsap.from(".fade_text", {
-			duration: 1,
-			y: 30,
-			opacity: 0,
-			delay: 0.2  // 0.2秒遅らせる
-		});
-	}
+fadeTitles.forEach((title, index) => {
+    gsap.from(title, {
+        duration: 1,
+        y: 50, 
+        opacity: 0,
+        // 最初の要素が遅延 0.4秒、2番目が 0.5秒...と、要素の出現順にわずかに遅延を設ける
+        delay: 0.4 + (index * 0.1), 
+        ease: "power2.out",
+        
+        scrollTrigger: {
+            trigger: title,
+            start: "top 90%", 
+            toggleActions: "play none none none" 
+        }
+    });
+});
+
+
+// 2. .fade_text のアニメーション設定
+const fadeTexts = gsap.utils.toArray(".fade_text");
+
+fadeTexts.forEach((text, index) => {
+    gsap.from(text, {
+        duration: 1,
+        y: 30,
+        opacity: 0,
+        delay: 0.6 + (index * 0.1),
+        ease: "power2.out",
+        
+        scrollTrigger: {
+            trigger: text,
+            start: "top 90%",
+            toggleActions: "play none none none"
+        }
+    });
+});
 
 	function setupFadeAnimation() {
-		// アニメーションを適用したい全ての要素を選択
 		const fadeTargets = gsap.utils.toArray(".fade_contents");
 
-		// 各要素に設定
-		fadeTargets.forEach((target, index) => {
+		fadeTargets.forEach((target) => {
 			gsap.from(target, {
 				// アニメーションの初期状態
 				duration: 1.0,
 				y: 30,
 				opacity: 0,
-				delay: index * 0.1,
+				delay: 0.8,
 				ease: "power2.out",
 
 				scrollTrigger: {
 					trigger: target,
-					start: "top 90%",       // 要素の上端がビューポートの85%の位置に来たらアニメーション開始
+					start: "top 90%",
 					toggleActions: "play none none none",
-					// play: 開始時にアニメーションを再生
-					// none: スクロールバックしても何もしない
 					// markers: true,
 				}
 			});

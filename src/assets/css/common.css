@@ -1043,3 +1043,7 @@ background-image: linear-gradient(to top, var(--white-color), var(--gray-color))
 .section_text {
 	line-height: 1.5;
 }
+
+/* .fade_title, .fade_text, .fade_contents {
+	opacity: 0;
+} */

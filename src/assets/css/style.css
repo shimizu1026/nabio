@@ -694,6 +694,10 @@
 	.title_box {
 		justify-content: center;
 	}
+	.title_center_ja {
+		font-size: calc(36 * var(--rem-ratio));
+		letter-spacing: 0.05em;
+	}
 }
 
 .inner_faq {
