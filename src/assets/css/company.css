@@ -50,7 +50,7 @@
 
 	dt {
 		width: 150px;
-		font-weight: 500;
+		font-weight: var(--font-weight-m);
 		padding: 25px 0;
 		border-bottom: 1px solid var(--border-color);
 
@@ -231,7 +231,7 @@
 	.year {
 		order: 2;
 		font-size: calc(24 * var(--rem-ratio));
-		font-weight: 500;
+		font-weight: var(--font-weight-m);
 		font-family: var(--font-family-en);
 		color: #BCBCBC;
 	}

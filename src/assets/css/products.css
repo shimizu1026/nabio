@@ -109,7 +109,7 @@
 
 .product_name {
 	font-size: calc(18 * var(--rem-ratio));
-	font-weight: 500;
+	font-weight: var(--font-weight-m);
 	margin-bottom: 20px;
 }
 
@@ -135,7 +135,7 @@
 		}
 
 		dt {
-			font-weight: 400;
+			font-weight: var(--font-weight-r);
 		}
 
 		dd {
@@ -163,7 +163,8 @@
 
 .title_center {
 	font-size: calc(32 * var(--rem-ratio));
-	font-weight: 500;
+	font-family: var(--font-family-noto-serif);
+	font-weight: var(--font-weight-sb);
 	text-align: center;
 	letter-spacing: 0.05em;
 	line-height: 1.3;
@@ -216,7 +217,7 @@
 	.deco {
 		color: var(--gold-color);
 		font-family: var(--font-family-en);
-		font-weight: 500;
+		font-weight: var(--font-weight-m);
 		writing-mode: vertical-rl;
 
 		@media (max-width: 768px) {
@@ -231,8 +232,9 @@
 
 	.title_red {
 		font-size: calc(30 * var(--rem-ratio));
+		font-family: var(--font-family-noto-serif);
 		color: var(--accent-color);
-		font-weight: 500;
+		font-weight: var(--font-weight-sb);
 		letter-spacing: 0.05em;
 
 		@media (max-width: 768px) {

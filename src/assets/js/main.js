@@ -24,6 +24,7 @@ import 'swiper/css/pagination';
 import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
 
+//lenis
 import Lenis from '@studio-freight/lenis';
 
 document.addEventListener('componentsLoaded', function () {
@@ -66,33 +67,32 @@ document.addEventListener('componentsLoaded', function () {
 
 	const openingMask = document.querySelector(".opening_mask");
 	const fvSwiper = document.querySelector(".swiper.mySwiper");
+	
+	if (openingMask && fvSwiper) {
+		const openingTl = gsap.timeline();
 
-if (openingMask && fvSwiper) {
+		// アニメーション開始
+		openingTl
+			// 0. 初期設定
+			.set(fvSwiper, {
+				scale: 0.95,
+				opacity: 0,
+				filter: "brightness(0)"
+			})
 
-	const openingTl = gsap.timeline();
+			.to(openingMask, {
+				y: "-120%",
+				duration: 1.8,
+				ease: "power4.out",
+			})
 
-	// アニメーション開始
-	openingTl
-		// 0. 初期設定
-		.set(fvSwiper, {
-			scale: 0.95,
-			opacity: 0,
-			filter: "brightness(0)"
-		})
-
-		.to(openingMask, {
-			y: "-120%",
-			duration: 1.8,
-			ease: "power4.out",
-		})
-
-		.to(fvSwiper, {
-			scale: 1,
-			opacity: 1,
-			filter: "brightness(1)",
-			duration: 0.5,
-			ease: "power4.out",
-		}, "-=1.0"); // マスクのアニメーションが終わる「1.0秒前」から開始（少し重ねる）
+			.to(fvSwiper, {
+				scale: 1,
+				opacity: 1,
+				filter: "brightness(1)",
+				duration: 0.5,
+				ease: "power4.out",
+			}, "-=1.0"); // マスクのアニメーションが終わる「1.0秒前」から開始（少し重ねる）
 	}
 
 	// --------------------------------------------------
