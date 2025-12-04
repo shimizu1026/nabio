@@ -646,183 +646,196 @@ fadeTexts.forEach((text, index) => {
 	// 実行
 	setupFaqAnimation();
 
+// ページが完全に読み込まれた後に実行
+window.onload = function() {
+    // ページを最上部 (座標 0, 0) にスクロール
+    window.scrollTo(0, 0);
+
+    // またはアニメーションを付けて滑らかに移動させる場合（モダンブラウザ対応）
+    // window.scrollTo({
+    //     top: 0,
+    //     left: 0,
+    //     behavior: 'smooth' // スムーズなスクロール
+    // });
+};
+
 	// --------------------------------------------------
 	// 問い合わせフォームの画面切り替え// 
 	// --------------------------------------------------
 
-	const form = document.querySelector('.contact_form');
-	if (form) {
-		const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
-		const confirmSection = document.getElementById('confirm');
-		const completeSection = document.getElementById('complete');
-		const confirmContent = document.getElementById('confirm_content');
-		const backButton = document.getElementById('back_btn');
-		const sendButton = document.getElementById('send_btn');
+	// const form = document.querySelector('.contact_form');
+	// if (form) {
+	// 	const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
+	// 	const confirmSection = document.getElementById('confirm');
+	// 	const completeSection = document.getElementById('complete');
+	// 	const confirmContent = document.getElementById('confirm_content');
+	// 	const backButton = document.getElementById('back_btn');
+	// 	const sendButton = document.getElementById('send_btn');
 
-		// 初期表示設定
-		// 確認画面と完了画面を非表示にする
-		confirmSection.style.display = 'none';
-		completeSection.style.display = 'none';
+	// 	// 初期表示設定
+	// 	// 確認画面と完了画面を非表示にする
+	// 	confirmSection.style.display = 'none';
+	// 	completeSection.style.display = 'none';
 
-		// フォームの送信（入力内容の確認ボタン）
-		form.addEventListener('submit', (event) => {
-			event.preventDefault(); // フォームの送信をキャンセル
+	// 	// フォームの送信（入力内容の確認ボタン）
+	// 	form.addEventListener('submit', (event) => {
+	// 		event.preventDefault(); // フォームの送信をキャンセル
 
-			// 1. バリデーションチェックをここで行う (ここでは省略)
-			if (!validateForm()) {
-				return; // バリデーションに失敗したら処理を終了
-			}
+	// 		// 1. バリデーションチェックをここで行う (ここでは省略)
+	// 		if (!validateForm()) {
+	// 			return; // バリデーションに失敗したら処理を終了
+	// 		}
 
-			// 2. 入力内容を確認画面に反映
-			displayConfirmContent();
+	// 		// 2. 入力内容を確認画面に反映
+	// 		displayConfirmContent();
 
-			// 3. 画面を切り替える
-			inputSection.style.display = 'none';  // 入力画面を非表示
-			confirmSection.style.display = 'block'; // 確認画面を表示
+	// 		// 3. 画面を切り替える
+	// 		inputSection.style.display = 'none';  // 入力画面を非表示
+	// 		confirmSection.style.display = 'block'; // 確認画面を表示
 
-			// ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
+	// 		// ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
+	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
+	// 	});
 
-		// 戻るボタンの処理
-		backButton.addEventListener('click', () => {
-			// 画面を切り替える
-			confirmSection.style.display = 'none'; // 確認画面を非表示
-			inputSection.style.display = 'block';  // 入力画面を表示
+	// 	// 戻るボタンの処理
+	// 	backButton.addEventListener('click', () => {
+	// 		// 画面を切り替える
+	// 		confirmSection.style.display = 'none'; // 確認画面を非表示
+	// 		inputSection.style.display = 'block';  // 入力画面を表示
 
-			// ページトップにスクロール
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
+	// 		// ページトップにスクロール
+	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
+	// 	});
 
-		// 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
-		sendButton.addEventListener('click', () => {
-			// 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
+	// 	// 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
+	// 	sendButton.addEventListener('click', () => {
+	// 		// 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
 
-			// サーバーサイドの処理が成功したと仮定し、完了画面へ移行
+	// 		// サーバーサイドの処理が成功したと仮定し、完了画面へ移行
 
-			// 画面を切り替える
-			confirmSection.style.display = 'none'; // 確認画面を非表示
-			completeSection.style.display = 'block'; // 完了画面を表示
+	// 		// 画面を切り替える
+	// 		confirmSection.style.display = 'none'; // 確認画面を非表示
+	// 		completeSection.style.display = 'block'; // 完了画面を表示
 
-			// ページトップにスクロール
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		});
+	// 		// ページトップにスクロール
+	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
+	// 	});
 
-		// 入力内容を整形して確認画面に表示する関数
-		function displayConfirmContent() {
-			let contentHTML = '<table>';
+	// 	// 入力内容を整形して確認画面に表示する関数
+	// 	function displayConfirmContent() {
+	// 		let contentHTML = '<table>';
 
-			// フォーム内の各入力フィールドをループして値を取得
-			const fields = [
-				{ id: 'name', label: '氏名' },
-				{ id: 'company', label: '会社名' },
-				{ id: 'address', label: '住所' },
-				{ id: 'tel', label: '電話番号' },
-				{ id: 'email', label: 'メールアドレス' },
-				{ id: 'message', label: 'お問い合わせ内容' },
-			];
+	// 		// フォーム内の各入力フィールドをループして値を取得
+	// 		const fields = [
+	// 			{ id: 'name', label: '氏名' },
+	// 			{ id: 'company', label: '会社名' },
+	// 			{ id: 'address', label: '住所' },
+	// 			{ id: 'tel', label: '電話番号' },
+	// 			{ id: 'email', label: 'メールアドレス' },
+	// 			{ id: 'message', label: 'お問い合わせ内容' },
+	// 		];
 
-			fields.forEach(field => {
-				const element = document.getElementById(field.id);
-				if (element) {
-					let value = element.value;
+	// 		fields.forEach(field => {
+	// 			const element = document.getElementById(field.id);
+	// 			if (element) {
+	// 				let value = element.value;
 
-					// textareaの改行をHTMLの<br>に変換
-					if (field.id === 'message') {
-						value = value.replace(/\n/g, '<br>');
-					}
+	// 				// textareaの改行をHTMLの<br>に変換
+	// 				if (field.id === 'message') {
+	// 					value = value.replace(/\n/g, '<br>');
+	// 				}
 
-					contentHTML += `
-                    <tr>
-                        <th>${field.label}</th>
-                        <td>${value || '未入力'}</td>
-                    </tr>
-                `;
-				}
-			});
+	// 				contentHTML += `
+    //                 <tr>
+    //                     <th>${field.label}</th>
+    //                     <td>${value || '未入力'}</td>
+    //                 </tr>
+    //             `;
+	// 			}
+	// 		});
 
-			// プライバシーポリシーの同意チェック
-			const agreeChecked = document.getElementById('agree').checked;
-			contentHTML += `
-            <tr>
-                <th>プライバシーポリシー</th>
-                <td>${agreeChecked ? '同意済み' : '未同意'}</td>
-            </tr>
-        `;
+	// 		// プライバシーポリシーの同意チェック
+	// 		const agreeChecked = document.getElementById('agree').checked;
+	// 		contentHTML += `
+    //         <tr>
+    //             <th>プライバシーポリシー</th>
+    //             <td>${agreeChecked ? '同意済み' : '未同意'}</td>
+    //         </tr>
+    //     `;
 
-			contentHTML += '</table>';
-			confirmContent.innerHTML = contentHTML;
-		}
+	// 		contentHTML += '</table>';
+	// 		confirmContent.innerHTML = contentHTML;
+	// 	}
 
-		// 簡易バリデーション (必須項目のみ)
-		function validateForm() {
-			let isValid = true;
-			const requiredFields = ['name', 'tel', 'email', 'message'];
+	// 	// 簡易バリデーション (必須項目のみ)
+	// 	function validateForm() {
+	// 		let isValid = true;
+	// 		const requiredFields = ['name', 'tel', 'email', 'message'];
 
-			requiredFields.forEach(id => {
-				const input = document.getElementById(id);
-				const errorElement = document.getElementById(id + '_error');
-				if (input.value.trim() === '') {
-					errorElement.textContent = '必須項目です。';
-					input.style.borderColor = 'red';
-					isValid = false;
-				} else {
-					errorElement.textContent = '';
-					input.style.borderColor = '';
-				}
-			});
+	// 		requiredFields.forEach(id => {
+	// 			const input = document.getElementById(id);
+	// 			const errorElement = document.getElementById(id + '_error');
+	// 			if (input.value.trim() === '') {
+	// 				errorElement.textContent = '必須項目です。';
+	// 				input.style.borderColor = 'red';
+	// 				isValid = false;
+	// 			} else {
+	// 				errorElement.textContent = '';
+	// 				input.style.borderColor = '';
+	// 			}
+	// 		});
 
-			const agreeCheck = document.getElementById('agree');
-			const agreeError = document.getElementById('agree_error');
-			if (!agreeCheck.checked) {
-				agreeError.textContent = '同意が必要です。';
-				isValid = false;
-			} else {
-				agreeError.textContent = '';
-			}
+	// 		const agreeCheck = document.getElementById('agree');
+	// 		const agreeError = document.getElementById('agree_error');
+	// 		if (!agreeCheck.checked) {
+	// 			agreeError.textContent = '同意が必要です。';
+	// 			isValid = false;
+	// 		} else {
+	// 			agreeError.textContent = '';
+	// 		}
 
-			return isValid;
-		}
+	// 		return isValid;
+	// 	}
 
-		// --------------------------------------------------
-		// フォーム送信処理 // --------------------------------------------------
-		const contactForm = document.getElementById('contact_form');
-		const phpEndpoint = 'form_handler/send_mail.php'; // ★ PHPファイルへのアクセスパス
+	// 	// --------------------------------------------------
+	// 	// フォーム送信処理 // --------------------------------------------------
+	// 	const contactForm = document.getElementById('contact_form');
+	// 	const phpEndpoint = 'form_handler/send_mail.php'; // ★ PHPファイルへのアクセスパス
 
-		if (contactForm) {
-			contactForm.addEventListener('submit', async function (e) {
-				e.preventDefault();
+	// 	if (contactForm) {
+	// 		contactForm.addEventListener('submit', async function (e) {
+	// 			e.preventDefault();
 
-				// 送信ボタンを無効化して多重送信を防ぐ
-				const submitButton = e.submitter;
-				submitButton.disabled = true;
+	// 			// 送信ボタンを無効化して多重送信を防ぐ
+	// 			const submitButton = e.submitter;
+	// 			submitButton.disabled = true;
 
-				const formData = new FormData(contactForm);
+	// 			const formData = new FormData(contactForm);
 
-				try {
-					const response = await fetch(phpEndpoint, {
-						method: 'POST',
-						body: formData,
-					});
+	// 			try {
+	// 				const response = await fetch(phpEndpoint, {
+	// 					method: 'POST',
+	// 					body: formData,
+	// 				});
 
-					const result = await response.json();
+	// 				const result = await response.json();
 
-					if (response.ok && result.success) {
-						alert('お問い合わせを正常に送信しました。');
-						contactForm.reset();
-					} else {
-						alert('送信に失敗しました。');
-						console.error('サーバーエラー:', result.message);
-					}
-				} catch (error) {
-					alert('通信エラーが発生しました。ネットワークを確認してください。');
-					console.error('通信エラー:', error);
-				} finally {
-					// 送信ボタンを元に戻す
-					submitButton.disabled = false;
-				}
-			});
-		}
-	}
+	// 				if (response.ok && result.success) {
+	// 					alert('お問い合わせを正常に送信しました。');
+	// 					contactForm.reset();
+	// 				} else {
+	// 					alert('送信に失敗しました。');
+	// 					console.error('サーバーエラー:', result.message);
+	// 				}
+	// 			} catch (error) {
+	// 				alert('通信エラーが発生しました。ネットワークを確認してください。');
+	// 				console.error('通信エラー:', error);
+	// 			} finally {
+	// 				// 送信ボタンを元に戻す
+	// 				submitButton.disabled = false;
+	// 			}
+	// 		});
+	// 	}
+	// }
 });
 

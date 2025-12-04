@@ -24,7 +24,10 @@
 
 .section_contact .title_center {
 	font-size: calc(30 * var(--rem-ratio));
+	font-weight: var(--font-weight-s);
+	font-family: var(--font-family-noto-sans);
 	text-align: center;
+	margin-top: 48px;
 }
 
 .form_wrapper {
@@ -100,6 +103,10 @@
 		display: grid;
 		place-content: center;
 	}
+
+	.form_wrapper {
+		justify-content: space-between;
+	}
 }
 
 .contact_form {
@@ -118,11 +125,13 @@
 	textarea {
 		border: 1px solid var(--border-color);
 		border-radius: 4px;
-		padding: 10px;
+		padding: 20px;
 	}
 
 	textarea {
 		line-height: 1.5;
+		letter-spacing: 0.05em;
+
 	}
 
 	input {
@@ -278,16 +287,15 @@
 	margin-top: 64px;
 }
 
-.confirm_content .table {
+.confirm_content {
 	width: 100%;
-}
+	display: grid;
+	row-gap: 32px;
 
-.confirm_content th {
-	width: 170px;
-	padding: 20px;
-}
-.confirm_content td {
-	padding: 20px;
+	span {
+		line-height: 1.5;
+		letter-spacing: 0.05em;
+	}
 }
 
 .confirm_buttons {
