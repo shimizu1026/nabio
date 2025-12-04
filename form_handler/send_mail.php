@@ -46,75 +46,95 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     exit;
 }
 
-// $mail = new PHPMailer(true);
-$mail = new PHPMailer();
+// ------------------------------------
+// フォームデータの受け取り (変数を定義)
+// ------------------------------------
+$user_email = $_POST['user_email'] ?? '';
+$user_name  = $_POST['user_name'] ?? '名無し';
+$user_company  = $_POST['user_company'] ?? '未入力';
+$user_address  = $_POST['user_address'] ?? '未入力';
+$user_tel  = $_POST['user_tel'] ?? '未入力';
+$user_message  = $_POST['user_message'] ?? 'メッセージなし';
+$user_agree_text = ($_POST['user_agree'] === '同意する') ? '同意する' : '未同意'; // 同意チェックボックスの値をテキストに変換
+
+// すべての情報をまとめた共通のメール本文を作成
+$mail_body_content = "--- お問い合わせ内容 ---\n";
+$mail_body_content .= "【氏名】: {$user_name}\n";
+$mail_body_content .= "【会社名】: {$user_company}\n";
+$mail_body_content .= "【住所】: {$user_address}\n";
+$mail_body_content .= "【電話番号】: {$user_tel}\n";
+$mail_body_content .= "【メールアドレス】: {$user_email}\n";
+$mail_body_content .= "【プライバシーポリシーへの同意】: {$user_agree_text}\n";
+$mail_body_content .= "----------------------\n";
+$mail_body_content .= "【お問い合わせ内容／ご質問事項】:\n";
+$mail_body_content .= "{$user_message}\n";
+$mail_body_content .= "----------------------\n";
+
+$mail = new PHPMailer(true); // 例外を発生させる設定 (エラー詳細表示のため)
+
 
 try {
-
+    
     // ------------------------------------
-    // サーバー設定
+    // 共通サーバー設定
     // ------------------------------------
     $mail->isSMTP();
-    $mail->Host       = 'a.shimizu@nichibi.co.jp';// 例: さくらのSMTP, XserverのSMTPなど
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'a.shimizu@nichibi.co.jp';// メールアドレス (SMTP認証ID)
-     //$mail->Username   = 'tuhan@natfemin.com';メールアドレス (SMTP認証ID)
-    $mail->Password   = 'fu3XKMCb8iEp';//SMTPパスワード
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 995;
-    $mail->CharSet = 'UTF-8';                         // 文字化け防止
+    $mail->Host      = 'sv14304.xserver.jp';
+    // $mail->Host      = 'mail.natofemin.com';
+    $mail->SMTPAuth  = true;
+    $mail->Username  = 'a.shimizu@nichibi.co.jp'; // SMTP認証ID
+    //$mail->Username  = 'no-reply@natofemin.com';  SMTP認証ID
+    $mail->Password  = 'fu3XKMCb8iEp';            // SMTPパスワード
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SMTPS (Port 465)
+    $mail->Port      = 465;
+    $mail->CharSet = 'UTF-8';
+    
+    // 送信元設定 (両方のメールで共通)
+    $mail->setFrom('nabio-test@nichibi.co.jp', 'Webサイト お問い合わせフォーム');
 
-    // ------------------------------------
-    // 送信元・宛先の設定
-    // ------------------------------------
-    $mail->setFrom('nabio-test@nichibi.co.jp
-', 'Webサイト お問い合わせフォーム'); // サーバーで許可されたアドレス
-    $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者'); // 実際に通知を受け取るアドレス
-	
-    // フォームからの値
-    $user_email = $_POST['user_email'];
-    $user_name  = $_POST['user_name'];
-    $user_company  = $_POST['user_company'];
-    $user_address  = $_POST['user_address'];
-    $user_tel  = $_POST['user_tel'];
-    $user_message  = $_POST['user_message'];
-    $user_agree  = $_POST['user_agree'];
-
+    
+    // ======================================
+    // 1. 管理者へ送信
+    // ======================================
+    $mail->clearAllRecipients(); // 宛先をクリア
+    $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者'); // 管理者のアドレス
+    $mail->Subject = '【Webサイト】新しいお問い合わせがありました';
+    $mail->Body    = $mail_body_content;
     $mail->addReplyTo($user_email, $user_name); // 返信先をフォーム入力者のアドレスにする
-    $mail->Subject = 'お問い合わせがありました';
-    $mail->Body    = "名前：{$user_name}\nメール：{$user_email}\n\n" . $_POST['user_message'];
 
-    $mail->send();
+    $mail->send(); // 1通目送信
+    
+    
+    // ======================================
+    // 2. フォーム入力者（ユーザー）へ自動返信
+    // ======================================
+    $mail->clearAllRecipients(); // 宛先をクリア
+    $mail->addAddress($user_email, $user_name); // ユーザーのアドレス
+    $mail->Subject = "【株式会社】お問い合わせありがとうございます（自動返信）";
+    
+    // ユーザー向け本文を整形
+    $user_mail_body = "{$user_name} 様\n\n";
+    $user_mail_body .= "この度はお問い合わせいただき、誠にありがとうございます。\n";
+    $user_mail_body .= "以下の内容でお問い合わせを受け付けいたしました。\n";
+    $user_mail_body .= "内容を確認後、改めて担当者よりご連絡させていただきます。\n\n";
+    $user_mail_body .= "======================================\n";
+    $user_mail_body .= "【お客様のお問い合わせ内容】\n";
+    $user_mail_body .= $mail_body_content; // 共通本文を挿入
+    $user_mail_body .= "======================================\n\n";
+    $user_mail_body .= "※このメールはシステムからの自動返信です。\n";
+    $user_mail_body .= "このメールに心当たりのない場合は、お手数ですが弊社までご連絡ください。\n";
 
-    // ★ここが重要：HTMLを出さず、成功の合言葉だけを返す
+    $mail->Body    = $user_mail_body;
+    
+    // ユーザーへの自動返信メールには、返信先を管理者側にするか、ReplyToを設定しない（NOREPLY）のが一般的です。
+    // $mail->addReplyTo('a.shimizu@nichibi.co.jp', '株式会社'); // 必要に応じて設定
+
+    $mail->send(); // 2通目送信
+
     echo 'success';
-    // ------------------------------------
-    // メール内容
-    // ------------------------------------
-    //$mail->isHTML(false);  プレーンテキストメールとして送信
-    // $mail->Subject = '【Webサイトからお問い合わせ】' . $name;
-    
-    // $body = "サイトから新しいお問い合わせがありました。\n\n";
-    // $body .= "氏名: {$name}\n";
-    // $body .= "会社名: {$company}\n";
-    // $body .= "住所: {$address}\n";
-    // $body .= "電話番号 : {$tel}\n";
-    // $body .= "メールアドレス: {$email}\n";
-    // $body .= "お問い合わせ内容:\n{$message}\n";
-    
-    // $mail->Body    = $body;
-    
-    // $mail->send();
-    
-    // 成功応答
-    // header('Content-Type: application/json');
-    // echo json_encode(['success' => true, 'message' => '送信が完了しました。']);
 
 } catch (Exception $e) {
     // エラーの場合はメッセージを返す
-    echo "Mailer Error: {$mail->ErrorInfo}";
-    // 失敗応答
-    // header('Content-Type: application/json', true, 500);
-    // echo json_encode(['success' => false, 'message' => '送信に失敗しました。詳細: ' . $mail->ErrorInfo]);
+    echo "送信に失敗しました。エラー: {$mail->ErrorInfo}";
 }
 ?>
