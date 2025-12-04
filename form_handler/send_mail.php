@@ -8,14 +8,19 @@ require_once 'PHPMailer-master/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
 // vendorフォルダへの正しいパスを設定（form_handlerフォルダの外側へ）
 // require __DIR__ . '/../vendor/autoload.php'; 
-require('path/to/PHPMailer/src/PHPMailer.php');
-require('path/to/PHPMailer/src/Exception.php');
-require('path/to/PHPMailer/src/SMTP.php');
+// require('/vender/PHPMailer/src/PHPMailer.php');
+// require('/vender/PHPMailer/src/Exception.php');
+// require('/vender/PHPMailer/src/SMTP.php');
+
+require_once __DIR__ . '/vender/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/vender/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/vender/PHPMailer/src/SMTP.php'; // SMTPを使うなら必要
 
 // POSTリクエストかどうかを確認
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -29,26 +34,39 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $name = htmlspecialchars($_POST['name'] ?? '名無し');
 $email = htmlspecialchars($_POST['email'] ?? 'unknown@example.com');
 $message = htmlspecialchars($_POST['message'] ?? 'メッセージなし');
+$company = htmlspecialchars($_POST['company'] ?? '未入力');
+$address = htmlspecialchars($_POST['address'] ?? '未入力');
+$tel = htmlspecialchars($_POST['tel'] ?? '未入力');
 
 $mail = new PHPMailer(true);
 
 try {
+
+	// ------------------------------------
+    // ★★★ デバッグ設定の追加 ★★★
+    // ------------------------------------
+    // デバッグレベル: 2 (クライアントとサーバーのメッセージを出力)
+    // テストが完了したら、この行をコメントアウトまたは 0 に設定してください。
+    $mail->SMTPDebug = 2; 
+    $mail->Debugoutput = 'html'; // HTML形式で表示（ブラウザでの確認向け）
     // ------------------------------------
     // サーバー設定（★ ここをご自身のレンタルサーバー情報に書き換えてください ★）
     // ------------------------------------
     $mail->isSMTP();
-    $mail->Host       = 'smtp.your-server.com';      // 例: さくらのSMTP, XserverのSMTPなど
+    $mail->Host       = 'mail.natofemin.com';      // 例: さくらのSMTP, XserverのSMTPなど
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'your-smtp-username';        // メールアドレス (SMTP認証ID)
-    $mail->Password   = 'your-smtp-password';        // SMTPパスワード
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // PHPMailer::ENCRYPTION_STARTTLS または SMTPS
+    $mail->Username   = 'no-reply@natofemin.com';        // メールアドレス (SMTP認証ID)
+     //$mail->Username   = 'tuhan@natfemin.com';        メールアドレス (SMTP認証ID)
+    $mail->Password   = 'nichibi3949';         //SMTPパスワード
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // PHPMailer::ENCRYPTION_STARTTLS または SMTPS
     $mail->Port       = 465;                         // 465 (SMTPS) または 587 (STARTTLS)
     $mail->CharSet = 'UTF-8';                         // 文字化け防止
 
     // ------------------------------------
     // 送信元・宛先の設定
     // ------------------------------------
-    $mail->setFrom('', 'Webサイト お問い合わせフォーム'); // サーバーで許可されたアドレス
+    $mail->setFrom('nabio-test@nichibi.co.jp
+', 'Webサイト お問い合わせフォーム'); // サーバーで許可されたアドレス
     $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者');                       // 実際に通知を受け取るアドレス
     $mail->addReplyTo($email, $name);                                         // 返信先をフォーム入力者のアドレスにする
 

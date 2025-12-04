@@ -22,7 +22,7 @@
 	}
 }
 
-.title_center {
+.section_contact .title_center {
 	font-size: calc(30 * var(--rem-ratio));
 	text-align: center;
 }
@@ -118,6 +118,11 @@
 	textarea {
 		border: 1px solid var(--border-color);
 		border-radius: 4px;
+		padding: 10px;
+	}
+
+	textarea {
+		line-height: 1.5;
 	}
 
 	input {
@@ -128,7 +133,7 @@
 		display: flex;
 		align-items: center;
 		column-gap: 8px;
-		margin-bottom: 30px;
+		margin-bottom: 20px;
 	}
 
 	.required {
@@ -271,6 +276,18 @@
 	letter-spacing: 0.05em;
 	text-indent: 1em;
 	margin-top: 64px;
+}
+
+.confirm_content .table {
+	width: 100%;
+}
+
+.confirm_content th {
+	width: 170px;
+	padding: 20px;
+}
+.confirm_content td {
+	padding: 20px;
 }
 
 .confirm_buttons {

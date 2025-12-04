@@ -153,26 +153,35 @@ document.addEventListener('componentsLoaded', function () {
 	);
 
 	// --- クリックイベントリスナー ---
-	hamburgerButton.addEventListener("click", () => {
-		const isMenuOpen = menu.classList.contains("MenuIsOpen");
-		hamburgerButton.classList.toggle("MenuIsActive");
+// --- クリックイベントリスナー ---
+hamburgerButton.addEventListener("click", () => {
+    const isMenuOpen = menu.classList.contains("MenuIsOpen");
+    hamburgerButton.classList.toggle("MenuIsActive");
 
-		if (isMenuOpen) {
-			// --- 閉じる処理 (逆再生) ---
-			hamburgerButton.classList.remove("MenuIsActive");
-			header.classList.remove("MenuIsActive");
-			lenis.start();
-			menuTimeline.timeScale(1).reverse();
+    if (isMenuOpen) {
+        // --- 閉じる処理 (逆再生) ---
+        hamburgerButton.classList.remove("MenuIsActive");
+        header.classList.remove("MenuIsActive");
+        
+        // ★★★ 余韻を維持するため、menu.classList.remove("MenuIsOpen"); はここから削除します ★★★
+        
+        lenis.start();
 
-		} else {
-			// --- 開く処理 (再生) ---
-			hamburgerButton.classList.add("MenuIsActive");
-			header.classList.add("MenuIsActive");
-			menu.classList.add("MenuIsOpen");
-			lenis.stop();
-			menuTimeline.timeScale(1).play();
-		}
-	});
+        // 逆再生 (閉じるアニメーション) が完了したときに実行
+        menuTimeline.timeScale(1).reverse().eventCallback("onReverseComplete", function() {
+            // ★★★ アニメーション完了後に、MenuIsOpen を削除する ★★★
+            menu.classList.remove("MenuIsOpen"); 
+        });
+
+    } else {
+        // --- 開く処理 (再生) ---
+        hamburgerButton.classList.add("MenuIsActive");
+        header.classList.add("MenuIsActive");
+        menu.classList.add("MenuIsOpen");
+        lenis.stop();
+        menuTimeline.timeScale(1).play();
+    }
+});
 
 	// スプリットテキスト
 	const navItems = document.querySelectorAll(".nav_item");
@@ -625,7 +634,6 @@ fadeTexts.forEach((text, index) => {
 			ease: "back.out(1)",
 			stagger: 0.3,
 
-			// 【スクロールトリガー設定】
 			scrollTrigger: {
 				trigger: ".faq_list",
 				start: "top 80%",
