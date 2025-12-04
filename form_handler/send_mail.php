@@ -14,32 +14,6 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 
-// vendorフォルダへの正しいパスを設定（form_handlerフォルダの外側へ）
-// require __DIR__ . '/../vendor/autoload.php'; 
-// require('/vender/PHPMailer/src/PHPMailer.php');
-// require('/vender/PHPMailer/src/Exception.php');
-// require('/vender/PHPMailer/src/SMTP.php');
-
-// require_once __DIR__ . '/vender/PHPMailer/src/PHPMailer.php';
-// require_once __DIR__ . '/vender/PHPMailer/src/Exception.php';
-// require_once __DIR__ . '/vender/PHPMailer/src/SMTP.php'; 
-
-// POSTリクエストかどうかを確認
-// if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-//     http_response_code(405);
-//     exit;
-// }
-
-// ------------------------------------
-// フォームデータの受け取り
-// ------------------------------------
-// $name = htmlspecialchars($_POST['name'] ?? '名無し');
-// $email = htmlspecialchars($_POST['email'] ?? 'unknown@example.com');
-// $message = htmlspecialchars($_POST['message'] ?? 'メッセージなし');
-// $company = htmlspecialchars($_POST['company'] ?? '未入力');
-// $address = htmlspecialchars($_POST['address'] ?? '未入力');
-// $tel = htmlspecialchars($_POST['tel'] ?? '未入力');
-
 // POST以外は拒否
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     echo "不正なリクエストです";
@@ -55,7 +29,7 @@ $user_company  = $_POST['user_company'] ?? '未入力';
 $user_address  = $_POST['user_address'] ?? '未入力';
 $user_tel  = $_POST['user_tel'] ?? '未入力';
 $user_message  = $_POST['user_message'] ?? 'メッセージなし';
-$user_agree_text = ($_POST['user_agree'] === '同意する') ? '同意する' : '未同意'; // 同意チェックボックスの値をテキストに変換
+$user_agree_text = isset($_POST['user_agree']) ? '同意する' : '未同意';
 
 // すべての情報をまとめた共通のメール本文を作成
 $mail_body_content = "--- お問い合わせ内容 ---\n";
@@ -83,8 +57,9 @@ try {
     // $mail->Host      = 'mail.natofemin.com';
     $mail->SMTPAuth  = true;
     $mail->Username  = 'a.shimizu@nichibi.co.jp'; // SMTP認証ID
-    //$mail->Username  = 'no-reply@natofemin.com';  SMTP認証ID
-    $mail->Password  = 'fu3XKMCb8iEp';            // SMTPパスワード
+    //$mail->Username  = 'no-reply@natofemin.com';
+    $mail->Password  = 'fu3XKMCb8iEp';// SMTPパスワード
+    //$mail->Password  = 'nichibi3949';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SMTPS (Port 465)
     $mail->Port      = 465;
     $mail->CharSet = 'UTF-8';
@@ -98,6 +73,7 @@ try {
     // ======================================
     $mail->clearAllRecipients(); // 宛先をクリア
     $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者'); // 管理者のアドレス
+    //$mail->addAddress('tuhan@natofemin.com', '管理者'); 
     $mail->Subject = '【Webサイト】新しいお問い合わせがありました';
     $mail->Body    = $mail_body_content;
     $mail->addReplyTo($user_email, $user_name); // 返信先をフォーム入力者のアドレスにする
@@ -134,7 +110,6 @@ try {
     echo 'success';
 
 } catch (Exception $e) {
-    // エラーの場合はメッセージを返す
     echo "送信に失敗しました。エラー: {$mail->ErrorInfo}";
 }
 ?>

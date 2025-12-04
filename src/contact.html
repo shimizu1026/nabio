@@ -198,7 +198,7 @@
 													</dl>
 													<dl class="info_row">
 														<dt>Eメールアドレス：</dt>
-														<dd>○○○○</dd>
+														<dd>tuhan@natofemin.com</dd>
 													</dl>
 												</div>
 											</section>
@@ -206,7 +206,8 @@
 									</div>
 									<div class="agree_actions">
 										<div class="agree_checkbox">
-											<input type="checkbox" id="agree" name="user_agree" required="">
+											<input type="checkbox" id="agree" name="user_agree" required=""
+												value="同意する">
 											<label for="agree">プライバシーポリシーに同意する</label>
 										</div>
 										<div class="error_message" id="agree_error"></div>
@@ -293,11 +294,11 @@
 			const tel = document.getElementById('tel').value;
 			const message = document.getElementById('message').value;
 			const agreeCheckbox = document.getElementById('agree');
-			const agree = agreeCheckbox.checked ? "同意する" : "";
+			const agreeTextForDisplay = agreeCheckbox.checked ? "同意する" : "未同意";
 
 			// 簡易バリデーション（空なら進ませない）
-			if (!name || !email || !tel || !message || !agree) {
-				alert('すべての項目を入力してください');
+			if (!name || !email || !tel || !message || !agreeCheckbox) {
+				alert('必須の項目はすべて入力してください');
 				return;
 			}
 
@@ -310,7 +311,7 @@
 			document.getElementById('conf_tel').innerText = tel;
 			document.getElementById('conf_email').innerText = email;
 			document.getElementById('conf_message').innerText = message;
-			document.getElementById('conf_agree').innerText = agree;
+			document.getElementById('conf_agree').innerText = agreeTextForDisplay;
 
 			// 表示の切り替え
 			document.getElementById('input-area').style.display = 'none';

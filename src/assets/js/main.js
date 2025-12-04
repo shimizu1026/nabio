@@ -646,18 +646,55 @@ fadeTexts.forEach((text, index) => {
 	// 実行
 	setupFaqAnimation();
 
-// ページが完全に読み込まれた後に実行
-window.onload = function() {
-    // ページを最上部 (座標 0, 0) にスクロール
-    window.scrollTo(0, 0);
+// 言語切り替え
+function translatePage(targetLang) {
+    // 翻訳したい要素（クラス名 'translatable' を持つ要素）を取得
+    const elementsToTranslate = document.querySelectorAll('.translatable');
+    const texts = Array.from(elementsToTranslate).map(el => el.textContent);
+    
+    // ページを日本語に戻す場合は翻訳は不要
+    if (targetLang === 'ja') {
+        // 日本語のオリジナルテキストに戻す処理を実装する必要があります。
+        // （ここでは省略しますが、実際にはオリジナルテキストをどこかに保存しておく必要があります）
+        console.log('日本語に戻す処理を実行');
+        return; 
+    }
 
-    // またはアニメーションを付けて滑らかに移動させる場合（モダンブラウザ対応）
-    // window.scrollTo({
-    //     top: 0,
-    //     left: 0,
-    //     behavior: 'smooth' // スムーズなスクロール
-    // });
-};
+    // 送信データ
+    const requestData = {
+        texts: texts,
+        target: targetLang
+    };
+
+    // PHPエンドポイントへデータを送信
+    fetch('form_handler/server_endpoint_for_translation.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('サーバーエラー: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.translations) {
+            // 翻訳結果をページに反映
+            elementsToTranslate.forEach((el, index) => {
+                // 翻訳後のテキストで要素の内容を更新
+                el.textContent = data.translations[index].translatedText;
+            });
+            console.log('翻訳完了。');
+        } else if (data.error) {
+            alert('翻訳APIエラー: ' + data.error);
+        }
+    })
+    .catch(error => {
+        alert('通信または翻訳エラーが発生しました。詳細はコンソールを確認してください。');
+        console.error('Error:', error);
+    });
+}
 
 	// --------------------------------------------------
 	// 問い合わせフォームの画面切り替え// 
