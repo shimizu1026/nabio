@@ -34,7 +34,7 @@ if (empty($texts) || empty($targetLang)) {
 // ------------------------------------------
 
 // ★★★ ここにあなたの取得した API キーを記述してください ★★★
-$apiKey = 'AIzaSyDpmP2kMLYMDDpXirLr8PIsDk1G0q8ap2E';
+$apiKey = '';
 
 try {
     $translate = new TranslateClient([
