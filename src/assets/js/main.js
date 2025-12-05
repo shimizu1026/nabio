@@ -8,6 +8,10 @@ import '../css/company.css';
 import '../css/faq.css';
 import '../css/products.css';
 
+//js
+import '../js/loadcomponent.js';
+import '../js/translate.js';
+
 // gsap
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -153,7 +157,6 @@ document.addEventListener('componentsLoaded', function () {
 	);
 
 	// --- クリックイベントリスナー ---
-// --- クリックイベントリスナー ---
 hamburgerButton.addEventListener("click", () => {
     const isMenuOpen = menu.classList.contains("MenuIsOpen");
     hamburgerButton.classList.toggle("MenuIsActive");
@@ -161,15 +164,11 @@ hamburgerButton.addEventListener("click", () => {
     if (isMenuOpen) {
         // --- 閉じる処理 (逆再生) ---
         hamburgerButton.classList.remove("MenuIsActive");
-        header.classList.remove("MenuIsActive");
-        
-        // ★★★ 余韻を維持するため、menu.classList.remove("MenuIsOpen"); はここから削除します ★★★
-        
+        header.classList.remove("MenuIsActive");        
         lenis.start();
 
         // 逆再生 (閉じるアニメーション) が完了したときに実行
         menuTimeline.timeScale(1).reverse().eventCallback("onReverseComplete", function() {
-            // ★★★ アニメーション完了後に、MenuIsOpen を削除する ★★★
             menu.classList.remove("MenuIsOpen"); 
         });
 
@@ -310,8 +309,6 @@ hamburgerButton.addEventListener("click", () => {
 		});
 
 	});
-
-	// -------------------------------------------------------------------
 
 	// ------------------------------------
 	//  Swiper　ファーストビュー
@@ -561,7 +558,7 @@ fadeTitles.forEach((title, index) => {
         y: 50, 
         opacity: 0,
         // 最初の要素が遅延 0.4秒、2番目が 0.5秒...と、要素の出現順にわずかに遅延を設ける
-        delay: 0.4 + (index * 0.1), 
+        delay: 0.2 + (index * 0.1), 
         ease: "power2.out",
         
         scrollTrigger: {
@@ -581,7 +578,7 @@ fadeTexts.forEach((text, index) => {
         duration: 1,
         y: 30,
         opacity: 0,
-        delay: 0.6 + (index * 0.1),
+        delay: 0.4 + (index * 0.1),
         ease: "power2.out",
         
         scrollTrigger: {
@@ -601,7 +598,7 @@ fadeTexts.forEach((text, index) => {
 				duration: 1.0,
 				y: 30,
 				opacity: 0,
-				delay: 0.8,
+				delay: 0.5,
 				ease: "power2.out",
 
 				scrollTrigger: {

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 export default defineConfig({
 	base: "./",
+	// base: '/exp/nabio/',
 	root: './src', //開発ディレクトリ設定
 	build: {
 		outDir: '../dist', //出力場所の指定

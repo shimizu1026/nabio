@@ -343,6 +343,13 @@ body {
 		position: relative;
 		font-family: var(--font-family-en);
 		padding-right: 8px;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--accent-color);
+			translate: var(--hover);
+			
+		}
 
 		&:not(:first-child) {
 			padding-left: 8px;
