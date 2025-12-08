@@ -2,8 +2,8 @@
 // translate_proxy.php
 
 // エラーを表示する場合（開発中のみ有効にしてください）
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // JSON形式で返却することを宣言
 header('Content-Type: application/json; charset=UTF-8');

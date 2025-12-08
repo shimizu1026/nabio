@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 export default defineConfig({
 	base: "./",
-	// base: '/exp/nabio/',
 	root: './src', //開発ディレクトリ設定
 	build: {
 		outDir: '../dist', //出力場所の指定
@@ -31,9 +30,8 @@ export default defineConfig({
 				entryFileNames: `assets/js/[name].js`,
 			},
 			input: {
+				// 日本語ページ
 				index: resolve(__dirname, './src/index.html'),
-
-				//   複数HTMLページを出力したい時にここへ追記していく
 				company: resolve(__dirname, './src/company.html'),
 				contact: resolve(__dirname, './src/contact.html'),
 				faq: resolve(__dirname, './src/faq.html'),
@@ -41,6 +39,24 @@ export default defineConfig({
 				header: resolve(__dirname, "./src/components/header.html"),
 				footer: resolve(__dirname, "./src/components/footer.html"),
 				component_contact: resolve(__dirname, "./src/components/contact.html"),
+				// 英語ページ
+				en_index: resolve(__dirname, './src/en/index.html'),
+				en_company: resolve(__dirname, './src/en/company.html'),
+				en_contact: resolve(__dirname, './src/en/contact.html'),
+				en_faq: resolve(__dirname, './src/en/faq.html'),
+				en_products: resolve(__dirname, './src/en/products.html'),
+				en_header: resolve(__dirname, "./src/en/components/header.html"),
+				en_footer: resolve(__dirname, "./src/en/components/footer.html"),
+				en_component_contact: resolve(__dirname, "./src/en/components/contact.html"),
+				// 中国語ページ
+				zh_index: resolve(__dirname, './src/zh/index.html'),
+				zh_company: resolve(__dirname, './src/zh/company.html'),
+				zh_contact: resolve(__dirname, './src/zh/contact.html'),
+				zh_faq: resolve(__dirname, './src/zh/faq.html'),
+				zh_products: resolve(__dirname, './src/zh/products.html'),
+				zh_header: resolve(__dirname, "./src/zh/components/header.html"),
+				zh_footer: resolve(__dirname, "./src/zh/components/footer.html"),
+				zh_component_contact: resolve(__dirname, "./src/zh/components/contact.html"),
 			},
 
 			//  list: resolve(__dirname, './src/list.html'),
