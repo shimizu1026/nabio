@@ -47,10 +47,7 @@
   "中国大陸地域指定代理 北京納百恩有限公司",
   "北京市昌平区十三陵鎮泰陵園村209号",
   "TEL：010-69706193",
-  "Page Top"
-]
-
-[
+  "Page Top",
   "商品紹介\nProducts",
   "Products",
   "よくある質問\nFAQ",
@@ -104,9 +101,7 @@
   "中国大陸地域指定代理 北京納百恩有限公司",
   "北京市昌平区十三陵鎮泰陵園村209号",
   "TEL：010-69706193",
-  "Page Top"
-]
-[
+  "Page Top",
   "商品紹介\nProducts",
   "Products",
   "よくある質問\nFAQ",
@@ -169,10 +164,7 @@
   "中国大陸地域指定代理 北京納百恩有限公司",
   "北京市昌平区十三陵鎮泰陵園村209号",
   "TEL：010-69706193",
-  "Page Top"
-]
-
-[
+  "Page Top",
   "商品紹介\nProducts",
   "Products",
   "よくある質問\nFAQ",
@@ -209,10 +201,7 @@
   "中国大陸地域指定代理 北京納百恩有限公司",
   "北京市昌平区十三陵鎮泰陵園村209号",
   "TEL：010-69706193",
-  "Page Top"
-]
-
-[
+  "Page Top",
   "商品紹介\nProducts",
   "Products",
   "よくある質問\nFAQ",
@@ -294,32 +283,3 @@
   "Page Top"
 ]
 
-// 翻訳対象のセレクターを指定します。必要に応じて調整してください。
-// const selectors = 'h1, h2, h3, h4, p, li, a:not(.no-translate), span:not(.no-translate)';
-
-// // ページ内のすべての対象要素を取得
-// const elements = document.querySelectorAll(selectors);
-
-// const textList = [];
-
-// elements.forEach(el => {
-//     let text = el.innerText.trim();
-    
-//     // 短すぎるテキスト（例: "JP" や "EN" など）や、空の要素を無視
-//     if (text.length > 5 && !textList.includes(text)) {
-//         // テキストをリストに追加
-//         textList.push(text);
-//     }
-// });
-
-// // JSON形式に整形して表示
-// const jsonOutput = JSON.stringify(textList, null, 2);
-
-// console.log("--- 翻訳対象テキストリスト (JSON) ---");
-// console.log(jsonOutput); 
-// console.log("-------------------------------------");
-
-// // 後の処理のためにクリップボードにコピー
-// copy(jsonOutput);
-
-// console.log("★リストがクリップボードにコピーされました！");

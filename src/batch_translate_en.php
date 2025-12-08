@@ -40,7 +40,7 @@ foreach ($textsToTranslate as $index => $text) {
 
     $response = curl_exec($ch);
     $responseData = json_decode($response, true);
-    curl_close($ch);
+
     
     // 結果の処理
     if (isset($responseData['data']['translations'][0]['translatedText'])) {

@@ -10,7 +10,6 @@ import '../css/products.css';
 
 //js
 import '../js/loadcomponent.js';
-import '../js/translate.js';
 
 // gsap
 import gsap from "gsap";
