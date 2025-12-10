@@ -457,7 +457,6 @@ hamburgerButton.addEventListener("click", () => {
 	const steps = gsap.utils.toArray('.img_box .product_step');
 
 	if (section && innerProduct && steps.length > 0) {
-
 		// ★初期設定: 1枚目の画像だけを表示しておく
 		gsap.set(steps[0], { opacity: 1 });
 
@@ -467,7 +466,7 @@ hamburgerButton.addEventListener("click", () => {
 				trigger: section,
 				pin: innerProduct,
 				start: "top top",
-				end: "+=300%",// スクロール量（画像の枚数に応じて調整。例: 200% = 2画面分スクロール）
+				end: "+=150%",// スクロール量（画像の枚数に応じて調整。例: 200% = 2画面分スクロール）
 				scrub: 0.5,// スクロールとアニメーションを連動（数値で慣性を調整）
 				anticipatePin: 1// ピン留めのガタつき防止
 			}
@@ -479,11 +478,12 @@ hamburgerButton.addEventListener("click", () => {
 			if (index === 0) return; // 1枚目は最初から出ているのでスキップ
 			const prevStep = steps[index - 1];
 
-			let holdDuration = (index === 1) ? 2.5 : 1;
+			let holdDuration = (index === 1) ? 1 : 0.5;
+			// let holdDuration = (index === 1) ? 2.5 : 1;
 			tl.to({}, { duration: holdDuration });
-			tl.to(prevStep, { opacity: 0, duration: 0.05 })
-				.to(step, { opacity: 1, duration: 0.05 }, "<");
-			tl.to({}, { duration: 1 });
+			tl.to(prevStep, { opacity: 0, duration: 0.01 })
+				.to(step, { opacity: 1, duration: 0.01 }, "<");
+			tl.to({}, { duration: 0.5 });
 
 		});
 	}

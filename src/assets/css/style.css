@@ -523,9 +523,9 @@
 	}
 
 	/* JSで付与する「表示中」のクラス */
-	/* .product_img.is-active {
+	.product_img.is_active {
 		opacity: 1;
-	} */
+	}
 
 	figure {
 		figcaption {

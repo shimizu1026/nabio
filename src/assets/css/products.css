@@ -110,7 +110,6 @@
 .product_name {
 	font-size: calc(18 * var(--rem-ratio));
 	font-weight: var(--font-weight-m);
-	margin-bottom: 20px;
 }
 
 .grid_container {
@@ -124,6 +123,7 @@
 
 .product_content {
 	width: 100%;
+	margin-top: 20px;
 
 	dl {
 		display: flex;
@@ -179,7 +179,7 @@
 	background-image: url(../images/bg_pattern.webp);
 	background-repeat: no-repeat;
 	background-position: right bottom;
-	background-size: 40%;
+	background-size: 33%;
 	margin-top: 80px;
 	/* @media (max-width: 768px) {
 		padding: 0 20px;
