@@ -207,7 +207,7 @@
 									<div class="agree_actions">
 										<div class="agree_checkbox">
 											<input type="checkbox" id="agree" name="user_agree" required=""
-												value="同意する">
+												value="同意">
 											<label for="agree">我同意隐私政策</label>
 										</div>
 										<div class="error_message" id="agree_error"></div>
@@ -254,8 +254,6 @@
 								<button type="button" onclick="backToInput()" class="button"><span>返回</span></button>
 								<button type="button" onclick="sendMail()" class="button"><span>发送</span></button>
 								<p id="sending-msg" style="display:none;">正在发送...</p>
-								<!-- <button id="back_btn" type="button" class="button"><span>戻る</span></button>
-								<button id="send_btn" type="button" class="button"><span>送信する</span></button> -->
 							</div>
 						</div>
 					</div>
@@ -294,15 +292,15 @@
 			const tel = document.getElementById('tel').value;
 			const message = document.getElementById('message').value;
 			const agreeCheckbox = document.getElementById('agree');
-			const agreeTextForDisplay = agreeCheckbox.checked ? "同意する" : "未同意";
+			const agreeTextForDisplay = agreeCheckbox.checked ? "同意" : "不同意";
 
 			// 簡易バリデーション（空なら進ませない）
 			if (!name || !email || !tel || !message || !agreeCheckbox) {
-				alert('必須の項目はすべて入力してください');
+				alert('请填写所有必填字段');
 				return;
 			}
 
-			const agreeText = agreeCheckbox.checked ? "同意する" : "未同意";
+			const agreeText = agreeCheckbox.checked ? "同意" : "不同意";
 
 			// 確認画面のパーツに入力値をセット
 			document.getElementById('conf_name').innerText = name;
@@ -352,12 +350,12 @@
 
 						window.scrollTo(0, 0);
 					} else {
-						alert('送信に失敗しました。エラー: ' + data);
+						alert('发送失败。错误: ' + data);
 						document.getElementById('sending-msg').style.display = 'none';
 					}
 				})
 				.catch(error => {
-					alert('通信エラーが発生しました');
+					alert('发生通信错误');
 					console.error('Error:', error);
 					document.getElementById('sending-msg').style.display = 'none';
 				});
