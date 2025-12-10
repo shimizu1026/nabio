@@ -7,7 +7,6 @@
 	width: 150%;
 	height: 150vh;
 	background-color: var(--base-color);
-	/* background-color: var(--white-color); */
 	z-index: 9999;
 	clip-path: ellipse(100% 87% at 50% 0%);
 }
@@ -20,10 +19,6 @@
 	left: 0;
 	z-index: 1;
 	transform-origin: center center;
-
-	/* @media (max-width: 768px) {
-		height: 100vh;
-	} */
 
 	.swiper-slide {
 		width: 100%;
@@ -64,10 +59,6 @@
 	.first {
 		position: relative;
 		z-index: -1;
-		/* display: none; */
-		/* background-image: url(../images/fv_1.jpg);
-		background-repeat: no-repeat;
-		background-position: center center; */
 
 		img {
 			height: 100%;
@@ -87,8 +78,6 @@
 			transform: translateY(-50%);
 			display: flex;
 			flex-direction: column;
-			/* padding-top: 270px;
-			padding-left: 96px; */
 			row-gap: 30px;
 			z-index: 12;
 
@@ -136,11 +125,6 @@
 		height: 100%;
 		display: grid;
 		place-items: center;
-		/* background-image: url(../images/fv_2.webp);
-		background-repeat: no-repeat;
-		background-size: 100%;
-		background-size: cover; */
-		/* display: none; */
 
 		img {
 			height: 100%;
@@ -192,7 +176,6 @@
 	.third {
 		position: relative;
 		z-index: -1;
-		/* display: none; */
 
 		img {
 			height: 100%;
@@ -246,33 +229,25 @@
  * ------------------------------------ */
 /* スライド内の<img>タグをターゲットにする */
 .swiper-slide img {
-	/* スライドの枠いっぱいに表示し、はみ出た部分は隠す設定が必要です */
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 
-	/* 初期状態: わずかに縮小しておく */
+	/* 初期状態 */
 	transform: scale(1.0);
 
-	/* 遷移の設定: 3秒間かけて滑らかに拡大 */
+	/* 遷移の設定 */
 	transition: transform 3000ms linear;
-	/* 3000ms = 3秒 */
 }
 
-/* ------------------------------------
- * 2. Swiperのオプション設定
- * ------------------------------------ */
-/* スライドの親要素（.swiper-slide）で、はみ出た画像を隠す */
 .swiper-slide {
 	overflow: hidden;
-	/* これが重要！拡大時に画像がスライド枠から出ないようにする */
 }
 
 
 /* ------------------------------------
  * 3. スライドがアクティブになった時の設定
  * ------------------------------------ */
-/* Swiperが自動で付与する `.swiper-slide-active` クラスをトリガーに拡大 */
 .swiper-slide-active img {
 	/* 最終状態: 1.15倍に拡大 */
 	transform: scale(1.15);
@@ -318,18 +293,6 @@
 	position: relative;
 	z-index: 2;
 	background-color: var(--white-color);
-
-	/* &:before {
-		content: "";
-		width: 100%;
-		height: 150px;
-		background-color: var(--white-color);
-		clip-path: ellipse(55% 87% at 50% 100%);
-		position: absolute;
-		top: -150px;
-		right: 0;
-		z-index: 100;
-	} */
 }
 
 .intro {
@@ -431,12 +394,7 @@
 }
 
 .section_home_products {
-	/* background-image: url(../images/bg_exclude.png);
-	background-repeat: no-repeat;
-	background-position: bottom 160px right; */
 	padding-top: 120px;
-	/* height: 350vh; */
-	/* position: relative; */
 }
 
 .inner_home_product {
@@ -460,9 +418,6 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: center;
-		/* row-gap: 24px;
-		flex: 1;
-		height: 100%; */
 		width: 50%;
 
 		@media (max-width: 768px) {
@@ -471,16 +426,9 @@
 			margin-right: auto;
 			padding: 0 1rem;
 		}
-
-		/* .button {
-			margin-inline: auto;
-		} */
 	}
 
 	.img_box {
-		/* flex: 1;
-		position: relative;
-		height: 100%; */
 		width: 50%;
 		height: 100%;
 		position: relative;
@@ -522,7 +470,6 @@
 		}
 	}
 
-	/* JSで付与する「表示中」のクラス */
 	.product_img.is_active {
 		opacity: 1;
 	}
@@ -617,8 +564,6 @@
 	}
 
 	.title_box {
-		/* max-width: var(--main-width);
-		margin-inline: auto; */
 		margin-right: auto;
 	}
 }
@@ -645,8 +590,6 @@
 		justify-content: center;
 		row-gap: 48px;
 		flex: 1;
-		/* position: relative;
-		z-index: 2; */
 	}
 
 	.company_copy {
@@ -660,29 +603,8 @@
 		}
 	}
 
-
-
-	/* img {
-		flex: 2;
-	} */
-
 	.img_wrapper {
 		flex: 1;
-		/* z-index: 0; */
-		/* width: fit-content;
-		height: fit-content; */
-
-		/* &::before {
-			content: "";
-			position: absolute;
-			top: 20px;
-			left: 20px;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(to bottom right, var(--white-color), var(--accent-color));
-			z-index: -1;
-			filter: url(#noiseFilter);
-		} */
 
 		img {
 			display: block;
@@ -739,7 +661,6 @@
 
 .features_item_wrap {
 	filter: drop-shadow(0px 5px 15px rgb(20 20 20 / 0.15));
-	/* filter: drop-shadow(0px 5px 15px rgba(20, 20, 20, 0.15)); */
 	display: grid;
 
 	@media (max-width: 768px) {

@@ -65,6 +65,161 @@ document.addEventListener('componentsLoaded', function () {
 	requestAnimationFrame(raf);
 
 	// --------------------------------------------------
+	// 言語切り替えリンクのパス自動調整
+	// --------------------------------------------------
+function updateLanguageLinks() {
+    // 1. 環境判定: ローカル環境かどうかをチェック (変更なし)
+    const isLocal = window.location.protocol === 'file:' || 
+                    window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1';
+    
+    const currentPath = decodeURIComponent(window.location.pathname); // 日本語URLも考慮
+    
+    // 2. ファイル名（products.htmlなど）を抽出
+    const fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
+
+    // 3. パス全体からファイル名を除去した部分（/exp/nabio/zh/）
+    let pathBase = currentPath.substring(0, currentPath.lastIndexOf(fileName)); 
+    
+    // -----------------------------------------------------------------------
+    // ★★★ 修正ポイント: 言語コードの確実な削除 ★★★
+    // -----------------------------------------------------------------------
+
+    // 4. ベースパスから現在の言語ディレクトリ（/en/ や /zh/）を確実に削除し、共通のベースディレクトリ（/exp/nabio/）を確保
+    
+    // 現在のパスの先頭のスラッシュを除いた部分
+    let pathNoRoot = pathBase.substring(1); 
+    
+    // 最初に現れる言語コードを削除する (この結果、exp/nabio/ が残る)
+    let commonDir = pathNoRoot.replace(/^(en\/|zh\/)/, ''); 
+    
+    // commonDir の末尾のスラッシュを処理（必ず / で終わらせる）
+    if (commonDir && !commonDir.endsWith('/')) {
+        commonDir += '/';
+    }
+
+    // 5. リンク要素を取得 (変更なし)
+    const linksJa = document.querySelectorAll('.lang_link_ja');
+    const linksEn = document.querySelectorAll('.lang_link_en');
+    const linksZh = document.querySelectorAll('.lang_link_zh');
+    
+    // 6. リンクを生成し、環境に応じてパスの先頭を調整
+    
+    // ルートのスラッシュの扱いを決定
+    const rootPrefix = isLocal ? '' : '/'; 
+    
+    // 日本語リンク (言語コードなし)
+    linksJa.forEach(link => {
+        // 例: /exp/nabio/products.html
+        link.href = `${rootPrefix}${commonDir}${fileName}`; 
+    });
+
+    // 英語リンク (en/)
+    linksEn.forEach(link => {
+        // 例: /exp/nabio/en/products.html
+        // commonDir が 'exp/nabio/' の形式のため、その後に 'en/' を追加
+        link.href = `${rootPrefix}${commonDir}en/${fileName}`;
+    });
+
+    // 中国語リンク (zh/)
+    linksZh.forEach(link => {
+        // 例: /exp/nabio/zh/products.html
+        link.href = `${rootPrefix}${commonDir}zh/${fileName}`; 
+    });
+}
+
+updateLanguageLinks();
+// function updateLanguageLinks() {
+//     // 1. 現在のパスと、現在の言語フォルダ（あれば）を取得
+//     const currentPath = window.location.pathname; // 例: /en/contact.html
+    
+//     // 現在の言語ディレクトリ（例: 'en', 'zh'）を抽出。見つからなければ null
+//     const langMatch = currentPath.match(/^\/(en|zh)\//); 
+//     const currentLangDir = langMatch ? langMatch[1] : ''; // 'en' または 'zh' または '' (日本語)
+
+//     // 2. 言語ディレクトリを除いた「ファイル名」を含むベースのパスを生成
+//     let basePath;
+//     if (currentLangDir) {
+//         // 現在のパスから /en/ や /zh/ を取り除いた部分が basePath になる
+//         // 例: /en/contact.html -> contact.html
+//         basePath = currentPath.substring(`/${currentLangDir}/`.length);
+//     } else {
+//         // 日本語ページの場合、パス全体が basePath (例: contact.html)
+//         // ただし、トップページ(/)の場合は空になるため調整が必要
+//         basePath = currentPath.substring(1); // 先頭の '/' を除く
+//     }
+    
+//     // トップページ(/)の場合の調整: basePath が空になるため 'index.html' とする
+//     if (basePath === '') {
+//         basePath = 'index.html'; 
+//     }
+
+//     // --- リンクの組み立てと上書き ---
+    
+//     // 3. 各言語のリンク要素を取得 (ここは変更なし)
+//     const linksJa = document.querySelectorAll('.lang_link_ja');
+//     const linksEn = document.querySelectorAll('.lang_link_en');
+//     const linksZh = document.querySelectorAll('.lang_link_zh');
+    
+//     // 4. 正しいパスを生成してhrefを上書き
+    
+//     // 日本語リンク (ルートに戻る)
+//     linksJa.forEach(link => {
+//         // 日本語ページはルートからの相対パス
+//         link.href = `/${basePath}`; // 例: /contact.html
+//     });
+
+//     // 英語リンク
+//     linksEn.forEach(link => {
+//         // 英語ページは /en/ フォルダに入れる
+//         link.href = `/en/${basePath}`; // 例: /en/contact.html
+//     });
+
+//     // 中国語リンク
+//     linksZh.forEach(link => {
+//         // 中国語ページは /zh/ フォルダに入れる
+//         link.href = `/zh/${basePath}`; // 例: /zh/contact.html
+//     });
+// }
+
+// updateLanguageLinks();
+	// function updateLanguageLinks() {
+	// 	// 1. 現在のパスを取得 (例: "/contact.html" や "/en/contact.html")
+	// 	const currentPath = window.location.pathname;
+
+	// 	// 2. パスから言語ディレクトリ(/en/ や /zh/)を除去して「ベースのパス」を作る
+	// 	// 正規表現: 行頭の "/en/" または "/zh/" を "/" に置換する
+	// 	let basePath = currentPath.replace(/^\/(en|zh)\//, '/');
+
+	// 	// ※もしルート(トップページ)にいて "/" で終わっている場合は index.html とみなす調整（必要に応じて）
+	// 	// if (basePath === '/') basePath = '/index.html';
+
+	// 	// 3. 各言語のリンク要素を取得
+	// 	const linksJa = document.querySelectorAll('.lang_link_ja');
+	// 	const linksEn = document.querySelectorAll('.lang_link_en');
+	// 	const linksZh = document.querySelectorAll('.lang_link_zh');
+
+	// 	// 4. 正しいパスを生成してhrefを上書き
+	// 	// 日本語: ベースパスそのまま (例: /contact.html)
+	// 	linksJa.forEach(link => {
+	// 		link.href = basePath;
+	// 	});
+
+	// 	// 英語: /en + ベースパス (例: /en/contact.html)
+	// 	linksEn.forEach(link => {
+	// 		link.href = '/en' + (basePath === '/' ? '/' : basePath);
+	// 	});
+
+	// 	// 中国語: /zh + ベースパス (例: /zh/contact.html)
+	// 	linksZh.forEach(link => {
+	// 		link.href = '/zh' + (basePath === '/' ? '/' : basePath);
+	// 	});
+	// }
+
+	// // 関数を実行
+	// updateLanguageLinks();
+
+	// --------------------------------------------------
 	// オープニング
 	// --------------------------------------------------
 
@@ -156,30 +311,30 @@ document.addEventListener('componentsLoaded', function () {
 	);
 
 	// --- クリックイベントリスナー ---
-hamburgerButton.addEventListener("click", () => {
-    const isMenuOpen = menu.classList.contains("MenuIsOpen");
-    hamburgerButton.classList.toggle("MenuIsActive");
+	hamburgerButton.addEventListener("click", () => {
+		const isMenuOpen = menu.classList.contains("MenuIsOpen");
+		hamburgerButton.classList.toggle("MenuIsActive");
 
-    if (isMenuOpen) {
-        // --- 閉じる処理 (逆再生) ---
-        hamburgerButton.classList.remove("MenuIsActive");
-        header.classList.remove("MenuIsActive");        
-        lenis.start();
+		if (isMenuOpen) {
+			// --- 閉じる処理 (逆再生) ---
+			hamburgerButton.classList.remove("MenuIsActive");
+			header.classList.remove("MenuIsActive");
+			lenis.start();
 
-        // 逆再生 (閉じるアニメーション) が完了したときに実行
-        menuTimeline.timeScale(1).reverse().eventCallback("onReverseComplete", function() {
-            menu.classList.remove("MenuIsOpen"); 
-        });
+			// 逆再生 (閉じるアニメーション) が完了したときに実行
+			menuTimeline.timeScale(1).reverse().eventCallback("onReverseComplete", function () {
+				menu.classList.remove("MenuIsOpen");
+			});
 
-    } else {
-        // --- 開く処理 (再生) ---
-        hamburgerButton.classList.add("MenuIsActive");
-        header.classList.add("MenuIsActive");
-        menu.classList.add("MenuIsOpen");
-        lenis.stop();
-        menuTimeline.timeScale(1).play();
-    }
-});
+		} else {
+			// --- 開く処理 (再生) ---
+			hamburgerButton.classList.add("MenuIsActive");
+			header.classList.add("MenuIsActive");
+			menu.classList.add("MenuIsOpen");
+			lenis.stop();
+			menuTimeline.timeScale(1).play();
+		}
+	});
 
 	// スプリットテキスト
 	const navItems = document.querySelectorAll(".nav_item");
@@ -548,45 +703,45 @@ hamburgerButton.addEventListener("click", () => {
 
 	// --------------------------------------------------
 	// 下から上にフェイドイン// --------------------------------------------------
-// 1. .fade_title のアニメーション設定
-const fadeTitles = gsap.utils.toArray(".fade_title");
+	// 1. .fade_title のアニメーション設定
+	const fadeTitles = gsap.utils.toArray(".fade_title");
 
-fadeTitles.forEach((title, index) => {
-    gsap.from(title, {
-        duration: 1,
-        y: 50, 
-        opacity: 0,
-        // 最初の要素が遅延 0.4秒、2番目が 0.5秒...と、要素の出現順にわずかに遅延を設ける
-        delay: 0.2 + (index * 0.1), 
-        ease: "power2.out",
-        
-        scrollTrigger: {
-            trigger: title,
-            start: "top 90%", 
-            toggleActions: "play none none none" 
-        }
-    });
-});
+	fadeTitles.forEach((title, index) => {
+		gsap.from(title, {
+			duration: 1,
+			y: 50,
+			opacity: 0,
+			// 最初の要素が遅延 0.4秒、2番目が 0.5秒...と、要素の出現順にわずかに遅延を設ける
+			delay: 0.2 + (index * 0.1),
+			ease: "power2.out",
+
+			scrollTrigger: {
+				trigger: title,
+				start: "top 90%",
+				toggleActions: "play none none none"
+			}
+		});
+	});
 
 
-// 2. .fade_text のアニメーション設定
-const fadeTexts = gsap.utils.toArray(".fade_text");
+	// 2. .fade_text のアニメーション設定
+	const fadeTexts = gsap.utils.toArray(".fade_text");
 
-fadeTexts.forEach((text, index) => {
-    gsap.from(text, {
-        duration: 1,
-        y: 30,
-        opacity: 0,
-        delay: 0.4 + (index * 0.1),
-        ease: "power2.out",
-        
-        scrollTrigger: {
-            trigger: text,
-            start: "top 90%",
-            toggleActions: "play none none none"
-        }
-    });
-});
+	fadeTexts.forEach((text, index) => {
+		gsap.from(text, {
+			duration: 1,
+			y: 30,
+			opacity: 0,
+			delay: 0.4 + (index * 0.1),
+			ease: "power2.out",
+
+			scrollTrigger: {
+				trigger: text,
+				start: "top 90%",
+				toggleActions: "play none none none"
+			}
+		});
+	});
 
 	function setupFadeAnimation() {
 		const fadeTargets = gsap.utils.toArray(".fade_contents");
@@ -642,55 +797,55 @@ fadeTexts.forEach((text, index) => {
 	// 実行
 	setupFaqAnimation();
 
-// 言語切り替え
-function translatePage(targetLang) {
-    // 翻訳したい要素（クラス名 'translatable' を持つ要素）を取得
-    const elementsToTranslate = document.querySelectorAll('.translatable');
-    const texts = Array.from(elementsToTranslate).map(el => el.textContent);
-    
-    // ページを日本語に戻す場合は翻訳は不要
-    if (targetLang === 'ja') {
-        // 日本語のオリジナルテキストに戻す処理を実装する必要があります。
-        // （ここでは省略しますが、実際にはオリジナルテキストをどこかに保存しておく必要があります）
-        console.log('日本語に戻す処理を実行');
-        return; 
-    }
+	// 言語切り替え
+	function translatePage(targetLang) {
+		// 翻訳したい要素（クラス名 'translatable' を持つ要素）を取得
+		const elementsToTranslate = document.querySelectorAll('.translatable');
+		const texts = Array.from(elementsToTranslate).map(el => el.textContent);
 
-    // 送信データ
-    const requestData = {
-        texts: texts,
-        target: targetLang
-    };
+		// ページを日本語に戻す場合は翻訳は不要
+		if (targetLang === 'ja') {
+			// 日本語のオリジナルテキストに戻す処理を実装する必要があります。
+			// （ここでは省略しますが、実際にはオリジナルテキストをどこかに保存しておく必要があります）
+			console.log('日本語に戻す処理を実行');
+			return;
+		}
 
-    // PHPエンドポイントへデータを送信
-    fetch('form_handler/server_endpoint_for_translation.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('サーバーエラー: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.translations) {
-            // 翻訳結果をページに反映
-            elementsToTranslate.forEach((el, index) => {
-                // 翻訳後のテキストで要素の内容を更新
-                el.textContent = data.translations[index].translatedText;
-            });
-            console.log('翻訳完了。');
-        } else if (data.error) {
-            alert('翻訳APIエラー: ' + data.error);
-        }
-    })
-    .catch(error => {
-        alert('通信または翻訳エラーが発生しました。詳細はコンソールを確認してください。');
-        console.error('Error:', error);
-    });
-}
+		// 送信データ
+		const requestData = {
+			texts: texts,
+			target: targetLang
+		};
+
+		// PHPエンドポイントへデータを送信
+		fetch('form_handler/server_endpoint_for_translation.php', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(requestData)
+		})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('サーバーエラー: ' + response.statusText);
+				}
+				return response.json();
+			})
+			.then(data => {
+				if (data.translations) {
+					// 翻訳結果をページに反映
+					elementsToTranslate.forEach((el, index) => {
+						// 翻訳後のテキストで要素の内容を更新
+						el.textContent = data.translations[index].translatedText;
+					});
+					console.log('翻訳完了。');
+				} else if (data.error) {
+					alert('翻訳APIエラー: ' + data.error);
+				}
+			})
+			.catch(error => {
+				alert('通信または翻訳エラーが発生しました。詳細はコンソールを確認してください。');
+				console.error('Error:', error);
+			});
+	}
 
 	// --------------------------------------------------
 	// 問い合わせフォームの画面切り替え// 
@@ -779,22 +934,22 @@ function translatePage(targetLang) {
 	// 				}
 
 	// 				contentHTML += `
-    //                 <tr>
-    //                     <th>${field.label}</th>
-    //                     <td>${value || '未入力'}</td>
-    //                 </tr>
-    //             `;
+	//                 <tr>
+	//                     <th>${field.label}</th>
+	//                     <td>${value || '未入力'}</td>
+	//                 </tr>
+	//             `;
 	// 			}
 	// 		});
 
 	// 		// プライバシーポリシーの同意チェック
 	// 		const agreeChecked = document.getElementById('agree').checked;
 	// 		contentHTML += `
-    //         <tr>
-    //             <th>プライバシーポリシー</th>
-    //             <td>${agreeChecked ? '同意済み' : '未同意'}</td>
-    //         </tr>
-    //     `;
+	//         <tr>
+	//             <th>プライバシーポリシー</th>
+	//             <td>${agreeChecked ? '同意済み' : '未同意'}</td>
+	//         </tr>
+	//     `;
 
 	// 		contentHTML += '</table>';
 	// 		confirmContent.innerHTML = contentHTML;

@@ -181,9 +181,6 @@
 	background-position: right bottom;
 	background-size: 33%;
 	margin-top: 80px;
-	/* @media (max-width: 768px) {
-		padding: 0 20px;
-	} */
 
 	@media (max-width: 768px) {
 		background-size: 100%;
@@ -227,7 +224,7 @@
 
 	.point_content {
 		display: grid;
-		row-gap: 24px;
+		row-gap: 1.5rem;
 	}
 
 	.title_red {

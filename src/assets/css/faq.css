@@ -55,19 +55,17 @@
 
 	/* --- アコーディオンの基本設定 --- */
 	.accordion {
-		/* アニメーションの時間をCSS変数として定義 */
+		/* アニメーションの時間 */
 		--_duration: 300ms;
-
 		background-color: #fff;
 		box-shadow: 0 2px 2px rgb(20 20 20 / 0.2);
-		/* box-shadow: 0 2px 2px rgba(20, 20, 20, 0.2); */
 
-		/* --- 開閉するコンテンツ部分（最新のCSS機能） --- */
+		/* --- 開閉するコンテンツ部分 --- */
 		&::details-content {
 			content-visibility: unset;
 			display: block grid;
 
-			/* アニメーションの設定：grid-template-rows が 300ms かけて変化する */
+			/* アニメーションの設定 */
 			@media (prefers-reduced-motion: no-preference) {
 				transition-duration: var(--_duration);
 				transition-property: grid-template-rows;
@@ -75,12 +73,12 @@
 		}
 
 		/* --- 閉じている時のコンテンツ --- */
-		/* :not([open]) で「open属性がない時（閉じている時）」を指定 */
+		/* open属性がない時（閉じている時） */
 		&:not([open])::details-content {
 			grid-template-rows: 0fr;
 		}
 
-		/* :not([open]) で「open属性がない時（閉じている時）」を指定 */
+		/*「open属性がない時（閉じている時）」 */
 		&[open] {
 			&::details-content {
 				grid-template-rows: 0fr;
@@ -93,23 +91,18 @@
 		}
 	}
 
-	/* --- アニメーションのためのラッパー --- */
 	.content_wrapper {
 		overflow: hidden;
 	}
 
 	/* --- 見出し（クリックする部分） --- */
 	.summary {
-		/* --- 色の変数を定義 --- */
 		--_foreground-default: var(--font-color)
 			/* 通常時の文字色 */
 			--_background-default: var(--white-color);
-		/* 通常時の背景色  */
 
 		--_background-interactive: var(--gray-color);
 		box-shadow: 0 2px 2px rgb(20 20 20 / 0.25);
-		/* box-shadow: 0 2px 2px rgba(20, 20, 20, 0.25); */
-
 
 		.question_wrap {
 			display: flex;
@@ -127,16 +120,13 @@
 		grid-template: ". icon" / 1fr max-content;
 		align-items: center;
 		padding-block: 1lh;
-		/* 上下の余白（1行分の高さ） */
 		padding-inline: 1rem;
-		/* 左右の余白 */
 
 		/* --- デザイン --- */
 		background-color: var(--_background-default);
 		color: var(--_foreground-default);
 		letter-spacing: 0.1em;
 		cursor: pointer;
-		/* カーソルを手の形に */
 
 		/* 色が変わる時のアニメーション設定 */
 		transition-duration: var(--_duration);
@@ -147,11 +137,8 @@
 		&::before {
 			content: "";
 			grid-area: icon;
-			/* グリッドの "icon" の位置に配置 */
 			inline-size: 1em;
-			/* 幅 */
 			border-block-end: 1px solid;
-			/* 下線（実際には横棒） */
 			writing-mode: initial;
 		}
 
@@ -159,26 +146,19 @@
 		&::after {
 			content: "";
 			grid-area: icon;
-			/* グリッドの "icon" の位置に配置 */
 			inline-size: 1em;
-			/* 幅 */
 			border-block-end: 1px solid;
-			/* 下線（横棒）を作り… */
 			rotate: 90deg;
-			/* …それを90度回転させて縦棒にする */
 		}
 
 		&:focus-visible {
 			background-color: var(--_background-interactive);
-			/* 少し暗い背景色に */
 			color: var(--_foreground-interactive);
 		}
 
-		/* --- マウスが乗った時（PCのみ） --- */
 		@media (any-hover: hover) {
 			&:hover {
 				background-color: var(--_background-interactive);
-				/* 少し暗い背景色に */
 				color: var(--font-color);
 			}
 		}
@@ -188,8 +168,6 @@
 	details[open]>summary.summary {
 		background-color: var(--white-color);
 		box-shadow: 0 2px 2px rgb(20 20 20 / 0.25);
-		/* box-shadow: 0 2px 2px rgba(20, 20, 20, 0.25); */
-
 	}
 
 	/* --- アコーディオンが開いている時の「＋」アイコン（縦棒を消す）--- */

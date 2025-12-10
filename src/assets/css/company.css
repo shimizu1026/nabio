@@ -82,7 +82,7 @@
 	.map {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 0.5rem;
 		padding-left: 1rem;
 
 		@media (max-width: 768px) {
@@ -123,7 +123,6 @@
 		width: 100%;
 		height: 100%;
 		background-color: rgb(20 20 20 / 0.3);
-		/* background-color: rgba(20, 20, 20, 0.3); */
 		z-index: 2;
 	}
 
@@ -193,11 +192,7 @@
 }
 
 .history_item {
-	/* display: flex; */
-	/* flex-direction: column;
-	align-items: center; */
-	/* position: relative; */
-	padding-top: 24px;
+	padding-top: 1.5rem;
 
 	&::after {
 		content: "";
@@ -215,11 +210,9 @@
 	&::before {
 		content: "";
 		position: absolute;
-		/* top: 55px; */
 		top: 10px;
 		/* 線と同じ高さ */
-		left: 8px;
-		/* left: 50%; */
+		left: 0.5rem;
 		/* 自分のエリアの中央に配置 */
 		transform: translate(-50%, -50%);
 		width: 1rem;
@@ -242,8 +235,7 @@
 		font-size: calc(20 * var(--rem-ratio));
 		line-height: 1.5;
 		letter-spacing: 0.05em;
-		margin-top: 24px;
-		/* margin-top: 64px; */
+		margin-top: 1.5rem;
 	}
 }
 
