@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let componentsLoadedCount = 0; // 読み込み完了したコンポーネントの数
 
     // 読み込み対象のプレースホルダー要素を定義
-    const headerContainer = document.getElementById('header_placeholder');
+    // const headerContainer = document.getElementById('header_placeholder');
     const contactContainer = document.getElementById('contact_placeholder');
     const footerContainer = document.getElementById('footer_placeholder');
 
     // 実際にHTML上に存在する要素だけをカウントする
     let totalComponents = 0;
-    if (headerContainer) totalComponents++;
+    // if (headerContainer) totalComponents++;
     if (contactContainer) totalComponents++;
     if (footerContainer) totalComponents++;
 
@@ -39,23 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // ----------------------------------------------------
     // 2. ヘッダーの読み込み処理
     // ----------------------------------------------------
-    if (headerContainer) {
-        fetch('components/header.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('ヘッダーファイルの読み込みに失敗しました: ' + response.statusText);
-                }
-                return response.text();
-            })
-            .then(html => {
-                headerContainer.innerHTML = html;
-                checkAllComponentsLoaded(); // 読み込み完了を通知
-            })
-            .catch(error => {
-                console.error('ヘッダーの読み込み中にエラーが発生しました:', error);
-                checkAllComponentsLoaded(); // エラーでもカウントは進める
-            });
-    } // プレースホルダーがない場合の 'else' は削除
+    // if (headerContainer) {
+    //     fetch('components/header.html')
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error('ヘッダーファイルの読み込みに失敗しました: ' + response.statusText);
+    //             }
+    //             return response.text();
+    //         })
+    //         .then(html => {
+    //             headerContainer.innerHTML = html;
+    //             checkAllComponentsLoaded(); // 読み込み完了を通知
+    //         })
+    //         .catch(error => {
+    //             console.error('ヘッダーの読み込み中にエラーが発生しました:', error);
+    //             checkAllComponentsLoaded(); // エラーでもカウントは進める
+    //         });
+    // } 
+	// プレースホルダーがない場合の 'else' は削除
 
     
     // ----------------------------------------------------

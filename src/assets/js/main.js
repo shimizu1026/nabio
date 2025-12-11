@@ -68,67 +68,65 @@ document.addEventListener('componentsLoaded', function () {
 	// 言語切り替えリンクのパス自動調整
 	// --------------------------------------------------
 function updateLanguageLinks() {
-    // 1. 環境判定: ローカル環境かどうかをチェック (変更なし)
-    const isLocal = window.location.protocol === 'file:' || 
-                    window.location.hostname === 'localhost' || 
-                    window.location.hostname === '127.0.0.1';
-    
-    const currentPath = decodeURIComponent(window.location.pathname); // 日本語URLも考慮
-    
-    // 2. ファイル名（products.htmlなど）を抽出
-    const fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1) || 'index.html';
+        // 1. 現在のパスを取得
+        const currentPath = window.location.pathname;
 
-    // 3. パス全体からファイル名を除去した部分（/exp/nabio/zh/）
-    let pathBase = currentPath.substring(0, currentPath.lastIndexOf(fileName)); 
-    
-    // -----------------------------------------------------------------------
-    // ★★★ 修正ポイント: 言語コードの確実な削除 ★★★
-    // -----------------------------------------------------------------------
+        // 2. ファイル名を抽出
+        //    例: products.html (トップページで末尾が/の場合は index.html とする)
+        let fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+        if (!fileName || currentPath.endsWith('/')) {
+            fileName = 'index.html';
+        }
 
-    // 4. ベースパスから現在の言語ディレクトリ（/en/ や /zh/）を確実に削除し、共通のベースディレクトリ（/exp/nabio/）を確保
-    
-    // 現在のパスの先頭のスラッシュを除いた部分
-    let pathNoRoot = pathBase.substring(1); 
-    
-    // 最初に現れる言語コードを削除する (この結果、exp/nabio/ が残る)
-    let commonDir = pathNoRoot.replace(/^(en\/|zh\/)/, ''); 
-    
-    // commonDir の末尾のスラッシュを処理（必ず / で終わらせる）
-    if (commonDir && !commonDir.endsWith('/')) {
-        commonDir += '/';
+        // 3. ディレクトリ部分（ファイル名を除いたパス）を抽出
+        let pathBase = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+        
+        // 正規表現の説明:
+        // (en|zh) -> en または zh
+        // \/$     -> パスの最後にあるスラッシュ
+        // これにより、 ".../zh/" や ".../en/" を "/" に置き換える
+        let commonDir = pathBase.replace(/(en|zh)\/$/, ''); 
+
+        // 4. 環境判定（file:// プロトコルの場合のみ相対パス対応が必要）
+        const isFileProtocol = window.location.protocol === 'file:';
+        
+        // リンクの先頭につけるプレフィックス
+        let pathPrefix = '';
+        if (!isFileProtocol) {
+
+            if (!commonDir.startsWith('/')) {
+                pathPrefix = '/';
+            }
+        } else {
+            // file:// の場合は絶対パス(/)を削除する
+            if (commonDir.startsWith('/')) {
+                commonDir = commonDir.substring(1);
+            }
+        }
+
+        // 5. リンク要素を取得
+        const linksJa = document.querySelectorAll('.lang_link_ja');
+        const linksEn = document.querySelectorAll('.lang_link_en');
+        const linksZh = document.querySelectorAll('.lang_link_zh');
+        
+        // 6. リンクを生成
+        // 日本語リンク (言語フォルダなし)
+        linksJa.forEach(link => {
+            link.href = `${pathPrefix}${commonDir}${fileName}`; 
+        });
+
+        // 英語リンク (enフォルダを追加)
+        linksEn.forEach(link => {
+            link.href = `${pathPrefix}${commonDir}en/${fileName}`;
+        });
+
+        // 中国語リンク (zhフォルダを追加)
+        linksZh.forEach(link => {
+            link.href = `${pathPrefix}${commonDir}zh/${fileName}`; 
+        });
     }
 
-    // 5. リンク要素を取得 (変更なし)
-    const linksJa = document.querySelectorAll('.lang_link_ja');
-    const linksEn = document.querySelectorAll('.lang_link_en');
-    const linksZh = document.querySelectorAll('.lang_link_zh');
-    
-    // 6. リンクを生成し、環境に応じてパスの先頭を調整
-    
-    // ルートのスラッシュの扱いを決定
-    const rootPrefix = isLocal ? '' : '/'; 
-    
-    // 日本語リンク (言語コードなし)
-    linksJa.forEach(link => {
-        // 例: /exp/nabio/products.html
-        link.href = `${rootPrefix}${commonDir}${fileName}`; 
-    });
-
-    // 英語リンク (en/)
-    linksEn.forEach(link => {
-        // 例: /exp/nabio/en/products.html
-        // commonDir が 'exp/nabio/' の形式のため、その後に 'en/' を追加
-        link.href = `${rootPrefix}${commonDir}en/${fileName}`;
-    });
-
-    // 中国語リンク (zh/)
-    linksZh.forEach(link => {
-        // 例: /exp/nabio/zh/products.html
-        link.href = `${rootPrefix}${commonDir}zh/${fileName}`; 
-    });
-}
-
-updateLanguageLinks();
+    updateLanguageLinks();
 // function updateLanguageLinks() {
 //     // 1. 現在のパスと、現在の言語フォルダ（あれば）を取得
 //     const currentPath = window.location.pathname; // 例: /en/contact.html
@@ -796,56 +794,6 @@ updateLanguageLinks();
 
 	// 実行
 	setupFaqAnimation();
-
-	// 言語切り替え
-	function translatePage(targetLang) {
-		// 翻訳したい要素（クラス名 'translatable' を持つ要素）を取得
-		const elementsToTranslate = document.querySelectorAll('.translatable');
-		const texts = Array.from(elementsToTranslate).map(el => el.textContent);
-
-		// ページを日本語に戻す場合は翻訳は不要
-		if (targetLang === 'ja') {
-			// 日本語のオリジナルテキストに戻す処理を実装する必要があります。
-			// （ここでは省略しますが、実際にはオリジナルテキストをどこかに保存しておく必要があります）
-			console.log('日本語に戻す処理を実行');
-			return;
-		}
-
-		// 送信データ
-		const requestData = {
-			texts: texts,
-			target: targetLang
-		};
-
-		// PHPエンドポイントへデータを送信
-		fetch('form_handler/server_endpoint_for_translation.php', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(requestData)
-		})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('サーバーエラー: ' + response.statusText);
-				}
-				return response.json();
-			})
-			.then(data => {
-				if (data.translations) {
-					// 翻訳結果をページに反映
-					elementsToTranslate.forEach((el, index) => {
-						// 翻訳後のテキストで要素の内容を更新
-						el.textContent = data.translations[index].translatedText;
-					});
-					console.log('翻訳完了。');
-				} else if (data.error) {
-					alert('翻訳APIエラー: ' + data.error);
-				}
-			})
-			.catch(error => {
-				alert('通信または翻訳エラーが発生しました。詳細はコンソールを確認してください。');
-				console.error('Error:', error);
-			});
-	}
 
 	// --------------------------------------------------
 	// 問い合わせフォームの画面切り替え// 
