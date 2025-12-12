@@ -67,120 +67,120 @@ document.addEventListener('componentsLoaded', function () {
 	// --------------------------------------------------
 	// 言語切り替えリンクのパス自動調整
 	// --------------------------------------------------
-function updateLanguageLinks() {
-        // 1. 現在のパスを取得
-        const currentPath = window.location.pathname;
+	function updateLanguageLinks() {
+		// 1. 現在のパスを取得
+		const currentPath = window.location.pathname;
 
-        // 2. ファイル名を抽出
-        //    例: products.html (トップページで末尾が/の場合は index.html とする)
-        let fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-        if (!fileName || currentPath.endsWith('/')) {
-            fileName = 'index.html';
-        }
+		// 2. ファイル名を抽出
+		//    例: products.html (トップページで末尾が/の場合は index.html とする)
+		let fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+		if (!fileName || currentPath.endsWith('/')) {
+			fileName = 'index.html';
+		}
 
-        // 3. ディレクトリ部分（ファイル名を除いたパス）を抽出
-        let pathBase = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-        
-        // 正規表現の説明:
-        // (en|zh) -> en または zh
-        // \/$     -> パスの最後にあるスラッシュ
-        // これにより、 ".../zh/" や ".../en/" を "/" に置き換える
-        let commonDir = pathBase.replace(/(en|zh)\/$/, ''); 
+		// 3. ディレクトリ部分（ファイル名を除いたパス）を抽出
+		let pathBase = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
 
-        // 4. 環境判定（file:// プロトコルの場合のみ相対パス対応が必要）
-        const isFileProtocol = window.location.protocol === 'file:';
-        
-        // リンクの先頭につけるプレフィックス
-        let pathPrefix = '';
-        if (!isFileProtocol) {
+		// 正規表現の説明:
+		// (en|zh) -> en または zh
+		// \/$     -> パスの最後にあるスラッシュ
+		// これにより、 ".../zh/" や ".../en/" を "/" に置き換える
+		let commonDir = pathBase.replace(/(en|zh)\/$/, '');
 
-            if (!commonDir.startsWith('/')) {
-                pathPrefix = '/';
-            }
-        } else {
-            // file:// の場合は絶対パス(/)を削除する
-            if (commonDir.startsWith('/')) {
-                commonDir = commonDir.substring(1);
-            }
-        }
+		// 4. 環境判定（file:// プロトコルの場合のみ相対パス対応が必要）
+		const isFileProtocol = window.location.protocol === 'file:';
 
-        // 5. リンク要素を取得
-        const linksJa = document.querySelectorAll('.lang_link_ja');
-        const linksEn = document.querySelectorAll('.lang_link_en');
-        const linksZh = document.querySelectorAll('.lang_link_zh');
-        
-        // 6. リンクを生成
-        // 日本語リンク (言語フォルダなし)
-        linksJa.forEach(link => {
-            link.href = `${pathPrefix}${commonDir}${fileName}`; 
-        });
+		// リンクの先頭につけるプレフィックス
+		let pathPrefix = '';
+		if (!isFileProtocol) {
 
-        // 英語リンク (enフォルダを追加)
-        linksEn.forEach(link => {
-            link.href = `${pathPrefix}${commonDir}en/${fileName}`;
-        });
+			if (!commonDir.startsWith('/')) {
+				pathPrefix = '/';
+			}
+		} else {
+			// file:// の場合は絶対パス(/)を削除する
+			if (commonDir.startsWith('/')) {
+				commonDir = commonDir.substring(1);
+			}
+		}
 
-        // 中国語リンク (zhフォルダを追加)
-        linksZh.forEach(link => {
-            link.href = `${pathPrefix}${commonDir}zh/${fileName}`; 
-        });
-    }
+		// 5. リンク要素を取得
+		const linksJa = document.querySelectorAll('.lang_link_ja');
+		const linksEn = document.querySelectorAll('.lang_link_en');
+		const linksZh = document.querySelectorAll('.lang_link_zh');
 
-    updateLanguageLinks();
-// function updateLanguageLinks() {
-//     // 1. 現在のパスと、現在の言語フォルダ（あれば）を取得
-//     const currentPath = window.location.pathname; // 例: /en/contact.html
-    
-//     // 現在の言語ディレクトリ（例: 'en', 'zh'）を抽出。見つからなければ null
-//     const langMatch = currentPath.match(/^\/(en|zh)\//); 
-//     const currentLangDir = langMatch ? langMatch[1] : ''; // 'en' または 'zh' または '' (日本語)
+		// 6. リンクを生成
+		// 日本語リンク (言語フォルダなし)
+		linksJa.forEach(link => {
+			link.href = `${pathPrefix}${commonDir}${fileName}`;
+		});
 
-//     // 2. 言語ディレクトリを除いた「ファイル名」を含むベースのパスを生成
-//     let basePath;
-//     if (currentLangDir) {
-//         // 現在のパスから /en/ や /zh/ を取り除いた部分が basePath になる
-//         // 例: /en/contact.html -> contact.html
-//         basePath = currentPath.substring(`/${currentLangDir}/`.length);
-//     } else {
-//         // 日本語ページの場合、パス全体が basePath (例: contact.html)
-//         // ただし、トップページ(/)の場合は空になるため調整が必要
-//         basePath = currentPath.substring(1); // 先頭の '/' を除く
-//     }
-    
-//     // トップページ(/)の場合の調整: basePath が空になるため 'index.html' とする
-//     if (basePath === '') {
-//         basePath = 'index.html'; 
-//     }
+		// 英語リンク (enフォルダを追加)
+		linksEn.forEach(link => {
+			link.href = `${pathPrefix}${commonDir}en/${fileName}`;
+		});
 
-//     // --- リンクの組み立てと上書き ---
-    
-//     // 3. 各言語のリンク要素を取得 (ここは変更なし)
-//     const linksJa = document.querySelectorAll('.lang_link_ja');
-//     const linksEn = document.querySelectorAll('.lang_link_en');
-//     const linksZh = document.querySelectorAll('.lang_link_zh');
-    
-//     // 4. 正しいパスを生成してhrefを上書き
-    
-//     // 日本語リンク (ルートに戻る)
-//     linksJa.forEach(link => {
-//         // 日本語ページはルートからの相対パス
-//         link.href = `/${basePath}`; // 例: /contact.html
-//     });
+		// 中国語リンク (zhフォルダを追加)
+		linksZh.forEach(link => {
+			link.href = `${pathPrefix}${commonDir}zh/${fileName}`;
+		});
+	}
 
-//     // 英語リンク
-//     linksEn.forEach(link => {
-//         // 英語ページは /en/ フォルダに入れる
-//         link.href = `/en/${basePath}`; // 例: /en/contact.html
-//     });
+	updateLanguageLinks();
+	// function updateLanguageLinks() {
+	//     // 1. 現在のパスと、現在の言語フォルダ（あれば）を取得
+	//     const currentPath = window.location.pathname; // 例: /en/contact.html
 
-//     // 中国語リンク
-//     linksZh.forEach(link => {
-//         // 中国語ページは /zh/ フォルダに入れる
-//         link.href = `/zh/${basePath}`; // 例: /zh/contact.html
-//     });
-// }
+	//     // 現在の言語ディレクトリ（例: 'en', 'zh'）を抽出。見つからなければ null
+	//     const langMatch = currentPath.match(/^\/(en|zh)\//); 
+	//     const currentLangDir = langMatch ? langMatch[1] : ''; // 'en' または 'zh' または '' (日本語)
 
-// updateLanguageLinks();
+	//     // 2. 言語ディレクトリを除いた「ファイル名」を含むベースのパスを生成
+	//     let basePath;
+	//     if (currentLangDir) {
+	//         // 現在のパスから /en/ や /zh/ を取り除いた部分が basePath になる
+	//         // 例: /en/contact.html -> contact.html
+	//         basePath = currentPath.substring(`/${currentLangDir}/`.length);
+	//     } else {
+	//         // 日本語ページの場合、パス全体が basePath (例: contact.html)
+	//         // ただし、トップページ(/)の場合は空になるため調整が必要
+	//         basePath = currentPath.substring(1); // 先頭の '/' を除く
+	//     }
+
+	//     // トップページ(/)の場合の調整: basePath が空になるため 'index.html' とする
+	//     if (basePath === '') {
+	//         basePath = 'index.html'; 
+	//     }
+
+	//     // --- リンクの組み立てと上書き ---
+
+	//     // 3. 各言語のリンク要素を取得 (ここは変更なし)
+	//     const linksJa = document.querySelectorAll('.lang_link_ja');
+	//     const linksEn = document.querySelectorAll('.lang_link_en');
+	//     const linksZh = document.querySelectorAll('.lang_link_zh');
+
+	//     // 4. 正しいパスを生成してhrefを上書き
+
+	//     // 日本語リンク (ルートに戻る)
+	//     linksJa.forEach(link => {
+	//         // 日本語ページはルートからの相対パス
+	//         link.href = `/${basePath}`; // 例: /contact.html
+	//     });
+
+	//     // 英語リンク
+	//     linksEn.forEach(link => {
+	//         // 英語ページは /en/ フォルダに入れる
+	//         link.href = `/en/${basePath}`; // 例: /en/contact.html
+	//     });
+
+	//     // 中国語リンク
+	//     linksZh.forEach(link => {
+	//         // 中国語ページは /zh/ フォルダに入れる
+	//         link.href = `/zh/${basePath}`; // 例: /zh/contact.html
+	//     });
+	// }
+
+	// updateLanguageLinks();
 	// function updateLanguageLinks() {
 	// 	// 1. 現在のパスを取得 (例: "/contact.html" や "/en/contact.html")
 	// 	const currentPath = window.location.pathname;
@@ -264,6 +264,7 @@ function updateLanguageLinks() {
 	const contactArea = document.querySelector(".hamburger_contact_area");
 	const topBar = document.querySelector(".hamburger_top_bar");
 	const body = document.body
+	const overlay = document.querySelector(".overlay")
 
 	const menuTimeline = gsap.timeline({ paused: true });
 
@@ -686,10 +687,9 @@ function updateLanguageLinks() {
 				duration: 0.5,
 				ease: "power2.out"
 			},
-			// AとBを同時に開始したい場合は '<' を使用します。
-			// Contactの文字がすべて出終わってから少し遅れて開始したい場合は '>-0.2' などを使用します。
-			// ここでは、Contactのアニメーション中に徐々にフェードインするように調整します。
-			0.3// Contactのアニメーション開始から0.1秒後に開始
+			// AとBを同時に開始したい場合は '<' を使用
+			// Contactの文字がすべて出終わってから少し遅れて開始したい場合は '>-0.2' などを使用
+			0.3
 		);
 	}
 
@@ -768,14 +768,19 @@ function updateLanguageLinks() {
 
 	// --------------------------------------------------
 	// TOP FAQアニメーション// --------------------------------------------------
-	function setupFaqAnimation() {
-		// アニメーション対象のラッパー要素をすべて取得
-		const faqWrappers = document.querySelectorAll(".faq_list .faq_item_wrap");
+	function setupFeaturesAnimation() {
 
-		if (faqWrappers.length === 0) return;
+		const featuresWrappers = document.querySelectorAll(".features_list .features_item_wrap");
 
-		gsap.from(faqWrappers, {
-			// 【初期状態】
+		if (featuresWrappers.length === 0) return;
+
+		const middleItem = featuresWrappers[1]; // 2番目の要素を取得
+
+		gsap.set(middleItem, {
+			y: 40
+		});
+
+		gsap.from(featuresWrappers, {
 			scale: 0.9,
 			opacity: 0,
 			y: 20,
@@ -784,194 +789,15 @@ function updateLanguageLinks() {
 			stagger: 0.3,
 
 			scrollTrigger: {
-				trigger: ".faq_list",
+				trigger: ".features_list",
 				start: "top 80%",
 				toggleActions: "play none none none", // 一度だけ再生
-				// markers: true,     // デバッグ用マーカーを表示（確認後削除）
+				//markers: true,      デバッグ用マーカーを表示（確認後削除）
 			}
 		});
 	}
 
 	// 実行
-	setupFaqAnimation();
-
-	// --------------------------------------------------
-	// 問い合わせフォームの画面切り替え// 
-	// --------------------------------------------------
-
-	// const form = document.querySelector('.contact_form');
-	// if (form) {
-	// 	const inputSection = form.parentElement.parentElement; // .form_wrapperを含む親要素 (.inner_contact)
-	// 	const confirmSection = document.getElementById('confirm');
-	// 	const completeSection = document.getElementById('complete');
-	// 	const confirmContent = document.getElementById('confirm_content');
-	// 	const backButton = document.getElementById('back_btn');
-	// 	const sendButton = document.getElementById('send_btn');
-
-	// 	// 初期表示設定
-	// 	// 確認画面と完了画面を非表示にする
-	// 	confirmSection.style.display = 'none';
-	// 	completeSection.style.display = 'none';
-
-	// 	// フォームの送信（入力内容の確認ボタン）
-	// 	form.addEventListener('submit', (event) => {
-	// 		event.preventDefault(); // フォームの送信をキャンセル
-
-	// 		// 1. バリデーションチェックをここで行う (ここでは省略)
-	// 		if (!validateForm()) {
-	// 			return; // バリデーションに失敗したら処理を終了
-	// 		}
-
-	// 		// 2. 入力内容を確認画面に反映
-	// 		displayConfirmContent();
-
-	// 		// 3. 画面を切り替える
-	// 		inputSection.style.display = 'none';  // 入力画面を非表示
-	// 		confirmSection.style.display = 'block'; // 確認画面を表示
-
-	// 		// ヘッダーやパンくずリストなどがある場合、ページトップにスクロール
-	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
-	// 	});
-
-	// 	// 戻るボタンの処理
-	// 	backButton.addEventListener('click', () => {
-	// 		// 画面を切り替える
-	// 		confirmSection.style.display = 'none'; // 確認画面を非表示
-	// 		inputSection.style.display = 'block';  // 入力画面を表示
-
-	// 		// ページトップにスクロール
-	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
-	// 	});
-
-	// 	// 送信するボタンの処理 (実際にはサーバーサイドの処理が必要)
-	// 	sendButton.addEventListener('click', () => {
-	// 		// 実際にはここでサーバーへデータを送信する処理 (fetch/XMLHttpRequestなど) を実行
-
-	// 		// サーバーサイドの処理が成功したと仮定し、完了画面へ移行
-
-	// 		// 画面を切り替える
-	// 		confirmSection.style.display = 'none'; // 確認画面を非表示
-	// 		completeSection.style.display = 'block'; // 完了画面を表示
-
-	// 		// ページトップにスクロール
-	// 		window.scrollTo({ top: 0, behavior: 'smooth' });
-	// 	});
-
-	// 	// 入力内容を整形して確認画面に表示する関数
-	// 	function displayConfirmContent() {
-	// 		let contentHTML = '<table>';
-
-	// 		// フォーム内の各入力フィールドをループして値を取得
-	// 		const fields = [
-	// 			{ id: 'name', label: '氏名' },
-	// 			{ id: 'company', label: '会社名' },
-	// 			{ id: 'address', label: '住所' },
-	// 			{ id: 'tel', label: '電話番号' },
-	// 			{ id: 'email', label: 'メールアドレス' },
-	// 			{ id: 'message', label: 'お問い合わせ内容' },
-	// 		];
-
-	// 		fields.forEach(field => {
-	// 			const element = document.getElementById(field.id);
-	// 			if (element) {
-	// 				let value = element.value;
-
-	// 				// textareaの改行をHTMLの<br>に変換
-	// 				if (field.id === 'message') {
-	// 					value = value.replace(/\n/g, '<br>');
-	// 				}
-
-	// 				contentHTML += `
-	//                 <tr>
-	//                     <th>${field.label}</th>
-	//                     <td>${value || '未入力'}</td>
-	//                 </tr>
-	//             `;
-	// 			}
-	// 		});
-
-	// 		// プライバシーポリシーの同意チェック
-	// 		const agreeChecked = document.getElementById('agree').checked;
-	// 		contentHTML += `
-	//         <tr>
-	//             <th>プライバシーポリシー</th>
-	//             <td>${agreeChecked ? '同意済み' : '未同意'}</td>
-	//         </tr>
-	//     `;
-
-	// 		contentHTML += '</table>';
-	// 		confirmContent.innerHTML = contentHTML;
-	// 	}
-
-	// 	// 簡易バリデーション (必須項目のみ)
-	// 	function validateForm() {
-	// 		let isValid = true;
-	// 		const requiredFields = ['name', 'tel', 'email', 'message'];
-
-	// 		requiredFields.forEach(id => {
-	// 			const input = document.getElementById(id);
-	// 			const errorElement = document.getElementById(id + '_error');
-	// 			if (input.value.trim() === '') {
-	// 				errorElement.textContent = '必須項目です。';
-	// 				input.style.borderColor = 'red';
-	// 				isValid = false;
-	// 			} else {
-	// 				errorElement.textContent = '';
-	// 				input.style.borderColor = '';
-	// 			}
-	// 		});
-
-	// 		const agreeCheck = document.getElementById('agree');
-	// 		const agreeError = document.getElementById('agree_error');
-	// 		if (!agreeCheck.checked) {
-	// 			agreeError.textContent = '同意が必要です。';
-	// 			isValid = false;
-	// 		} else {
-	// 			agreeError.textContent = '';
-	// 		}
-
-	// 		return isValid;
-	// 	}
-
-	// 	// --------------------------------------------------
-	// 	// フォーム送信処理 // --------------------------------------------------
-	// 	const contactForm = document.getElementById('contact_form');
-	// 	const phpEndpoint = 'form_handler/send_mail.php'; // ★ PHPファイルへのアクセスパス
-
-	// 	if (contactForm) {
-	// 		contactForm.addEventListener('submit', async function (e) {
-	// 			e.preventDefault();
-
-	// 			// 送信ボタンを無効化して多重送信を防ぐ
-	// 			const submitButton = e.submitter;
-	// 			submitButton.disabled = true;
-
-	// 			const formData = new FormData(contactForm);
-
-	// 			try {
-	// 				const response = await fetch(phpEndpoint, {
-	// 					method: 'POST',
-	// 					body: formData,
-	// 				});
-
-	// 				const result = await response.json();
-
-	// 				if (response.ok && result.success) {
-	// 					alert('お問い合わせを正常に送信しました。');
-	// 					contactForm.reset();
-	// 				} else {
-	// 					alert('送信に失敗しました。');
-	// 					console.error('サーバーエラー:', result.message);
-	// 				}
-	// 			} catch (error) {
-	// 				alert('通信エラーが発生しました。ネットワークを確認してください。');
-	// 				console.error('通信エラー:', error);
-	// 			} finally {
-	// 				// 送信ボタンを元に戻す
-	// 				submitButton.disabled = false;
-	// 			}
-	// 		});
-	// 	}
-	// }
+	setupFeaturesAnimation();
 });
 

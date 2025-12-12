@@ -70,7 +70,7 @@
 		.inner {
 			display: flex;
 			align-items: flex-end;
-			line-height: 1.8;
+			line-height: 1.5;
 
 			@media (max-width: 768px) {
 				flex-direction: column;
@@ -94,7 +94,7 @@
 			background-image: url(../images/out_link.svg);
 			display: block;
 			background-repeat: no-repeat;
-			width: 20px;
+			width: 24px;
 			height: 20px;
 		}
 	}
