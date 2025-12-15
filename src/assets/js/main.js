@@ -799,5 +799,6 @@ document.addEventListener('componentsLoaded', function () {
 
 	// 実行
 	setupFeaturesAnimation();
+	
 });
 
