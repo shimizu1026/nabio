@@ -16,6 +16,13 @@
 	max-width: var(--main-width);
 	margin-inline: auto;
 	padding-top: 144px;
+	padding-right: 20px;
+	padding-left: 20px;
+
+	@media (max-width: 768px) {
+		padding-top: 40px;
+
+	}
 
 	/* &:first-child {
 		padding-top: 0;
@@ -47,6 +54,7 @@
 		width: 30px;
 		height: 30px;
 		display: block;
+	
 	}
 }
 
@@ -190,10 +198,8 @@
 .point_inner {
 	max-width: var(--main-width);
 	margin-inline: auto;
+	padding: 0 1rem;
 
-	@media (max-width: 768px) {
-		padding: 0 1rem;
-	}
 }
 
 .section_point {
@@ -243,4 +249,26 @@
 		letter-spacing: 0.05em;
 		line-height: 1.5;
 	}
+}
+
+.lang_en_page {
+	.top_link {
+		align-items: flex-start;
+
+		&::before {
+
+			@media (max-width: 768px) {
+				width: 60px;
+				height: 60px;
+			}
+		}
+	}
+
+	.product_content {
+    & dl {
+			dt, dd {
+					width: 35%;
+			}
+	}
+}
 }

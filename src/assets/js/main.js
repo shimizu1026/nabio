@@ -64,158 +64,6 @@ document.addEventListener('componentsLoaded', function () {
 	}
 	requestAnimationFrame(raf);
 
-	// --------------------------------------------------
-	// 言語切り替えリンクのパス自動調整
-	// --------------------------------------------------
-	function updateLanguageLinks() {
-		// 1. 現在のパスを取得
-		const currentPath = window.location.pathname;
-
-		// 2. ファイル名を抽出
-		//    例: products.html (トップページで末尾が/の場合は index.html とする)
-		let fileName = currentPath.substring(currentPath.lastIndexOf('/') + 1);
-		if (!fileName || currentPath.endsWith('/')) {
-			fileName = 'index.html';
-		}
-
-		// 3. ディレクトリ部分（ファイル名を除いたパス）を抽出
-		let pathBase = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-
-		// 正規表現の説明:
-		// (en|zh) -> en または zh
-		// \/$     -> パスの最後にあるスラッシュ
-		// これにより、 ".../zh/" や ".../en/" を "/" に置き換える
-		let commonDir = pathBase.replace(/(en|zh)\/$/, '');
-
-		// 4. 環境判定（file:// プロトコルの場合のみ相対パス対応が必要）
-		const isFileProtocol = window.location.protocol === 'file:';
-
-		// リンクの先頭につけるプレフィックス
-		let pathPrefix = '';
-		if (!isFileProtocol) {
-
-			if (!commonDir.startsWith('/')) {
-				pathPrefix = '/';
-			}
-		} else {
-			// file:// の場合は絶対パス(/)を削除する
-			if (commonDir.startsWith('/')) {
-				commonDir = commonDir.substring(1);
-			}
-		}
-
-		// 5. リンク要素を取得
-		const linksJa = document.querySelectorAll('.lang_link_ja');
-		const linksEn = document.querySelectorAll('.lang_link_en');
-		const linksZh = document.querySelectorAll('.lang_link_zh');
-
-		// 6. リンクを生成
-		// 日本語リンク (言語フォルダなし)
-		linksJa.forEach(link => {
-			link.href = `${pathPrefix}${commonDir}${fileName}`;
-		});
-
-		// 英語リンク (enフォルダを追加)
-		linksEn.forEach(link => {
-			link.href = `${pathPrefix}${commonDir}en/${fileName}`;
-		});
-
-		// 中国語リンク (zhフォルダを追加)
-		linksZh.forEach(link => {
-			link.href = `${pathPrefix}${commonDir}zh/${fileName}`;
-		});
-	}
-
-	updateLanguageLinks();
-	// function updateLanguageLinks() {
-	//     // 1. 現在のパスと、現在の言語フォルダ（あれば）を取得
-	//     const currentPath = window.location.pathname; // 例: /en/contact.html
-
-	//     // 現在の言語ディレクトリ（例: 'en', 'zh'）を抽出。見つからなければ null
-	//     const langMatch = currentPath.match(/^\/(en|zh)\//); 
-	//     const currentLangDir = langMatch ? langMatch[1] : ''; // 'en' または 'zh' または '' (日本語)
-
-	//     // 2. 言語ディレクトリを除いた「ファイル名」を含むベースのパスを生成
-	//     let basePath;
-	//     if (currentLangDir) {
-	//         // 現在のパスから /en/ や /zh/ を取り除いた部分が basePath になる
-	//         // 例: /en/contact.html -> contact.html
-	//         basePath = currentPath.substring(`/${currentLangDir}/`.length);
-	//     } else {
-	//         // 日本語ページの場合、パス全体が basePath (例: contact.html)
-	//         // ただし、トップページ(/)の場合は空になるため調整が必要
-	//         basePath = currentPath.substring(1); // 先頭の '/' を除く
-	//     }
-
-	//     // トップページ(/)の場合の調整: basePath が空になるため 'index.html' とする
-	//     if (basePath === '') {
-	//         basePath = 'index.html'; 
-	//     }
-
-	//     // --- リンクの組み立てと上書き ---
-
-	//     // 3. 各言語のリンク要素を取得 (ここは変更なし)
-	//     const linksJa = document.querySelectorAll('.lang_link_ja');
-	//     const linksEn = document.querySelectorAll('.lang_link_en');
-	//     const linksZh = document.querySelectorAll('.lang_link_zh');
-
-	//     // 4. 正しいパスを生成してhrefを上書き
-
-	//     // 日本語リンク (ルートに戻る)
-	//     linksJa.forEach(link => {
-	//         // 日本語ページはルートからの相対パス
-	//         link.href = `/${basePath}`; // 例: /contact.html
-	//     });
-
-	//     // 英語リンク
-	//     linksEn.forEach(link => {
-	//         // 英語ページは /en/ フォルダに入れる
-	//         link.href = `/en/${basePath}`; // 例: /en/contact.html
-	//     });
-
-	//     // 中国語リンク
-	//     linksZh.forEach(link => {
-	//         // 中国語ページは /zh/ フォルダに入れる
-	//         link.href = `/zh/${basePath}`; // 例: /zh/contact.html
-	//     });
-	// }
-
-	// updateLanguageLinks();
-	// function updateLanguageLinks() {
-	// 	// 1. 現在のパスを取得 (例: "/contact.html" や "/en/contact.html")
-	// 	const currentPath = window.location.pathname;
-
-	// 	// 2. パスから言語ディレクトリ(/en/ や /zh/)を除去して「ベースのパス」を作る
-	// 	// 正規表現: 行頭の "/en/" または "/zh/" を "/" に置換する
-	// 	let basePath = currentPath.replace(/^\/(en|zh)\//, '/');
-
-	// 	// ※もしルート(トップページ)にいて "/" で終わっている場合は index.html とみなす調整（必要に応じて）
-	// 	// if (basePath === '/') basePath = '/index.html';
-
-	// 	// 3. 各言語のリンク要素を取得
-	// 	const linksJa = document.querySelectorAll('.lang_link_ja');
-	// 	const linksEn = document.querySelectorAll('.lang_link_en');
-	// 	const linksZh = document.querySelectorAll('.lang_link_zh');
-
-	// 	// 4. 正しいパスを生成してhrefを上書き
-	// 	// 日本語: ベースパスそのまま (例: /contact.html)
-	// 	linksJa.forEach(link => {
-	// 		link.href = basePath;
-	// 	});
-
-	// 	// 英語: /en + ベースパス (例: /en/contact.html)
-	// 	linksEn.forEach(link => {
-	// 		link.href = '/en' + (basePath === '/' ? '/' : basePath);
-	// 	});
-
-	// 	// 中国語: /zh + ベースパス (例: /zh/contact.html)
-	// 	linksZh.forEach(link => {
-	// 		link.href = '/zh' + (basePath === '/' ? '/' : basePath);
-	// 	});
-	// }
-
-	// // 関数を実行
-	// updateLanguageLinks();
 
 	// --------------------------------------------------
 	// オープニング
@@ -612,17 +460,30 @@ document.addEventListener('componentsLoaded', function () {
 
 	if (section && innerProduct && steps.length > 0) {
 		// ★初期設定: 1枚目の画像だけを表示しておく
-		gsap.set(steps[0], { opacity: 1 });
+		// gsap.set(steps[0], { opacity: 1 });
+		gsap.set(steps, { opacity: 0, visibility: "hidden" });
+    gsap.set(steps[0], { opacity: 1, visibility: "visible" });
 
 		// タイムラインの作成
+		// let tl = gsap.timeline({
+		// 	scrollTrigger: {
+		// 		trigger: section,
+		// 		pin: innerProduct,
+		// 		start: "top top",
+		// 		end: "+=150%",// スクロール量（画像の枚数に応じて調整。例: 200% = 2画面分スクロール）
+		// 		scrub: 0.5,// スクロールとアニメーションを連動（数値で慣性を調整）
+		// 		anticipatePin: 1// ピン留めのガタつき防止
+		// 	}
+		// });
 		let tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: section,
 				pin: innerProduct,
-				start: "top top",
-				end: "+=150%",// スクロール量（画像の枚数に応じて調整。例: 200% = 2画面分スクロール）
-				scrub: 0.5,// スクロールとアニメーションを連動（数値で慣性を調整）
-				anticipatePin: 1// ピン留めのガタつき防止
+				start: window.innerWidth <= 500 ? "top 5%" : "top top", 
+				end: "+=150%", 
+				scrub: 0.5,
+				invalidateOnRefresh: true,
+				anticipatePin: 1,
 			}
 		});
 
@@ -633,10 +494,9 @@ document.addEventListener('componentsLoaded', function () {
 			const prevStep = steps[index - 1];
 
 			let holdDuration = (index === 1) ? 1 : 0.5;
-			// let holdDuration = (index === 1) ? 2.5 : 1;
 			tl.to({}, { duration: holdDuration });
-			tl.to(prevStep, { opacity: 0, duration: 0.01 })
-				.to(step, { opacity: 1, duration: 0.01 }, "<");
+			tl.to(prevStep, { opacity: 0, visibility: "hidden", duration: 0.2 })
+			.to(step, { opacity: 1, visibility: "visible", duration: 0.2 }, "<");
 			tl.to({}, { duration: 0.5 });
 
 		});

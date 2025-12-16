@@ -17,6 +17,7 @@
 		padding-bottom: 120px;
 
 		@media (max-width: 768px) {
+			padding-top: 40px;
 			padding-right: 20px;
 			padding-left: 20px;
 		}
@@ -37,11 +38,12 @@
 
 }
 
-
-
 .company_table {
 	width: 100%;
 	flex: 1.5;
+	@media (max-width: 768px) {
+		padding-top: 40px;
+	}
 }
 
 .company_table_row {
@@ -111,8 +113,9 @@
 	z-index: -1;
 
 	@media (max-width: 768px) {
-		background-position: top;
+		background-image: url(../images/company_bg_sp.webp);
 		padding: 0 1rem;
+		height: 100vh;
 	}
 
 	&::before {

@@ -560,7 +560,8 @@ body {
 	transform: translateY(170px);
 
 	@media (max-width: 768px) {
-		padding: 40px;
+		transform: translateY(100px);
+		padding: 32px;
 	}
 
 	.title {
@@ -675,7 +676,7 @@ body {
 		max-width: var(--main-width);
 		margin-inline: auto;
 
-		@media (max-width: 768px) {
+		@media (max-width: 1024px) {
 			padding: 0 20px;
 		}
 
@@ -717,7 +718,7 @@ body {
 			justify-content: space-between;
 			column-gap: 1rem;
 
-			@media (max-width: 768px) {
+			@media (max-width: 500px) {
 				flex-direction: column;
 				row-gap: 32px;
 			}

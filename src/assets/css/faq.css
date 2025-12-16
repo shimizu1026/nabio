@@ -48,9 +48,17 @@
 	margin-inline: auto;
 	padding-top: 80px;
 
+	@media (max-width: 768px) {
+		padding-top: 40px;
+	}
+
 	.accordion_wrapper {
 		display: grid;
-		gap: 40px;
+		row-gap: 40px;
+			@media (max-width: 768px) {
+				padding-right: 20px;
+				padding-left: 20px;
+	}
 	}
 
 	/* --- アコーディオンの基本設定 --- */
