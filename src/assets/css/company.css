@@ -8,7 +8,6 @@
 	}
 }
 
-
 .contents {
 	.section_outline {
 		max-width: var(--main-width);
@@ -26,6 +25,9 @@
 			display: flex;
 			justify-content: space-between;
 
+			@media (max-width: 1200px) {
+				padding: 0 1.25rem;
+			}
 			@media (max-width: 768px) {
 				flex-direction: column;
 			}
@@ -35,7 +37,6 @@
 			}
 		}
 	}
-
 }
 
 .company_table {
@@ -63,7 +64,6 @@
 			border-bottom: none;
 			padding-bottom: 0;
 		}
-
 	}
 
 	dd {
@@ -94,24 +94,54 @@
 	}
 
 	.map {
+
+		&::after {
+			-webkit-mask-image: url(../images/out_link.svg);
+			mask-image: url(../images/out_link.svg);
+		}
+	}
+
+	.agency {
+
+		&::after {
+			-webkit-mask-image: url(../images/icon_file.svg);
+			mask-image: url(../images/icon_file.svg);
+		}
+	}
+	.map, .agency {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
+		font-size: calc(14 * var(--rem-ratio));
 		padding-left: 1rem;
+		text-decoration: underline;
+    text-underline-offset: 4px;
 
 		@media (max-width: 768px) {
 			padding-left: 0;
 		}
-
 		&::after {
 			content: "";
-			background-image: url(../images/out_link.svg);
 			display: block;
 			background-repeat: no-repeat;
-			width: 24px;
-			height: 20px;
+			width: 1rem;
+			height: 1rem;
+			background-color: currentColor;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			-webkit-mask-size: contain;
+			mask-size: contain;
+			&:hover::after {
+				background-color: var(--accent-color);
+			}
 		}
 	}
+}
+
+.hover_color:hover {
+	color: var(--accent-color);
+	transition: var(--hover);
+	cursor: pointer;
 }
 
 .section_business {
@@ -123,10 +153,11 @@
 	background-size: cover;
 	position: relative;
 	z-index: -1;
-
+	@media (max-width: 1200px) {
+		padding: 0 1.25rem;
+	}
 	@media (max-width: 768px) {
 		background-image: url(../images/company_bg_sp.webp);
-		padding: 0 1rem;
 		height: 100vh;
 	}
 
@@ -180,6 +211,12 @@
 			padding-left: 20px;
 		}
 	}
+}
+
+.inner_history {
+	@media (max-width: 1200px) {
+		padding-left: 1.25rem;
+}
 }
 
 .history_slider_container {
@@ -303,9 +340,8 @@
 	max-width: var(--main-width);
 	margin-inline: auto;
 	width: 100%;
-
-	@media (max-width: 768px) {
-		padding: 0 20px;
+	@media (max-width: 1200px) {
+		padding: 0 1.25rem;
 	}
 
 	.address {

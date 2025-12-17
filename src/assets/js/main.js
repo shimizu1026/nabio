@@ -106,15 +106,12 @@ document.addEventListener('componentsLoaded', function () {
 	const header = document.querySelector(".header");
 	const menu = document.querySelector(".hamburger_contents");
 	const hamburgerButton = document.querySelector(".hamburger_button");
-
-	const menuList = document.querySelector(".hamburger_list");
 	const menuItems = document.querySelectorAll(".hamburger_item");
 	const contactArea = document.querySelector(".hamburger_contact_area");
 	const topBar = document.querySelector(".hamburger_top_bar");
-	const body = document.body
-	const overlay = document.querySelector(".overlay")
-
+	const overlay = document.querySelector(".header_overlay")
 	const menuTimeline = gsap.timeline({ paused: true });
+	const CLOSE_TIME_SCALE = 1.4; 
 
 	// メニューが開く動作
 	menuTimeline.fromTo(menu,
@@ -157,31 +154,66 @@ document.addEventListener('componentsLoaded', function () {
 		0.6
 	);
 
-	// --- クリックイベントリスナー ---
-	hamburgerButton.addEventListener("click", () => {
+	// --- 開閉用の共通関数 ---
+	function openMenu() {
+		hamburgerButton.classList.add("MenuIsActive");
+		header.classList.add("MenuIsActive");
+		menu.classList.add("MenuIsOpen");
+		lenis.stop();
+		menuTimeline.timeScale(1).play();
+	}
+
+	function closeMenu() {
+		if (!menu.classList.contains("MenuIsOpen")) return;
+
+		hamburgerButton.classList.remove("MenuIsActive");
+		header.classList.remove("MenuIsActive");
+		lenis.start();
+
+		// 逆再生 (閉じるアニメーション) が完了したときに実行
+		menuTimeline.timeScale(CLOSE_TIME_SCALE).reverse().eventCallback("onReverseComplete", function () {
+			menu.classList.remove("MenuIsOpen");
+		});
+	}
+
+	// --- クリックイベントリスナー（ハンバーガーアイコン） ---
+	hamburgerButton.addEventListener("click", (event) => {
+		event.stopPropagation(); // 外側クリック判定にイベントが届かないようにする
+
 		const isMenuOpen = menu.classList.contains("MenuIsOpen");
-		hamburgerButton.classList.toggle("MenuIsActive");
-
 		if (isMenuOpen) {
-			// --- 閉じる処理 (逆再生) ---
-			hamburgerButton.classList.remove("MenuIsActive");
-			header.classList.remove("MenuIsActive");
-			lenis.start();
-
-			// 逆再生 (閉じるアニメーション) が完了したときに実行
-			menuTimeline.timeScale(1).reverse().eventCallback("onReverseComplete", function () {
-				menu.classList.remove("MenuIsOpen");
-			});
-
+			// --- 閉じる処理 ---
+			closeMenu();
 		} else {
-			// --- 開く処理 (再生) ---
-			hamburgerButton.classList.add("MenuIsActive");
-			header.classList.add("MenuIsActive");
-			menu.classList.add("MenuIsOpen");
-			lenis.stop();
-			menuTimeline.timeScale(1).play();
+			// --- 開く処理 ---
+			openMenu();
 		}
 	});
+
+	// --- クリックイベントリスナー（オーバーレイ） ---
+	if (overlay) {
+		overlay.addEventListener("click", (event) => {
+			event.stopPropagation();
+			closeMenu();
+		});
+	}
+
+	// --- クリックイベントリスナー（画面のどこかをクリックしたとき） ---
+	document.addEventListener("click", (event) => {
+		// メニューが開いていないときは何もしない
+		if (!menu.classList.contains("MenuIsOpen")) return;
+
+		const target = event.target;
+
+		// ハンバーガー内をクリックした場合は閉じない
+		if (menu.contains(target) || hamburgerButton.contains(target)) {
+			return;
+		}
+
+		// それ以外（外側）をクリックした場合は閉じる
+		closeMenu();
+	});
+	
 
 	// スプリットテキスト
 	const navItems = document.querySelectorAll(".nav_item");

@@ -31,12 +31,12 @@
 			display: block;
 			position: absolute;
 			top: 0;
-			right: 6%;
+			right: 4%;
 			z-index: 10;
 			width: 1227px;
 			height: 1166px;
 
-			@media (max-width: 980px) {
+			@media (max-width: 1024px) {
 				top: 50%;
 				left: 50%;
 				width: 170vw;
@@ -46,8 +46,6 @@
 				right: auto;
 				transform: translate(-50%, -50%);
 			}
-
-
 		}
 	}
 
@@ -192,11 +190,12 @@
 			left: 8%;
 			color: var(--white-color);
 			display: grid;
-			gap: 45px;
+			row-gap: 45px;
 			z-index: 12;
 
 			@media (max-width: 768px) {
-				gap: 1rem;
+				row-gap: 1rem;
+				left: 1rem;
 			}
 
 			.text {
@@ -204,7 +203,10 @@
 				text-shadow: 2px 2px 4px rgb(20 20 20 / 0.3);
 
 				@media (max-width: 768px) {
-					font-size: calc(32 * var(--rem-ratio));
+					font-size: calc(48 * var(--rem-ratio));
+				}
+				@media (max-width: 500px) {
+					font-size: calc(40 * var(--rem-ratio));
 				}
 			}
 
@@ -553,7 +555,11 @@
 	background-position: right 7% center;
 	background-repeat: no-repeat;
 
-	@media (max-width: 768px) {
+	@media (max-width: 1320px) {
+		background-position: right 0 center;
+	}
+
+	@media (max-width: 980px) {
 		background-image: linear-gradient(to top, #752022, var(--accent-color));
 		background-size: 100% 30%;
 		background-position: bottom;
@@ -574,7 +580,7 @@
 	column-gap: 80px;
 	padding-left: 20px;
 
-	@media (max-width: 768px) {
+	@media (max-width: 980px) {
 		flex-direction: column;
 		row-gap: 40px;
 		margin-top: 48px;
