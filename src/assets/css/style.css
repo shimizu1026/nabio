@@ -81,7 +81,6 @@
 			row-gap: 30px;
 			z-index: 12;
 
-
 			@media (max-width: 768px) {
 				left: 1rem;
 			}
@@ -95,7 +94,7 @@
 					font-size: calc(48 * var(--rem-ratio));
 				}
 
-				@media (max-width: 450px) {
+				@media (max-width: 500px) {
 					font-size: calc(40 * var(--rem-ratio));
 				}
 
@@ -273,7 +272,7 @@
 			clip-path: ellipse(60% 87% at 50% 100%);
 		}
 
-		@media (max-width: 450px) {
+		@media (max-width: 500px) {
 			clip-path: ellipse(80% 87% at 50% 100%);
 		}
 	}
@@ -745,5 +744,15 @@
 		background-size: contain;
 		display: block;
 		margin-bottom: 0.5rem;
+	}
+}
+
+.lang_en_page {
+	.copy {
+		font-family: var(--font-family-en);
+
+		.text {
+			font-weight: var(--font-weight-sb);
+		}
 	}
 }

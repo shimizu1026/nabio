@@ -65,6 +65,8 @@
 	row-gap: 40px;
 }
 
+
+
 .form_step {
 	width: 200px;
 	display: flex;
@@ -305,18 +307,27 @@
 }
 
 /* 英語版 */
+
+.lang_en_page {
+	.form_step {
+		font-family: var(--font-family-en);
+	}
+}
+
 .lang_en_page .contact_form {
 
 	.required {
 		&::before {
 			content: 'Required';
-			width: 80px;
+			width: 90px;
+			font-family: var(--font-family-en);
 		}
 	}
 
 	.optional {
 		&::before {
 			content: 'Any';
+			font-family: var(--font-family-en);
 		}
 	}
 }
