@@ -483,59 +483,6 @@ document.addEventListener('componentsLoaded', function () {
 	}
 
 	// --------------------------------------------------
-	// productsセクションの切り替え
-	// --------------------------------------------------
-
-	const section = document.querySelector('.section_home_products');
-	const innerProduct = document.querySelector('.inner_home_product');
-	const steps = gsap.utils.toArray('.img_box .product_step');
-
-	if (section && innerProduct && steps.length > 0) {
-		// ★初期設定: 1枚目の画像だけを表示しておく
-		// gsap.set(steps[0], { opacity: 1 });
-		gsap.set(steps, { opacity: 0, visibility: "hidden" });
-    gsap.set(steps[0], { opacity: 1, visibility: "visible" });
-
-		// タイムラインの作成
-		// let tl = gsap.timeline({
-		// 	scrollTrigger: {
-		// 		trigger: section,
-		// 		pin: innerProduct,
-		// 		start: "top top",
-		// 		end: "+=150%",// スクロール量（画像の枚数に応じて調整。例: 200% = 2画面分スクロール）
-		// 		scrub: 0.5,// スクロールとアニメーションを連動（数値で慣性を調整）
-		// 		anticipatePin: 1// ピン留めのガタつき防止
-		// 	}
-		// });
-		let tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: section,
-				pin: innerProduct,
-				start: window.innerWidth <= 500 ? "top 5%" : "top top", 
-				end: "+=150%", 
-				scrub: 0.5,
-				invalidateOnRefresh: true,
-				anticipatePin: 1,
-			}
-		});
-
-		// アニメーションの定義
-		// 2枚目以降を順番にフェードインさせる
-		steps.forEach((step, index) => {
-			if (index === 0) return; // 1枚目は最初から出ているのでスキップ
-			const prevStep = steps[index - 1];
-
-			let holdDuration = (index === 1) ? 1 : 0.5;
-			tl.to({}, { duration: holdDuration });
-			tl.to(prevStep, { opacity: 0, visibility: "hidden", duration: 0.2 })
-			.to(step, { opacity: 1, visibility: "visible", duration: 0.2 }, "<");
-			tl.to({}, { duration: 0.5 });
-
-		});
-	}
-
-
-	// --------------------------------------------------
 	// 下層ページ見出し// --------------------------------------------------
 	function titleAnimation() {
 

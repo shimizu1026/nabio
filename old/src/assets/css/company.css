@@ -1,0 +1,369 @@
+.sub_page.company_header {
+	&::before {
+		background-image: url(../images/heading_company.webp) !important;
+
+		@media (max-width: 768px) {
+			background-position: bottom right 30%;
+		}
+	}
+}
+
+.contents {
+	.section_outline {
+		max-width: var(--main-width);
+		margin-inline: auto;
+		padding-top: 80px;
+		padding-bottom: 120px;
+
+		@media (max-width: 768px) {
+			padding-top: 40px;
+			padding-right: 20px;
+			padding-left: 20px;
+		}
+
+		.inner_outline {
+			display: flex;
+			justify-content: space-between;
+
+			@media (max-width: 1200px) {
+				padding: 0 1.25rem;
+			}
+			@media (max-width: 768px) {
+				flex-direction: column;
+			}
+
+			.title_box {
+				flex: 1;
+			}
+		}
+	}
+}
+
+.company_table {
+	width: 100%;
+	flex: 1.5;
+	@media (max-width: 768px) {
+		padding-top: 40px;
+	}
+}
+
+.company_table_row {
+	display: flex;
+	letter-spacing: 0.05em;
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+
+	dt {
+		width: 150px;
+		font-weight: var(--font-weight-m);
+		padding: 25px 0;
+		border-bottom: 1px solid var(--border-color);
+		@media (max-width: 768px) {
+			width: 100%;
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+	}
+
+	dd {
+		width: calc(100% - 150px);
+		padding: 25px 0;
+		border-bottom: 1px solid var(--border-color);
+
+		@media (max-width: 768px) {
+			width: 100%;
+		}
+
+		.location_group {
+			&.designated_agent {
+				margin-top: 1.5rem;
+			}
+		}
+
+		.inner {
+			display: flex;
+			align-items: flex-end;
+			line-height: 1.5;
+
+			@media (max-width: 768px) {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+	}
+
+	.map {
+
+		&::after {
+			-webkit-mask-image: url(../images/out_link.svg);
+			mask-image: url(../images/out_link.svg);
+		}
+	}
+
+	.agency {
+
+		&::after {
+			-webkit-mask-image: url(../images/icon_file.svg);
+			mask-image: url(../images/icon_file.svg);
+		}
+	}
+	.map, .agency {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: calc(14 * var(--rem-ratio));
+		padding-left: 1rem;
+		text-decoration: underline;
+    text-underline-offset: 4px;
+
+		@media (max-width: 768px) {
+			padding-left: 0;
+		}
+		&::after {
+			content: "";
+			display: block;
+			background-repeat: no-repeat;
+			width: 1rem;
+			height: 1rem;
+			background-color: currentColor;
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			-webkit-mask-size: contain;
+			mask-size: contain;
+			&:hover::after {
+				background-color: var(--accent-color);
+			}
+		}
+	}
+}
+
+.hover_color:hover {
+	color: var(--accent-color);
+	transition: var(--hover);
+	cursor: pointer;
+}
+
+.section_business {
+	width: 100%;
+	height: 470px;
+	background-image: url(../images/company_bg.webp);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	position: relative;
+	z-index: -1;
+	@media (max-width: 1200px) {
+		padding: 0 1.25rem;
+	}
+	@media (max-width: 768px) {
+		background-image: url(../images/company_bg_sp.webp);
+		height: 100vh;
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgb(20 20 20 / 0.3);
+		z-index: 2;
+	}
+
+	.title_en {
+		color: var(--white-color);
+	}
+
+	.title_ja {
+		color: var(--white-color);
+	}
+}
+
+.inner_business {
+	max-width: var(--main-width);
+	width: 100%;
+	height: 100%;
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	vertical-align: middle;
+	row-gap: 30px;
+	z-index: 2;
+	position: relative;
+}
+
+.text_business {
+	color: var(--white-color);
+	line-height: 2;
+}
+
+.section_history {
+	padding-top: 120px;
+
+	.title_box {
+		max-width: var(--main-width);
+		margin-inline: auto;
+
+		@media (max-width: 768px) {
+			padding-left: 20px;
+		}
+	}
+}
+
+.inner_history {
+	@media (max-width: 1200px) {
+		padding-left: 1.25rem;
+}
+}
+
+.history_slider_container {
+	position: relative;
+	width: 80%;
+	max-width: calc(100% - 360px);
+	margin-left: auto;
+	margin-right: 0;
+	padding-top: 80px;
+	padding-bottom: 60px;
+	overflow: hidden;
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+	}
+}
+
+.historySwiper {
+	width: 100%;
+	padding: 40px 0;
+
+	.swiper-wrapper {
+		align-items: flex-start;
+	}
+}
+
+.history_item {
+	padding-top: 1.5rem;
+
+	&::after {
+		content: "";
+		position: absolute;
+		/* top: 55px; */
+		top: 10px;
+		/* 丸の中心を通る高さに合わせる */
+		left: 0;
+		width: 100%;
+		height: 1px;
+		background-color: var(--border-color);
+		z-index: 1;
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 10px;
+		/* 線と同じ高さ */
+		left: 0.5rem;
+		/* 自分のエリアの中央に配置 */
+		transform: translate(-50%, -50%);
+		width: 1rem;
+		height: 1rem;
+		background-color: var(--gold-color);
+		border-radius: 50%;
+		z-index: 2;
+	}
+
+	.year {
+		order: 2;
+		font-size: calc(24 * var(--rem-ratio));
+		font-weight: var(--font-weight-m);
+		font-family: var(--font-family-en);
+		color: #BCBCBC;
+	}
+
+	.text {
+		order: 1;
+		font-size: calc(20 * var(--rem-ratio));
+		line-height: 1.5;
+		letter-spacing: 0.05em;
+		margin-top: 1.5rem;
+	}
+}
+
+/* 矢印ボタン */
+.history_navigation {
+	display: flex;
+	justify-content: center;
+	column-gap: 40px;
+	margin-top: 20px;
+
+	.swiper-button-prev,
+	.swiper-button-next {
+		position: static;
+		width: 50px;
+		height: 50px;
+		background-color: var(--accent-color);
+		border-radius: 50%;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 20px 23px;
+
+		svg {
+			display: none;
+		}
+	}
+
+	.swiper-button-prev {
+		background-image: url(../images/icon_arrow_prev.svg);
+	}
+
+	.swiper-button-next {
+		background-image: url(../images/icon_arrow_next.svg);
+	}
+}
+
+.section_access {
+	background-image: url(../images/bg_exclude.webp);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: right -178px bottom -15px;
+	padding-top: 120px;
+
+	@media (max-width: 768px) {
+		background-position: center bottom -15px;
+		background-size: cover;
+	}
+}
+
+.inner_access {
+	max-width: var(--main-width);
+	margin-inline: auto;
+	width: 100%;
+	@media (max-width: 1200px) {
+		padding: 0 1.25rem;
+	}
+
+	.address {
+		letter-spacing: 0.05em;
+		line-height: 1.5;
+
+	}
+
+}
+
+.map_container {
+	position: relative;
+	width: 100%;
+	height: 0;
+	padding-top: 56.25%;
+	margin-top: 32px;
+
+	iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}

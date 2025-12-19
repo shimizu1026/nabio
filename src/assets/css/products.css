@@ -15,7 +15,7 @@
 .inner_product {
 	max-width: var(--main-width);
 	margin-inline: auto;
-	padding-top: 144px;
+	padding-top: 100px;
 	padding-right: 20px;
 	padding-left: 20px;
 
@@ -143,6 +143,7 @@
 		}
 
 		dt {
+			width: 15%;
 			font-weight: var(--font-weight-r);
 		}
 
@@ -267,7 +268,7 @@
 	.product_content {
     & dl {
 			dt, dd {
-					width: 35%;
+					width: 24%;
 			}
 	}
 }

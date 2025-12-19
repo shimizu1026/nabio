@@ -1,0 +1,212 @@
+.sub_page.faq_header {
+	&::before {
+		background-image: url(../images/heading_faq.webp) !important;
+
+		@media (max-width: 768px) {
+			background-position: bottom right 30%;
+		}
+	}
+}
+
+.bread {
+	width: 100%;
+	max-width: var(--main-width);
+	margin-inline: auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 40px;
+
+	li {
+		position: relative;
+		font-size: calc(15 * var(--rem-ratio));
+		padding-left: 0;
+
+
+		&:not(:last-child) {
+			padding-right: 40px;
+
+			/* ::after で縦棒を生成し、右側（要素間）に配置 */
+			&::after {
+				position: absolute;
+				top: 50%;
+				right: 20px;
+				transform: translateY(-50%);
+
+				content: "";
+				width: 1px;
+				height: 14px;
+				/* 縦棒の高さ */
+				background-color: var(--font-color);
+			}
+		}
+	}
+}
+
+.faq_inner {
+	max-width: var(--main-width);
+	margin-inline: auto;
+	padding-top: 80px;
+
+	@media (max-width: 768px) {
+		padding-top: 40px;
+	}
+
+	.accordion_wrapper {
+		display: grid;
+		row-gap: 40px;
+			@media (max-width: 1200px) {
+				padding-right: 1.25rem;
+				padding-left: 1.25rem;
+	}
+	}
+
+	/* --- アコーディオンの基本設定 --- */
+	.accordion {
+		/* アニメーションの時間 */
+		--_duration: 300ms;
+		background-color: #fff;
+		box-shadow: 0 2px 2px rgb(20 20 20 / 0.2);
+
+		/* --- 開閉するコンテンツ部分 --- */
+		&::details-content {
+			content-visibility: unset;
+			display: block grid;
+
+			/* アニメーションの設定 */
+			@media (prefers-reduced-motion: no-preference) {
+				transition-duration: var(--_duration);
+				transition-property: grid-template-rows;
+			}
+		}
+
+		/* --- 閉じている時のコンテンツ --- */
+		/* open属性がない時（閉じている時） */
+		&:not([open])::details-content {
+			grid-template-rows: 0fr;
+		}
+
+		/*「open属性がない時（閉じている時）」 */
+		&[open] {
+			&::details-content {
+				grid-template-rows: 0fr;
+			}
+
+			/* --- 開いている時のコンテンツ --- */
+			&::details-content {
+				grid-template-rows: 1fr;
+			}
+		}
+	}
+
+	.content_wrapper {
+		overflow: hidden;
+	}
+
+	/* --- 見出し（クリックする部分） --- */
+	.summary {
+		--_foreground-default: var(--font-color)
+			/* 通常時の文字色 */
+			--_background-default: var(--white-color);
+
+		--_background-interactive: var(--gray-color);
+		box-shadow: 0 2px 2px rgb(20 20 20 / 0.25);
+
+		.question_wrap {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+
+		.icon_question {
+			font-size: calc(30 * var(--rem-ratio));
+		}
+
+		/* --- レイアウト --- */
+		display: grid;
+		gap: 1rem;
+		grid-template: ". icon" / 1fr max-content;
+		align-items: center;
+		padding-block: 1lh;
+		padding-inline: 1rem;
+
+		/* --- デザイン --- */
+		background-color: var(--_background-default);
+		color: var(--_foreground-default);
+		letter-spacing: 0.1em;
+		cursor: pointer;
+
+		/* 色が変わる時のアニメーション設定 */
+		transition-duration: var(--_duration);
+		transition-property: background-color,
+		color;
+
+		/* --- 見出しの「＋」アイコン（横棒） --- */
+		&::before {
+			content: "";
+			grid-area: icon;
+			inline-size: 1em;
+			border-block-end: 1px solid;
+			writing-mode: initial;
+		}
+
+		/* --- 見出しの「＋」アイコン（縦棒） --- */
+		&::after {
+			content: "";
+			grid-area: icon;
+			inline-size: 1em;
+			border-block-end: 1px solid;
+			rotate: 90deg;
+		}
+
+		&:focus-visible {
+			background-color: var(--_background-interactive);
+			color: var(--_foreground-interactive);
+		}
+
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: var(--_background-interactive);
+				color: var(--font-color);
+			}
+		}
+	}
+
+	/* --- アコーディオンが開いている時の見出し --- */
+	details[open]>summary.summary {
+		background-color: var(--white-color);
+		box-shadow: 0 2px 2px rgb(20 20 20 / 0.25);
+	}
+
+	/* --- アコーディオンが開いている時の「＋」アイコン（縦棒を消す）--- */
+	details[open]>summary.summary::after {
+		/* 縦棒を透明にする（「＋」が「ー」になる） */
+		opacity: 0;
+	}
+
+	/* --- 実際の中身のスタイル --- */
+	.content {
+		padding-block: 1lh;
+		background-color: var(--gray-color);
+
+		.answer_wrap {
+			display: flex;
+			align-items: flex-start;
+			gap: 1rem;
+			padding-inline: 1rem;
+
+			.icon_answer {
+				font-size: calc(30 * var(--rem-ratio));
+				color: var(--accent-color);
+				line-height: 1;
+			}
+
+			p {
+				line-height: 1.8;
+				letter-spacing: 0.05em;
+			}
+		}
+
+	}
+
+}
