@@ -17,8 +17,8 @@
 
 		@media (max-width: 768px) {
 			padding-top: 40px;
-			padding-right: 20px;
-			padding-left: 20px;
+			/* padding-right: 20px;
+			padding-left: 20px; */
 		}
 
 		.inner_outline {
@@ -54,11 +54,19 @@
 		flex-direction: column;
 	}
 
+	&:first-of-type {
+		dt {
+		padding-top: 0;			
+		}
+	}
+
 	dt {
 		width: 150px;
 		font-weight: var(--font-weight-m);
-		padding: 25px 0;
+		padding-top: 25px;
+		padding-bottom: 25px;
 		border-bottom: 1px solid var(--border-color);
+
 		@media (max-width: 768px) {
 			width: 100%;
 			border-bottom: none;

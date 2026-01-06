@@ -10,6 +10,10 @@
 
 .section_contact {
 	padding-top: 80px;
+
+	@media (max-width: 768px) {
+		padding-top: 40px;
+	}
 }
 
 .inner_contact {
@@ -36,7 +40,7 @@
 	flex-direction: row-reverse;
 	justify-content: space-between;
 	column-gap: 64px;
-	margin-top: 64px;
+	margin-top: 40px;
 	align-items: flex-start;
 
 
@@ -55,7 +59,7 @@
 	@media (max-width: 768px) {
 		position: static;
 		margin-inline: auto;
-		margin-bottom: 32px;
+		margin-bottom: 40px;
 	}
 }
 
