@@ -309,7 +309,6 @@
 	transition: none;
 	overflow: hidden;
 	padding-top: 100px;
-	padding-bottom: 120px;
 	position: relative;
 
 
@@ -356,59 +355,93 @@
 	margin-inline: auto;
 	width: 100%;
 
-	.flex_container {
-		display: flex;
-		column-gap: 130px;
-		margin-top: 20px;
+}
 
-		@media (max-width: 768px) {
-			column-gap: 30px;
-		}
+/* intro_img_container の横並びレイアウト */
+.intro_img_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 40px;
+	width: 100%;
+	max-width: var(--main-width);
+	margin-inline: auto;
+	overflow: hidden; 
+
+	@media (max-width: 768px) {
+		flex-direction: column-reverse;
+		gap: 20px;
+	}
+}
+
+/* ナトフェミンの画像 */
+.img_product {
+	width: 100%;
+	max-width: 530px;
+	height: auto;
+	object-fit: cover;
+	margin-top: 40px;
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+	}
+}
+
+/* ツリーと女性の画像を縦並びにするグループ */
+.img_group {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	max-width: 100%;
+	
+}
+
+/* 女性の画像（上に配置、z-index: 2で重ねる） */
+.img_woman {
+	width: 100%;
+	max-width: 100%; /* コンテナーの幅を超えないように */
+	height: auto;
+	object-fit: cover;
+	position: relative;
+	z-index: 2;
+	margin-bottom: -50px; /* ツリーの画像と重ねるための負のマージン */
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+		margin-bottom: -50px;
+	}
+}
+
+/* ツリーの画像（下に配置、z-index: 1） */
+.img_tree {
+	width: 100%;
+	max-width: 250px;
+	height: auto;
+	object-fit: cover;
+	margin-right: 150px;
+	position: relative;
+	z-index: 3;
+
+	@media (max-width: 768px) {
+		max-width: 120px;
+		margin-right: 120px;
 	}
 }
 
 .img_woman,
-.img_man,
-.img_lab {
+.img_tree {
 	will-change: transform;
 }
 
-/* 左の縦長の画像の設定 */
-.img_man {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-/* 右上の画像の設定 */
-.img_woman {
-	width: 650px;
-	margin-left: auto;
-	object-fit: cover;
-
-	@media (max-width: 768px) {
-		width: 300px;
-	}
-}
-
-/* 右下の画像の設定 */
-.img_lab {
-	padding-top: 120px;
-	padding-right: 115px;
-	width: 100%;
-	height: auto;
-	object-fit: cover;
-
-	@media (max-width: 768px) {
-		padding-right: 30px;
-	}
-}
 
 /* gifアニメーション */
 .animation_box {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	column-gap: 20px;
+	column-gap: 30px;
 	align-items: center;
 	justify-content: center;
 	max-width: var(--main-width);
@@ -417,17 +450,30 @@
 		
 	@media (max-width: 768px) {
 		grid-template-columns: repeat(2, 1fr);
-		row-gap: 20px;
+		row-gap: 30px;
+		margin-top: 0;
 	}
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
 	}
 
 	figcaption {
-		font-size: calc(14 * var(--rem-ratio));
-		letter-spacing: 0.05em;
-		text-align: center;
-		margin-top: 8px;
+
+		.img_title {
+			font-size: calc(16 * var(--rem-ratio));
+			font-weight: var(--font-weight-m);
+			text-align: center;
+			display: block;
+			margin-top: 8px;
+			margin-bottom: 4px;
+		}
+		.img_text {
+			font-size: calc(14 * var(--rem-ratio));
+			line-height: 1.5;
+			text-align: justify;
+			letter-spacing: 0.05em;
+
+		}
 	}
 
 	img {

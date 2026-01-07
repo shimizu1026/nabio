@@ -453,8 +453,8 @@ document.addEventListener('componentsLoaded', function () {
 			}
 		);
 
-		// 男性の画像（速く上がる）
-		gsap.fromTo(".img_man",
+		// 2枚目の画像（速く上がる）
+		gsap.fromTo(".img_product",
 			{ y: 100 },
 			{
 				y: -100,
@@ -467,11 +467,11 @@ document.addEventListener('componentsLoaded', function () {
 			}
 		);
 
-		// 研究者の画像（中くらいの速度）
-		gsap.fromTo(".img_lab",
-			{ y: 30 },
+		// 3枚目の画像（中くらいの速度）
+		gsap.fromTo(".img_tree",
+			{ y: 60 },
 			{
-				y: -30,
+				y: -60,
 				scrollTrigger: {
 					trigger: introSectionPara,
 					start: "top bottom",
