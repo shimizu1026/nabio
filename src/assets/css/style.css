@@ -323,11 +323,10 @@
 	}
 	@media (max-width: 500px) {
 		background-image: url(../images/bg_world_map_sp.webp);
-		background-size: cover;
-		background-position: center;
+		/* background-position: center;
 		padding-top: 0;
 		padding-right: 1rem;
-		padding-left: 1rem;
+		padding-left: 1rem; */
 	}
 
 
@@ -422,6 +421,13 @@
 	}
 	@media (max-width: 500px) {
 		grid-template-columns: 1fr;
+	}
+
+	figcaption {
+		font-size: calc(14 * var(--rem-ratio));
+		letter-spacing: 0.05em;
+		text-align: center;
+		margin-top: 8px;
 	}
 
 	img {
