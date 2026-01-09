@@ -1,0 +1,426 @@
+<?php
+// 日本語トップページ
+$lang = 'ja';
+$basePath = '';
+?>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="株式会社ナビオは、納豆の自然の力を活かした製品の開発・販売に取り組んでおります。"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>株式会社ナビオ</title>
+
+    <script src="assets/js/main.js" type="module"></script>
+    <script type="module" src="assets/js/loadcomponent.js"></script>
+
+    <meta property="og:title" content="株式会社ナビオ" />
+    <meta
+      property="og:description"
+      content="株式会社ナビオは、納豆の自然の力を活かした製品の開発・販売に取り組んでおります。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://natofemin.com/" />
+    <meta
+      property="og:image"
+      content="http://www.natofemin.com/assets/images/ogp.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/images/apple-touch-icon.png"
+    />
+  </head>
+
+  <body>
+    <main class="main" id="top">
+      <div class="opening_mask"></div>
+      <?php include __DIR__ . '/components/header.php'; ?>
+      <div class="header_overlay"></div>
+      <!-- <div id="header_placeholder"></div> -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide first zoom">
+            <picture>
+              <source
+                srcset="assets/images/fv_1.webp"
+                media="(min-width: 1200px)"
+              />
+              <img
+                src="assets/images/fv_1_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+            <div class="copy">
+              <p class="text">
+                あなたの
+                <br />
+                <span class="red">健康</span>
+                を
+                <br />
+                支えたい。
+              </p>
+              <span class="sub_text">
+                株式会社ナビオは、納豆の自然の力を活かした
+                <br />
+                製品の開発・販売に取り組んでおります。
+              </span>
+            </div>
+          </div>
+          <div class="swiper-slide second zoom">
+            <div class="copy">
+              <p class="text">腸内工場</p>
+              <span class="sub_text">
+                からだは、内側で支えるしくみを持っています。わたしたちは、そのはたらきに着目しています。
+              </span>
+            </div>
+            <picture>
+              <source
+                srcset="assets/images/fv_2.webp"
+                media="(min-width: 980px)"
+              />
+              <img
+                src="assets/images/fv_2_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+          </div>
+          <div class="swiper-slide third zoom">
+            <picture>
+              <source
+                srcset="assets/images/fv_3.webp"
+                media="(min-width: 980px)"
+              />
+              <img
+                src="assets/images/fv_3_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+            <div class="copy">
+              <p class="text">
+                自社基準にもとづく
+                <br class="sp_only" />
+                製造体制
+              </p>
+              <span class="sub_text">
+                原料から製造まで、確かな品質は自社基準の確かな管理体制から生まれます。
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="scroll_wrapper">
+        <div class="top_curve"></div>
+        <div class="scroll_contents">
+          <section class="intro">
+            <p class="intro_copy fade_title">
+              ナビオの製品は
+              <br />
+              世界の人々の健康に役立っています。
+            </p>
+            <p class="intro_text fade_text">
+              弊社は納豆由来の健康食品原料の製造を手掛けてきました。
+              <br />
+              弊社の製品1グラムには、100億個以上の納豆菌が含まれています。
+              <br />
+              これは、市販納豆1パックに含まれる納豆菌数に相当します。
+              さらに超低温処理を行い、腸内で増殖しやすい納豆菌になっています。
+              <br />
+              ユニークな製品はサプリ原料として、納豆の食習慣のない海外諸国にも多く輸出されています。
+            </p>
+            <div class="image_gallery fade_contents">
+              <div class="intro_img_container">
+                <img
+                  src="assets/images/intro_natofemin.webp"
+                  alt="ナトフェミンの画像"
+                  width="530"
+                  height="360"
+                  decoding="async"
+                  class="img_product"
+                />
+                <div class="img_group">
+                  <img
+                    src="assets/images/intro_woman.webp"
+                    alt="サプリメントを飲む女性のイメージ画像"
+                    width="650"
+                    height="434"
+                    decoding="async"
+                    class="img_woman"
+                  />
+                  <img
+                    src="assets/images/intro_tree.png"
+                    alt="納豆パウダーが入った木のガラス瓶の画像"
+                    width="250"
+                    height="455"
+                    decoding="async"
+                    class="img_tree"
+                  />
+                </div>
+              </div>
+
+              <div class="animation_box">
+                <figure class="anime01">
+                  <img
+                    src="assets/images/anime01.gif"
+                    alt="納豆菌の数についてのGIFアニメーション"
+                    width="738"
+                    height="508"
+                    decoding="async"
+                  />
+                  <figcaption>
+                    <span class="img_title">納豆菌の数 HOW MANY?</span>
+                    <p class="img_text">
+                      あなたは知っていますか？たった数グラムの納豆に、どれほどの規模で彼らは存在するのか。
+                      <br />
+                      この小さな四角い世界には、想像を絶する数がひしめき合っています。億単位？いいえ、もっとです。
+                    </p>
+                  </figcaption>
+                </figure>
+                <!-- /.anime01 -->
+                <figure class="anime02">
+                  <img
+                    src="assets/images/anime02.gif"
+                    alt="ナビオパウダーについてのGIFアニメーション"
+                    width="738"
+                    height="508"
+                    decoding="async"
+                  />
+                  <figcaption>
+                    <span class="img_title">生きたまま腸まで届ける</span>
+                    <p class="img_text">
+                      NABIO
+                      POWDERは、納豆菌を耐久性の高い胞子のまま粉末化しています。消化管の途中で死滅するリスクを最小限に抑え、乾燥休眠状態を維持させて、腸まで菌を到達させることに特化しています。
+                    </p>
+                  </figcaption>
+                </figure>
+                <!-- /.anime02 -->
+                <figure class="anime03">
+                  <img
+                    src="assets/images/anime03.gif"
+                    alt="納豆菌についてのGIFアニメーション"
+                    width="738"
+                    height="508"
+                    decoding="async"
+                  />
+                  <figcaption>
+                    <span class="img_title">腸内環境で「発芽」</span>
+                    <p class="img_text">
+                      胃を通過した納豆菌は、温度、水分、酸素、栄養、そして中性pH。これらが揃ったヒトの腸内環境下で、納豆菌は芽胞から活動状態（栄養細胞）へと戻り、初めて機能するよう設計されています。
+                    </p>
+                  </figcaption>
+                </figure>
+                <!-- /.anime03 -->
+              </div>
+              <!-- /.animation_box -->
+            </div>
+          </section>
+          <!-- /.intro -->
+          <section class="section_home_products">
+            <div class="text_inner">
+              <div>
+                <div class="title_box fade_title">
+                  <h2 class="en">
+                    Products
+                    <span class="ja">商品紹介</span>
+                  </h2>
+                </div>
+                <!-- /.title_box -->
+                <p class="mt48 fade_text section_text">
+                  ナビオの製品には、ナットウキナーゼ、FAS、ビタミンK2、
+                  <br class="pc_only" />
+                  ポリアミン、納豆菌がバランスよく含まれています。
+                </p>
+              </div>
+              <a href="products.php" class="button fade_contents">
+                <span>View More</span>
+              </a>
+            </div>
+            <div class="inner_home_product">
+              <div class="img_box fade_contents">
+                <div class="text_inner">
+                  <h3 class="product_name">ナトフェミン 納豆力</h3>
+                  <p class="product_text">
+                    ナットウキナーゼ(納豆キナーゼ)は納豆菌がつくる酵素です。
+                    <br />
+                    納豆菌の増殖により、ナットウキナーゼ(納豆キナーゼ)が作られます。
+                    <br />
+                    納豆菌は、ナットウキナーゼだけでなく、ビタミンK2やビタミンB群などの健康成分も作っています。
+                    <br />
+                    ナトフェミンPAは、納豆菌の生み出す成分を凝縮して作られた製品です。
+                  </p>
+                </div>
+                <figure class="product_step">
+                  <img
+                    src="assets/images/natofemin.webp"
+                    alt="ナトフェミン 納豆力の画像"
+                    width="400"
+                    height="330"
+                    decoding="async"
+                    loading="lazy"
+                    class="product_img is_active"
+                  />
+                </figure>
+              </div>
+              <!-- /.img_box -->
+              <div class="img_box fade_contents">
+                <div class="text_inner">
+                  <h3 class="product_name">妙果酵素 納豆パワー</h3>
+                  <p class="product_text">
+                    弊社粉末を原料とするソフトカプセル製品です。
+                    <br />
+                    日本薬局方最新版に準拠した腸溶カプセルの製品です。
+                    <br />
+                    弊社製品に含まれる納豆菌は腸内でビタミンKを産生しますので、ワーファリン服用中はお召し上がりになれません。
+                  </p>
+                  <div class="howto">
+                    <h4 class="howto_heading">弊社製品のお召上がり方</h4>
+                    <ul class="howto_list">
+                      <li class="howto_item">
+                        １日二粒をめどに、食後にお召し上がりください。
+                        <br />
+                        食事に含まれる炭水化物が餌となって、納豆菌が増殖します。
+                      </li>
+                      <li class="howto_item">
+                        すっぱいものを食べた後に摂取しても構いません。
+                        <br />
+                        ナットウキナーゼは胃酸のような酸性の液体に触れると、消失します。
+                        <br />
+                        納豆菌は強酸でも死滅することなく、小腸で増殖します。
+                      </li>
+                      <li class="howto_item">
+                        毎日、決まった時間にお召し上がりください。
+                        <br />
+                        腸で増殖する納豆菌は、24時間以上ナットウキナーゼやビタミンKなどの健康成分を
+                        <br />
+                        持続的に産生しますが、納豆菌の数は徐々に減少します。毎日、納豆菌を補給することをお勧めします。
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <figure class="product_step">
+                  <img
+                    src="assets/images/myouka.webp"
+                    alt="妙果酵素 納豆パワーの画像"
+                    width="400"
+                    height="305"
+                    decoding="async"
+                    loading="lazy"
+                    class="product_img"
+                  />
+                </figure>
+              </div>
+              <!-- /.img_box -->
+            </div>
+          </section>
+          <!-- /.section_home_products -->
+          <div class="products_wrapper">
+            <section class="section_home_company">
+              <div class="inner_home_company">
+                <div class="text_inner">
+                  <div class="title_box fade_title">
+                    <h2 class="en">
+                      Company
+                      <span class="ja">会社概要</span>
+                    </h2>
+                  </div>
+                  <p class="company_copy fade_text">
+                    長年にわたる
+                    <br />
+                    納豆菌の研究成果を
+                    <br class="pc_only" />
+                    製品化。
+                  </p>
+                  <p class="section_text fade_text">
+                    納豆は健康によい食品として、広く認知されています。
+                    <br />
+                    納豆に関する科学研究の成果を取り入れて製品化したのが弊社の製品です。
+                    <br />
+                    納豆菌は増殖中に様々な酵素やビタミンを作ります。
+                    <br />
+                    弊社の製品にも納豆の産み出す酵素やビタミンが含まれていますが、弊社製品は腸内で納豆菌に酵素やビタミンを産生させることをコンセプトにした製品です。
+                  </p>
+                  <a href="company.php" class="button">
+                    <span>View More</span>
+                  </a>
+                </div>
+                <div class="img_wrapper fade_contents">
+                  <img
+                    src="assets/images/home_company.webp"
+                    alt=""
+                    width="750"
+                    height="530"
+                    decoding="async"
+                    style="flex: 1;"
+                  />
+                </div>
+              </div>
+            </section>
+            <!-- /.section_company -->
+          </div>
+          <section class="section_features">
+            <div class="inner_features">
+              <div class="title_box fade_title">
+                <h2 class="en">
+                  Nabio product features
+                  <span class="ja">ナビオ製品の特長</span>
+                </h2>
+              </div>
+              <!-- <div class="title_box fade_title">
+							<h2 class="title_center_ja">ナビオ製品の特長</h2>
+						</div> -->
+              <ul class="features_list mt48">
+                <li class="features_item_wrap">
+                  <div class="features_item">
+                    <p class="features_text">
+                      ナビオの製品に含まれる納豆菌は休眠状態の納豆菌です(芽胞菌といいます)。休眠状態の納豆菌は100℃の熱でも、pH1の強酸でも死滅しません。
+                    </p>
+                  </div>
+                </li>
+                <li class="features_item_wrap translate">
+                  <div class="features_item">
+                    <p class="features_text">
+                      ナビオの製品は、1グラムに数百億個の納豆菌が含まれています。世界の人口数よりも多い数です。
+                    </p>
+                  </div>
+                </li>
+                <li class="features_item_wrap">
+                  <div class="features_item">
+                    <p class="features_text">
+                      大豆を納豆菌発酵させる点では、食品の納豆と同じです。ただ、納豆菌数を最大化する特殊な技術で製造されています。
+                    </p>
+                  </div>
+                </li>
+              </ul>
+              <!-- /.features_list -->
+              <a href="faq.php" class="button fade_contents">
+                <span>よくある質問はこちら</span>
+              </a>
+            </div>
+          </section>
+          <!-- /.section_features -->
+          <div id="contact_placeholder" class="gray_gradient"></div>
+          <div id="footer_placeholder"></div>
+        </div>
+        <!-- /.scroll_contents -->
+      </div>
+    </main>
+  </body>
+</html>
+

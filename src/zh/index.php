@@ -1,0 +1,378 @@
+<?php
+// 中国語トップページ
+$lang = 'zh';
+$basePath = '../';
+?>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nabio有限公司 致力于开发和销售利用纳豆天然能量的产品。"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Nabio有限公司</title>
+
+    <script src="../assets/js/main.js" type="module"></script>
+    <script type="module" src="../assets/js/loadcomponent.js"></script>
+
+    <meta property="og:title" content="Nabio有限公司" />
+    <meta
+      property="og:description"
+      content="Nabio有限公司 致力于开发和销售利用纳豆天然能量的产品。"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://natofemin.com/" />
+    <meta
+      property="og:image"
+      content="http://www.natofemin.com/assets/images/ogp.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/images/apple-touch-icon.png"
+    />
+  </head>
+
+  <body>
+    <main class="main" id="top">
+      <div class="opening_mask"></div>
+      <?php include __DIR__ . '/../components/header.php'; ?>
+      <div class="header_overlay"></div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide first zoom">
+            <picture>
+              <source
+                srcset="../assets/images/fv_1.webp"
+                media="(min-width: 1200px)"
+              />
+              <img
+                src="../assets/images/fv_1_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+            <div class="copy">
+              <p class="text">
+                我想支持你的
+                <br />
+                <span class="red">健康。</span>
+              </p>
+              <span class="sub_text">
+                Nabio有限公司
+                <br />
+                致力于开发和销售利用纳豆天然能量的产品。
+              </span>
+            </div>
+          </div>
+          <div class="swiper-slide second zoom">
+            <div class="copy">
+              <p class="text">肠道工厂</p>
+              <span class="sub_text">
+                人体内部有一套支撑自身运转的机制，而我们正在研究的就是这套机制是如何运作的。
+              </span>
+            </div>
+            <picture>
+              <source
+                srcset="../assets/images/fv_2.webp"
+                media="(min-width: 980px)"
+              />
+              <img
+                src="../assets/images/fv_2_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+          </div>
+          <div class="swiper-slide third zoom">
+            <picture>
+              <source
+                srcset="../assets/images/fv_3.webp"
+                media="(min-width: 980px)"
+              />
+              <img
+                src="../assets/images/fv_3_sp.webp"
+                alt=""
+                width="834"
+                height="1195"
+                decoding="async"
+              />
+            </picture>
+            <div class="copy">
+              <p class="text">
+                基于我们自身标准的
+                <br />
+                制造体系
+              </p>
+              <span class="sub_text">
+                从原材料到生产制造，我们可靠的质量源于以我们自身标准为基础的完善管理体系。
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="scroll_wrapper">
+        <div class="top_curve"></div>
+        <div class="scroll_contents">
+          <section class="intro">
+            <p class="intro_copy fade_title">
+              Nabio的
+              <br />
+              产品为世界各地人们的健康做出了贡献。
+            </p>
+            <p class="intro_text fade_text">
+              我公司一直致力于生产源自纳豆的保健食品原料。
+              <br />
+              每克我们的产品含有超过100亿个纳豆益生菌。
+              <br />
+              这与市售一包纳豆中所含的纳豆益生菌数量相当。我们还采用超低温加工技术，使纳豆益生菌更容易在肠道内繁殖。
+              <br />
+              这款独特的产品作为膳食补充剂原料出口，甚至远销纳豆并非常见食品的海外国家。
+            </p>
+            <div class="image_gallery fade_contents">
+              <div class="img_woman">
+                <img
+                  src="../assets/images/intro_woman.webp"
+                  alt="服用补充剂的女性形象"
+                  width="650"
+                  height="434"
+                  decoding="async"
+                />
+              </div>
+              <div class="flex_container">
+                <img
+                  src="../assets/images/intro_man.webp"
+                  alt="サプリメントを飲む男性のイメージ"
+                  width="420"
+                  height="280"
+                  decoding="async"
+                  class="img_man"
+                />
+                <img
+                  src="../assets/images/intro_study.webp"
+                  alt="研究者のイメージ"
+                  width="530"
+                  height="363"
+                  decoding="async"
+                  class="img_lab"
+                />
+              </div>
+            </div>
+            <div class="animation_box">
+              <div class="anime01">
+                <img src="../assets/images/anime01.gif" alt="" decoding="async" />
+              </div>
+              <!-- /.anime01 -->
+              <div class="anime02">
+                <img src="../assets/images/anime02.gif" alt="" decoding="async" />
+              </div>
+              <!-- /.anime02 -->
+              <div class="anime03">
+                <img src="../assets/images/anime03.gif" alt="" decoding="async" />
+              </div>
+              <!-- /.anime03 -->
+            </div>
+            <!-- /.animation_box -->
+          </section>
+          <!-- /.intro -->
+          <section class="section_home_products">
+            <div class="text_inner">
+              <div>
+                <div class="title_box fade_title">
+                  <h2 class="en">
+                    Products
+                    <span class="ja">产品介绍</span>
+                  </h2>
+                </div>
+                <!-- /.title_box -->
+                <p class="mt24 fade_text section_text">
+                  Nabio产品含有均衡配比的纳豆激酶,脂肪酸合成酶（FAS）,维生素K2,
+                  <br class="pc_only" />
+                  多胺和纳豆菌。
+                </p>
+              </div>
+              <a href="products.php" class="button fade_contents">
+                <span>View More</span>
+              </a>
+            </div>
+            <div class="inner_home_product">
+              <div class="img_box fade_contents">
+                <div class="text_inner">
+                  <h3 class="product_name">NATOFEMIN</h3>
+                  <p class="product_text">
+                    纳豆激酶是纳豆细菌产生的一种酶。
+                    <br />
+                    纳豆激酶是纳豆菌生长过程中产生的。
+                    <br />
+                    除了纳豆激酶，纳豆菌还会产生维生素K2和B族维生素等有益健康的成分。
+                    <br />
+                    Natofemin PA是一种通过浓缩纳豆菌产生的成分制成的产品。
+                  </p>
+                </div>
+                <figure class="product_step">
+                  <img
+                    src="../assets/images/natofemin.webp"
+                    alt="NATOFEMIN 纳豆能量形象"
+                    width="400"
+                    height="330"
+                    decoding="async"
+                    loading="lazy"
+                    class="product_img is_active"
+                  />
+                </figure>
+              </div>
+              <!-- /.img_box -->
+              <div class="img_box fade_contents">
+                <div class="text_inner">
+                  <h3 class="product_name">妙果酵素 纳豆能量</h3>
+                  <p class="product_text">
+                    本软胶囊产品由我们的纳豆粉制成。
+                    <br />
+                    本产品为肠溶胶囊，符合最新版日本药典标准。
+                    <br />
+                    本产品中所含的纳豆菌会在肠道内产生维生素K，因此服用华法林期间不可服用。
+                  </p>
+                  <div class="howto">
+                    <h4 class="howto_heading">如何服用我们的产品</h4>
+                    <ul class="howto_list">
+                      <li class="howto_item">
+                        每日餐后服用约两片。
+                        <br />
+                        食物中的碳水化合物是纳豆菌繁殖的养分。
+                      </li>
+                      <li class="howto_item">
+                        吃完酸味食物后服用也没关系。
+                        <br />
+                        纳豆激酶在接触胃酸等酸性液体后会消失。
+                        <br />
+                        纳豆中的益生菌即使在强酸环境下也能存活，并在小肠内持续繁殖。
+                      </li>
+                      <li class="howto_item">
+                        每天定时食用。
+                        <br />
+                        纳豆益生菌在肠道内生长，并持续24小时以上产生纳豆激酶、维生素K等有益成分，但数量会逐渐减少。我们建议每天补充纳豆益生菌。
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <figure class="product_step">
+                  <img
+                    src="../assets/images/myouka.webp"
+                    alt="妙果酵素 纳豆纳豆粉图片"
+                    width="400"
+                    height="305"
+                    decoding="async"
+                    loading="lazy"
+                    class="product_img"
+                  />
+                </figure>
+              </div>
+              <!-- /.img_box -->
+            </div>
+          </section>
+          <!-- /.section_home_products -->
+          <div class="products_wrapper">
+            <section class="section_home_company">
+              <div class="inner_home_company">
+                <div class="text_inner">
+                  <div class="title_box fade_title">
+                    <h2 class="en">
+                      Company
+                      <span class="ja">公司概况</span>
+                    </h2>
+                  </div>
+                  <p class="company_copy fade_text">
+                    多年来对纳豆菌的
+                    <br />
+                    研究成果已经商业化。
+                  </p>
+                  <p class="section_text fade_text">
+                    纳豆被广泛认为是一种健康食品。
+                    <br />
+                    我们的产品融合了纳豆相关的科学研究成果。
+                    <br />
+                    纳豆菌在生长过程中会产生多种酶和维生素。
+                    <br />
+                    我们的产品含有纳豆产生的酶和维生素，
+                    <br />
+                    但我们的理念是让纳豆菌在肠道内产生这些酶和维生素。
+                  </p>
+                  <a href="company.php" class="button">
+                    <span>View More</span>
+                  </a>
+                </div>
+                <div class="img_wrapper fade_contents">
+                  <img
+                    src="../assets/images/home_company.webp"
+                    alt=""
+                    width="600"
+                    height="532"
+                    decoding="async"
+                    style="flex: 1;"
+                  />
+                </div>
+              </div>
+            </section>
+            <!-- /.section_company -->
+          </div>
+          <section class="section_features">
+            <div class="inner_features">
+              <div class="title_box fade_title">
+                <h2 class="en">
+                  Nabio product features
+                  <span class="ja">Nabio产品功能</span>
+                </h2>
+              </div>
+              <!-- <div class="title_box fade_title">
+							<h2 class="title_center_ja">Nabio产品功能</h2>
+						</div> -->
+              <ul class="features_list mt48">
+                <li class="features_item_wrap">
+                  <div class="features_item">
+                    <p class="features_text">
+                      Nabio产品中所含的纳豆菌是休眠纳豆菌（也称为产孢细菌）。休眠纳豆菌无法被100°C的高温或pH值为1的强酸性环境杀死。
+                    </p>
+                  </div>
+                </li>
+                <li class="features_item_wrap translate">
+                  <div class="features_item">
+                    <p class="features_text">
+                      Nabio 的产品每克含有数百亿个纳豆细菌，比世界人口还多。
+                    </p>
+                  </div>
+                </li>
+                <li class="features_item_wrap">
+                  <div class="features_item">
+                    <p class="features_text">
+                      它与食品纳豆相同，都是用纳豆菌发酵大豆制成的，但它的生产采用了一种特殊的技术，最大限度地提高了纳豆菌的数量。
+                    </p>
+                  </div>
+                </li>
+              </ul>
+              <!-- /.features_list -->
+              <a href="faq.php" class="button fade_contents">
+                <span>常见问题解答</span>
+              </a>
+            </div>
+          </section>
+          <!-- /.section_features -->
+          <div id="contact_placeholder" class="gray_gradient"></div>
+          <div id="footer_placeholder"></div>
+        </div>
+        <!-- /.scroll_contents -->
+      </div>
+    </main>
+  </body>
+</html>
+
