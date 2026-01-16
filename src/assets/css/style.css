@@ -442,7 +442,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 30px;
-	align-items: center;
+	align-items: baseline;
 	justify-content: center;
 	max-width: var(--main-width);
 	margin-inline: auto;
@@ -470,7 +470,8 @@
 		.img_text {
 			font-size: calc(14 * var(--rem-ratio));
 			line-height: 1.5;
-			text-align: justify;
+			text-align: left;
+			/* text-align: justify; */
 			letter-spacing: 0.05em;
 
 		}

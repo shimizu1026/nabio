@@ -538,6 +538,31 @@ document.addEventListener('componentsLoaded', function () {
 		titleAnimation();
 	}
 
+// --------------------------------------------------
+// GIFアニメーションのフェードアップ（左から順に）
+// --------------------------------------------------
+function setupGifAnimation() {
+  const figures = gsap.utils.toArray(".animation_box figure");
+
+  if (figures.length === 0) return;
+
+  gsap.from(figures, {
+    y: 40,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out",
+    stagger: 0.3,
+    scrollTrigger: {
+      trigger: ".animation_box", 
+      start: "top 80%", 
+      toggleActions: "play none none none",
+    }
+  });
+}
+
+// 実行
+setupGifAnimation();
+
 	// --------------------------------------------------
 	// 下から上にフェイドイン// --------------------------------------------------
 	// 1. .fade_title のアニメーション設定
