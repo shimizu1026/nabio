@@ -457,23 +457,18 @@
 		grid-template-columns: 1fr;
 	}
 
-	figcaption {
+	figure {
+		display: grid;
+		row-gap: 8px;
+	}
 
-		.img_title {
-			font-size: calc(16 * var(--rem-ratio));
-			font-weight: var(--font-weight-m);
-			text-align: center;
-			display: block;
-			margin-top: 8px;
-			margin-bottom: 4px;
-		}
+	figcaption {
 		.img_text {
 			font-size: calc(14 * var(--rem-ratio));
 			line-height: 1.5;
 			text-align: left;
 			/* text-align: justify; */
 			letter-spacing: 0.05em;
-
 		}
 	}
 
