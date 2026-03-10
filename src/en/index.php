@@ -12,7 +12,6 @@ $basePath = '../';
       name="description"
       content="Nabio Co., Ltd. is committed to developing and selling products that utilize the natural power of natto."
     />
-    <meta name="robots" content="noindex, nofollow" />
     <title>Nabio Co., Ltd.</title>
 
     <script src="../assets/js/main.js" type="module"></script>

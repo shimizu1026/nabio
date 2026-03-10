@@ -1,465 +1,757 @@
 <!DOCTYPE html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nabio Co., Ltd. is committed to developing and selling products that utilize the natural power of natto."
+    />
+    <title>Nabio Co., Ltd.</title>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Nabio Co., Ltd. is committed to developing and selling products that utilize the natural power of natto.">
-	<meta name="robots" content="noindex, nofollow" />
-	<title>Nabio Co., Ltd.</title>
+    <style>
+      /* 最初は確認エリアと完了エリアを隠しておく */
+      #confirm-area,
+      #thanks-area {
+        display: none;
+      }
 
-	<style>
-		/* 最初は確認エリアと完了エリアを隠しておく */
-		#confirm-area,
-		#thanks-area {
-			display: none;
-		}
+      /* エラーメッセージ用 */
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
 
-		/* エラーメッセージ用 */
-		.error {
-			color: red;
-			font-weight: bold;
-		}
-	</style>
+    <script src="../assets/js/main.js" type="module"></script>
+    <script type="module" src="../assets/js/loadcomponent.js"></script>
 
-	<script src="../assets/js/main.js" type="module"></script>
-	<script type="module" src="../assets/js/loadcomponent.js"></script>
+    <meta property="og:title" content="Nabio Co., Ltd." />
+    <meta
+      property="og:description"
+      content="Nabio Co., Ltd. is committed to developing and selling products that utilize the natural power of natto."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://natofemin.com/" />
+    <meta
+      property="og:image"
+      content="http://www.natofemin.com/assets/images/ogp.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/images/apple-touch-icon.png"
+    />
+  </head>
 
-	<meta property="og:title" content="Nabio Co., Ltd.">
-	<meta property="og:description" content="Nabio Co., Ltd. is committed to developing and selling products that utilize the natural power of natto.">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="http://natofemin.com/">
-	<meta property="og:image" content="http://www.natofemin.com/assets/images/ogp.jpg">
-	<meta name="twitter:card" content="summary_large_image">
-	<link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
-	<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
-</head>
+  <body class="lang_en_page">
+    <!-- <div id="header_placeholder"></div> -->
+    <header class="header">
+      <div class="header_inner">
+        <div class="nav_wrapper">
+          <h1 class="header_logo">
+            <a href="index.html">
+              <img
+                src="../assets/images/logo.svg"
+                alt="Nabio Inc. logo"
+                width="145"
+                height="51"
+                decoding="async"
+                loading="lazy"
+              />
+            </a>
+          </h1>
 
-<body class="lang_en_page">
-	<!-- <div id="header_placeholder"></div> -->
-<header class="header">
-	<div class="header_inner">
+          <nav class="nav">
+            <ul class="nav_list">
+              <li class="nav_item">
+                <a href="products.html" class="nav_link">
+                  <span class="ja">商品紹介</span>
+                  <span class="en">Products</span>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="faq.html" class="nav_link">
+                  <span class="ja">よくある質問</span>
+                  <span class="en">FAQ</span>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="company.html" class="nav_link">
+                  <span class="ja">会社概要</span>
+                  <span class="en">Company</span>
+                </a>
+              </li>
+              <li class="nav_item">
+                <a href="contact.html" class="nav_link">
+                  <span class="ja">お問い合わせ</span>
+                  <span class="en">Contact</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="header_contact">
+          <div class="header_contact_inner">
+            <a href="tel:0829425833" class="tel">082-942-5833</a>
+            <a href="contact.html" class="mail">
+              <img
+                src="../assets/images/icon_mail.svg"
+                alt="Contact form link"
+                width="25"
+                height="25"
+                decoding="async"
+                loading="lazy"
+              />
+            </a>
+          </div>
 
-		<div class="nav_wrapper">
-			<h1 class="header_logo"><a href="index.html"><img src="../assets/images/logo.svg" alt="Nabio Inc. logo" width="145"
-						height="51" decoding="async" loading="lazy"></a></h1>
+          <ul class="lang_links">
+            <li class="link_ja">
+              <a href="../contact.html">JP</a>
+            </li>
+            <li class="link_en">
+              <a href="contact.html">EN</a>
+            </li>
+            <li class="link_zh">
+              <a href="../zh/contact.html">中文</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button class="hamburger_button">
+        <div class="button_line_top"></div>
+        <div class="button_line_bottom"></div>
+      </button>
+      <div class="hamburger_contents">
+        <div class="hamburger_top_bar">
+          <div class="hamburger_logo">
+            <a href="index.html">
+              <img
+                src="../assets/images/logo.svg"
+                alt="Nabio Inc. logo"
+                width="145"
+                height="51"
+                decoding="async"
+                loading="lazy"
+              />
+            </a>
+          </div>
+          <div class="link_box">
+            <ul class="lang_links">
+              <li class="link_ja">
+                <a href="../contact.html">JP</a>
+              </li>
+              <li class="link_en">
+                <a href="contact.html">EN</a>
+              </li>
+              <li class="link_zh">
+                <a href="../zh/contact.html">中文</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="hamburger_contact_area">
+          <div class="hamburger_contact">
+            <a href="tel:0829425833" class="tel">082-942-5833</a>
+            <p>
+              Reception hours: 9:00 AM to 5:00 PM (excluding weekends and
+              holidays)
+            </p>
+            <a href="contact.html" class="mail button">
+              <span>Email form</span>
+            </a>
+          </div>
+        </div>
+        <ul class="hamburger_list">
+          <li class="hamburger_item">
+            <a href="products.html">
+              <span class="ja">商品紹介</span>
+              <span class="en">Products</span>
+            </a>
+          </li>
+          <li class="hamburger_item">
+            <a href="faq.html">
+              <span class="ja">よくある質問</span>
+              <span class="en">FAQ</span>
+            </a>
+          </li>
+          <li class="hamburger_item">
+            <a href="company.html">
+              <span class="ja">会社概要</span>
+              <span class="en">Company</span>
+            </a>
+          </li>
+          <li class="hamburger_item">
+            <a href="contact.html">
+              <span class="ja">お問い合わせ</span>
+              <span class="en">Contact</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="header_overlay"></div>
+    <main class="main" id="top">
+      <section class="sub_page contact_header">
+        <div class="inner">
+          <h2 class="title">
+            <span class="title_en">Contact</span>
+            <span class="title_ja">お問い合わせ</span>
+          </h2>
+          <!-- /.title -->
+        </div>
+        <!-- /.inner -->
+      </section>
+      <ul class="bread">
+        <li><a href="../index.html" class="hover_color">Home</a></li>
+        <li>Contact</li>
+      </ul>
+      <!-- /.bread -->
+      <section class="contents">
+        <section class="section_contact">
+          <div class="inner_contact">
+            <div class="title_box fade_title">
+              <h2 class="en">
+                Mail Form
+                <span class="ja">Inquiries via mail form</span>
+              </h2>
+            </div>
+            <!-- /.title_box -->
+            <div id="input-area">
+              <p class="mt48 fade_text">
+                For inquiries by email, please use the email submission form
+                below.
+              </p>
+              <div class="form_wrapper">
+                <div class="form_steps fade_contents">
+                  <ol class="form_step_list">
+                    <li class="form_step select">
+                      <span class="en">01.</span>
+                      Form entry
+                    </li>
+                    <li class="form_step">
+                      <span class="en">02.</span>
+                      Confirm the input
+                      <br />
+                      information
+                    </li>
+                    <li class="form_step">
+                      <span class="en">03.</span>
+                      The letter has been delivered.
+                    </li>
+                  </ol>
+                </div>
+                <!-- /.form_steps -->
 
-			<nav class="nav">
-				<ul class="nav_list">
-					<li class="nav_item"><a href="products.html" class="nav_link"><span class="ja">商品紹介</span><span
-								class="en">Products</span></a></li>
-					<li class="nav_item"><a href="faq.html" class="nav_link"><span class="ja">よくある質問</span><span
-								class="en">FAQ</span></a></li>
-					<li class="nav_item"><a href="company.html" class="nav_link"><span class="ja">会社概要</span><span
-								class="en">Company</span></a></li>
-					<li class="nav_item"><a href="contact.html" class="nav_link"><span class="ja">お問い合わせ</span><span
-								class="en">Contact</span></a></li>
-				</ul>
-			</nav>
-		</div>
-		<div class="header_contact">
-			<div class="header_contact_inner">
-				<a href="tel:0829425833" class="tel">082-942-5833</a>
-				<a href="contact.html" class="mail"><img src="../assets/images/icon_mail.svg" alt="Contact form link"
-						width="25" height="25" decoding="async" loading="lazy"></a>
-			</div>
+                <form id="contact_form" class="contact_form fade_contents">
+                  <div class="form_row">
+                    <label for="name" class="required">Name</label>
+                    <input type="text" id="name" name="user_name" required />
+                    <div class="error_message" id="name_error"></div>
+                  </div>
+                  <div class="form_row">
+                    <label for="company" class="optional">Company Name</label>
+                    <input type="text" id="company" name="user_company" />
+                    <div class="error_message" id="company_error"></div>
+                  </div>
+                  <div class="form_row">
+                    <label for="address" class="optional">Address</label>
+                    <input type="text" id="address" name="user_address" />
+                    <div class="error_message" id="address_error"></div>
+                  </div>
+                  <div class="form_row">
+                    <label for="tel" class="required">Phone Number</label>
+                    <input type="tel" id="tel" name="user_tel" />
+                    <div class="error_message" id="tel_error"></div>
+                  </div>
+                  <div class="form_row">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="user_email" required />
+                    <div class="error_message" id="email_error"></div>
+                  </div>
+                  <div class="form_row">
+                    <label for="message" class="required">
+                      Inquiry/question
+                    </label>
+                    <textarea
+                      id="message"
+                      name="user_message"
+                      rows="8"
+                      required
+                    ></textarea>
+                    <div class="error_message" id="message_error"></div>
+                  </div>
+                  <div class="agree_wrapp form_row">
+                    <label for="agree" class="required">Privacy Policy</label>
+                    <div class="privacy_policy_box">
+                      <div id="privacy_policy_placeholder"></div>
+                      <div class="privacy_policy_content">
+                        <p class="privacy_policy_text">
+                          Nabio Inc. (hereinafter referred to as "our company")
+                          has established the following privacy policy
+                          (hereinafter referred to as "this policy") regarding
+                          the handling of users' personal information in the
+                          services provided on this website (hereinafter
+                          referred to as "this service").
+                        </p>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 1 (Personal Information)
+                          </h3>
+                          <p class="privacy_policy_text">
+                            "Personal information" refers to "personal
+                            information" as defined in the Personal Information
+                            Protection Act, and refers to information about a
+                            living individual that can identify a specific
+                            individual based on the name, date of birth,
+                            address, telephone number, contact details, and
+                            other descriptions contained in the information, as
+                            well as data related to appearance, fingerprints,
+                            voiceprints, and information that can identify a
+                            specific individual from the information alone, such
+                            as the insurer number on a health insurance card
+                            (personal identification information).
+                          </p>
+                        </section>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 2 (Method of collecting personal
+                            information)
+                          </h3>
+                          <p class="privacy_policy_text">
+                            When a user registers for use, we may ask for
+                            personal information such as name, date of birth,
+                            address, telephone number, email address, bank
+                            account number, credit card number, driver's license
+                            number, etc. In addition, we may collect information
+                            regarding transaction records and payments made
+                            between users and our partners, etc., including
+                            personal information about users, from our partners
+                            (including information providers, advertisers, ad
+                            distribution destinations, etc.; hereinafter
+                            referred to as "Partners").
+                          </p>
+                        </section>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 3 (Purpose of collecting and using personal
+                            information)
+                          </h3>
+                          <p class="privacy_policy_text">
+                            The purposes for which we collect and use personal
+                            information are as follows.
+                          </p>
+                          <ul class="circle_list">
+                            <li>To provide and operate our services</li>
+                            <li>
+                              To respond to inquiries from users (including
+                              verifying their identity)
+                            </li>
+                            <li>
+                              To send emails about new features, updates,
+                              campaigns, etc. of the services the user is using,
+                              as well as information about other services
+                              provided by our company
+                            </li>
+                            <li>
+                              To contact you as necessary regarding maintenance,
+                              important notices, etc.
+                            </li>
+                            <li>
+                              To identify and deny use to users who have
+                              violated the terms of use or who are attempting to
+                              use the service for fraudulent or improper
+                              purposes
+                            </li>
+                            <li>
+                              To allow users to view, change, or delete their
+                              own registered information, and to view their
+                              usage status
+                            </li>
+                            <li>To bill users for paid services</li>
+                            <li>
+                              Purposes incidental to the above purposes of use
+                            </li>
+                          </ul>
+                        </section>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 4 (Provision of personal information to
+                            third parties)
+                          </h3>
+                          <ul class="circle_list">
+                            <li>
+                              We will not provide personal information to third
+                              parties without the user's prior consent, except
+                              in the following cases. However, this does not
+                              apply when permitted by the Personal Information
+                              Protection Act or other laws and regulations:
+                              <ul class="circle_list">
+                                <li>
+                                  When it is necessary to protect a person's
+                                  life, body, or property, and it is difficult
+                                  to obtain the individual's consent.
+                                </li>
+                                <li>
+                                  When it is particularly necessary for the
+                                  improvement of public health or the promotion
+                                  of healthy child development, and it is
+                                  difficult to obtain the consent of the
+                                  individual.
+                                </li>
+                                <li>
+                                  When it is necessary to cooperate with a
+                                  national government agency, local government,
+                                  or a person commissioned by them to carry out
+                                  duties prescribed by law, and obtaining the
+                                  individual's consent may impede the
+                                  performance of said duties.
+                                </li>
+                                <li>
+                                  The following items will be announced or
+                                  publicly announced in advance, and the Company
+                                  will notify the Personal Information
+                                  Protection Commission:
+                                  <ul class="circle_list">
+                                    <li>
+                                      The purpose of use includes providing the
+                                      information to a third party.
+                                    </li>
+                                    <li>
+                                      Data items provided to third parties
+                                    </li>
+                                    <li>
+                                      Means or method of providing to third
+                                      parties
+                                    </li>
+                                    <li>
+                                      To stop providing personal information to
+                                      third parties at the request of the
+                                      individual.
+                                    </li>
+                                    <li>
+                                      How to accept a request from the
+                                      individual
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>
+                              Notwithstanding the provisions of the preceding
+                              paragraph, in the following cases, the recipient
+                              of such information will not be a third party:
+                              <ul class="circle_list">
+                                <li>
+                                  When we outsource all or part of the handling
+                                  of personal information to the extent
+                                  necessary to achieve the purpose of use.
+                                </li>
+                                <li>
+                                  When personal information is provided in
+                                  connection with business succession due to a
+                                  merger or other reason
+                                </li>
+                                <li>
+                                  When personal information is jointly used with
+                                  a specific person, the individual is notified
+                                  in advance or made easily accessible to the
+                                  individual of the fact, the items of personal
+                                  information to be jointly used, the scope of
+                                  the joint users, the purpose of use by the
+                                  users, and the name or title of the person
+                                  responsible for managing the personal
+                                  information.
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </section>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 5 (Correction and Deletion of Personal
+                            Information)
+                          </h3>
+                          <p class="privacy_policy_text">
+                            If the personal information held by the Company is
+                            incorrect, the User may request the Company to
+                            correct, add, or delete the personal information
+                            (hereinafter referred to as \"correction, etc.\") in
+                            accordance with the procedures established by the
+                            Company.
+                          </p>
+                          <p class="privacy_policy_text">
+                            If we receive a request from a user as set forth in
+                            the preceding paragraph and determine that it is
+                            necessary to comply with the request, we will
+                            correct the personal information without delay.
+                          </p>
+                          <p class="privacy_policy_text">
+                            If the Company makes any corrections, etc. pursuant
+                            to the provisions of the preceding paragraph, or if
+                            the Company decides not to make any corrections,
+                            etc., the Company will notify the User without
+                            delay.
+                          </p>
+                        </section>
+                        <section>
+                          <h3 class="privacy_policy_title mb8">
+                            Article 6 (Inquiries)
+                          </h3>
+                          <p class="privacy_policy_text">
+                            For inquiries regarding this policy, please contact
+                            the following office.
+                          </p>
+                          <div class="contact_info">
+                            <dl class="info_row">
+                              <dt>Address:</dt>
+                              <dd>
+                                10-12 Yahata 5-chome, Saeki-ku, Hiroshima City,
+                                731-5116
+                              </dd>
+                            </dl>
+                            <dl class="info_row">
+                              <dt>Company Name：</dt>
+                              <dd>Nabio Co., Ltd.</dd>
+                            </dl>
+                            <dl class="info_row">
+                              <dt>Representative Director：</dt>
+                              <dd>Masaaki Obayashi</dd>
+                            </dl>
+                            <dl class="info_row">
+                              <dt>Email address:</dt>
+                              <dd>tuhan@natofemin.com</dd>
+                            </dl>
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                    <div class="agree_actions">
+                      <div class="agree_checkbox">
+                        <input
+                          type="checkbox"
+                          id="agree"
+                          name="user_agree"
+                          required=""
+                          value="同意する"
+                        />
+                        <label for="agree">I agree to the privacy policy</label>
+                      </div>
+                      <div class="error_message" id="agree_error"></div>
+                    </div>
+                  </div>
 
-				<ul class="lang_links">
-				<li class="link_ja">
-					<a href="../contact.html">JP</a>
-				</li>
-				<li class="link_en">
-					<a href="contact.html">EN</a>
-				</li>
-				<li class="link_zh">
-					<a href="../zh/contact.html">中文</a>
-				</li>
-				</ul>
-		</div>
-	</div>
-	<button class="hamburger_button">
-		<div class="button_line_top"></div>
-		<div class="button_line_bottom"></div>
-	</button>
-	<div class="hamburger_contents">
+                  <button
+                    type="button"
+                    class="button center"
+                    onclick="showConfirm()"
+                  >
+                    <span>Check your input</span>
+                  </button>
+                </form>
+              </div>
 
-		<div class="hamburger_top_bar">
-			<div class="hamburger_logo"><a href="index.html"><img src="../assets/images/logo.svg" alt="Nabio Inc. logo"
-						width="145" height="51" decoding="async" loading="lazy"></a></div>
-			<div class="link_box">
-				<ul class="lang_links">
-				<li class="link_ja">
-					<a href="../contact.html">JP</a>
-				</li>
-				<li class="link_en">
-					<a href="contact.html">EN</a>
-				</li>
-				<li class="link_zh">
-					<a href="../zh/contact.html">中文</a>
-				</li>
-				</ul>
-			</div>
+              <p class="note">
+                If you have not received a response from us within a week, it is
+                possible that the email was not received due to a malfunction of
+                the email system. Please send the email again or contact us by
+                phone.
+              </p>
+            </div>
+          </div>
+          <!-- /.inner_contact -->
 
-		</div>
-		<div class="hamburger_contact_area">
-			<div class="hamburger_contact">
-				<a href="tel:0829425833" class="tel">082-942-5833</a>
-				<p>Reception hours: 9:00 AM to 5:00 PM (excluding weekends and holidays)</p>
-				<a href="contact.html" class="mail button"><span>Email form</span></a>
-			</div>
-		</div>
-		<ul class="hamburger_list">
-			<li class="hamburger_item">
-				<a href="products.html"><span class="ja">商品紹介</span>
-					<span class="en">Products</span>
-				</a>
-			</li>
-			<li class="hamburger_item">
-				<a href="faq.html">
-					<span class="ja">よくある質問</span>
-					<span class="en">FAQ</span>
-				</a>
-			</li>
-			<li class="hamburger_item">
-				<a href="company.html">
-					<span class="ja">会社概要</span>
-					<span class="en">Company</span>
-				</a>
-			</li>
-			<li class="hamburger_item">
-				<a href="contact.html">
-					<span class="ja">お問い合わせ</span>
-					<span class="en">Contact</span></a>
-			</li>
-		</ul>
-	</div>
-</header>
-<div class="header_overlay"></div>
-	<main class="main" id="top">
-		<section class="sub_page contact_header">
-			<div class="inner">
-				<h2 class="title">
-					<span class="title_en">Contact</span>
-					<span class="title_ja">お問い合わせ</span>
-				</h2>
-				<!-- /.title -->
-			</div>
-			<!-- /.inner -->
-		</section>
-		<ul class="bread">
-			<li><a href="../index.html" class="hover_color">Home</a></li>
-			<li>Contact</li>
-		</ul>
-		<!-- /.bread -->
-		<section class="contents">
-			<section class="section_contact">
-				<div class="inner_contact">
-					<div class="title_box fade_title">
-						<h2 class="en">Mail Form<span class="ja">Inquiries via mail form</span></h2>
-					</div>
-					<!-- /.title_box -->
-					<div id="input-area">
-						<p class="mt48 fade_text">For inquiries by email, please use the email submission form below.
-						</p>
-						<div class="form_wrapper">
-							<div class="form_steps fade_contents">
-								<ol class="form_step_list">
-									<li class="form_step select"><span class="en">01.</span>Form entry</li>
-									<li class="form_step"><span class="en">02.</span>Confirm the input<br>information</li>
-									<li class="form_step"><span class="en">03.</span>The letter has been delivered.</li>
-								</ol>
-							</div>
-							<!-- /.form_steps -->
+          <!-- お問い合わせ内容の確認 -->
+          <div id="confirm-area" class="confirm inner_contact">
+            <h3 class="title_center mt48">Confirmation of inquiry details</h3>
+            <div class="form_wrapper">
+              <div class="form_steps">
+                <ol class="form_step_list">
+                  <li class="form_step">
+                    <span class="en">01.</span>
+                    Form entry
+                  </li>
+                  <li class="form_step select">
+                    <span class="en">02.</span>
+                    Confirm the input information
+                  </li>
+                  <li class="form_step">
+                    <span class="en">03.</span>
+                    The letter has been delivered.
+                  </li>
+                </ol>
+              </div>
+              <!-- /.form_steps -->
+              <div style="width: 100%;">
+                <p>Would you like to send the following?</p>
+                <div id="confirm_content" class="confirm_content mt48">
+                  <p>
+                    <strong>Name：</strong>
+                    <span id="conf_name"></span>
+                  </p>
+                  <p>
+                    <strong>Company Name：</strong>
+                    <span id="conf_company"></span>
+                  </p>
+                  <p>
+                    <strong>Address：</strong>
+                    <span id="conf_address"></span>
+                  </p>
+                  <p>
+                    <strong>Phone Number：</strong>
+                    <span id="conf_tel"></span>
+                  </p>
+                  <p>
+                    <strong>Email Address:</strong>
+                    <span id="conf_email"></span>
+                  </p>
+                  <p>
+                    <strong>Inquiry/question:</strong>
+                    <br />
+                    <span
+                      id="conf_message"
+                      style="line-height: 1.5; margin-top: 8px; display: block;"
+                    ></span>
+                  </p>
+                  <p>
+                    <strong>Privacy Policy:</strong>
+                    <span id="conf_agree"></span>
+                  </p>
+                </div>
+                <div class="confirm_buttons">
+                  <button type="button" onclick="backToInput()" class="button">
+                    <span>Return</span>
+                  </button>
+                  <button type="button" onclick="sendMail()" class="button">
+                    <span>Send</span>
+                  </button>
+                  <p id="sending-msg" style="display: none;">Sending...</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- お問い合わせ完了 -->
+          <div id="thanks-area" class="complete inner_contact">
+            <h3 class="title_center mt48">Inquiry completed</h3>
+            <div class="form_wrapper">
+              <div class="form_steps">
+                <ol class="form_step_list">
+                  <li class="form_step">
+                    <span class="en">01.</span>
+                    Form entry
+                  </li>
+                  <li class="form_step">
+                    <span class="en">02.</span>
+                    Confirm the input information
+                  </li>
+                  <li class="form_step select">
+                    <span class="en">03.</span>
+                    The letter has been delivered.
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <p style="line-height: 1.8; letter-spacing: 0.05em;">
+                  Your message has been sent.
+                  <br />
+                  Thank you for your inquiry.
+                </p>
+                <p class="mt64">
+                  <a href="../index.html" class="button">
+                    <span>Back to top</span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+      <!-- /.contents -->
+    </main>
+    <div id="footer_placeholder"></div>
 
-							<form id="contact_form" class="contact_form fade_contents">
-								<div class="form_row">
-									<label for="name" class="required">Name</label>
-									<input type="text" id="name" name="user_name" required />
-									<div class="error_message" id="name_error"></div>
-								</div>
-								<div class="form_row">
-									<label for="company" class="optional">Company Name</label>
-									<input type="text" id="company" name="user_company" />
-									<div class="error_message" id="company_error"></div>
-								</div>
-								<div class="form_row">
-									<label for="address" class="optional">Address</label>
-									<input type="text" id="address" name="user_address" />
-									<div class="error_message" id="address_error"></div>
-								</div>
-								<div class="form_row">
-									<label for="tel" class="required">Phone Number</label>
-									<input type="tel" id="tel" name="user_tel" />
-									<div class="error_message" id="tel_error"></div>
-								</div>
-								<div class="form_row">
-									<label for="email" class="required">Email Address</label>
-									<input type="email" id="email" name="user_email" required />
-									<div class="error_message" id="email_error"></div>
-								</div>
-								<div class="form_row">
-									<label for="message" class="required">Inquiry/question</label>
-									<textarea id="message" name="user_message" rows="8" required></textarea>
-									<div class="error_message" id="message_error"></div>
-								</div>
-								<div class="agree_wrapp form_row">
-									<label for="agree" class="required">Privacy Policy</label>
-									<div class="privacy_policy_box">
-										<div id="privacy_policy_placeholder"></div>
-										<div class="privacy_policy_content">
-											<p class="privacy_policy_text">
-												Nabio Inc. (hereinafter referred to as "our company") has established the following privacy policy (hereinafter referred to as "this policy") regarding the handling of users' personal information in the services provided on this website (hereinafter referred to as "this service").
-											</p>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 1 (Personal Information)</h3>
-												<p class="privacy_policy_text">
-													"Personal information" refers to "personal information" as defined in the Personal Information Protection Act, and refers to information about a living individual that can identify a specific individual based on the name, date of birth, address, telephone number, contact details, and other descriptions contained in the information, as well as data related to appearance, fingerprints, voiceprints, and information that can identify a specific individual from the information alone, such as the insurer number on a health insurance card (personal identification information).
-												</p>
-											</section>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 2 (Method of collecting personal information)</h3>
-												<p class="privacy_policy_text">
-													When a user registers for use, we may ask for personal information such as name, date of birth, address, telephone number, email address, bank account number, credit card number, driver's license number, etc. In addition, we may collect information regarding transaction records and payments made between users and our partners, etc., including personal information about users, from our partners (including information providers, advertisers, ad distribution destinations, etc.; hereinafter referred to as "Partners").
-												</p>
-											</section>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 3 (Purpose of collecting and using personal information)</h3>
-												<p class="privacy_policy_text">The purposes for which we collect and use personal information are as follows.</p>
-												<ul class="circle_list">
-													<li>To provide and operate our services</li>
-													<li>To respond to inquiries from users (including verifying their identity)</li>
-													<li>To send emails about new features, updates, campaigns, etc. of the services the user is using, as well as information about other services provided by our company</li>
-													<li>To contact you as necessary regarding maintenance, important notices, etc.</li>
-													<li>To identify and deny use to users who have violated the terms of use or who are attempting to use the service for fraudulent or improper purposes</li>
-													<li>To allow users to view, change, or delete their own registered information, and to view their usage status</li>
-													<li>To bill users for paid services</li>
-													<li>Purposes incidental to the above purposes of use</li>
-												</ul>
-											</section>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 4 (Provision of personal information to third parties)</h3>
-												<ul class="circle_list">
-													<li>We will not provide personal information to third parties without the user's prior consent, except in the following cases. However, this does not apply when permitted by the Personal Information Protection Act or other laws and regulations:
-														<ul class="circle_list">
-															<li>When it is necessary to protect a person's life, body, or property, and it is difficult to obtain the individual's consent.</li>
-															<li>When it is particularly necessary for the improvement of public health or the promotion of healthy child development, and it is difficult to obtain the consent of the individual.
-															</li>
-															<li>When it is necessary to cooperate with a national government agency, local government, or a person commissioned by them to carry out duties prescribed by law, and obtaining the individual's consent may impede the performance of said duties.
-															</li>
-															<li>The following items will be announced or publicly announced in advance, and the Company will notify the Personal Information Protection Commission:
-																<ul class="circle_list">
-																	<li>The purpose of use includes providing the information to a third party.</li>
-																	<li>Data items provided to third parties</li>
-																	<li>Means or method of providing to third parties</li>
-																	<li>To stop providing personal information to third parties at the request of the individual.</li>
-																	<li>How to accept a request from the individual</li>
-																</ul>
-															</li>
-														</ul>
-													</li>
-													<li>Notwithstanding the provisions of the preceding paragraph, in the following cases, the recipient of such information will not be a third party:
-														<ul class="circle_list">
-															<li>When we outsource all or part of the handling of personal information to the extent necessary to achieve the purpose of use.</li>
-															<li>When personal information is provided in connection with business succession due to a merger or other reason</li>
-															<li>When personal information is jointly used with a specific person, the individual is notified in advance or made easily accessible to the individual of the fact, the items of personal information to be jointly used, the scope of the joint users, the purpose of use by the users, and the name or title of the person responsible for managing the personal information.
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</section>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 5 (Correction and Deletion of Personal Information)</h3>
-												<p class="privacy_policy_text">
-													If the personal information held by the Company is incorrect, the User may request the Company to correct, add, or delete the personal information (hereinafter referred to as \"correction, etc.\") in accordance with the procedures established by the Company.
-												</p>
-												<p class="privacy_policy_text">
-													If we receive a request from a user as set forth in the preceding paragraph and determine that it is necessary to comply with the request, we will correct the personal information without delay.
-												</p>
-												<p class="privacy_policy_text">
-													If the Company makes any corrections, etc. pursuant to the provisions of the preceding paragraph, or if the Company decides not to make any corrections, etc., the Company will notify the User without delay.</p>
-											</section>
-											<section>
-												<h3 class="privacy_policy_title mb8">Article 6 (Inquiries)</h3>
-												<p class="privacy_policy_text">For inquiries regarding this policy, please contact the following office.</p>
-												<div class="contact_info">
-													<dl class="info_row">
-														<dt>Address:</dt>
-														<dd>10-12 Yahata 5-chome, Saeki-ku, Hiroshima City, 731-5116</dd>
-													</dl>
-													<dl class="info_row">
-														<dt>Company Name：</dt>
-														<dd>Nabio Co., Ltd.</dd>
-													</dl>
-													<dl class="info_row">
-														<dt>Representative Director：</dt>
-														<dd>Masaaki Obayashi</dd>
-													</dl>
-													<dl class="info_row">
-														<dt>Email address:</dt>
-														<dd>tuhan@natofemin.com</dd>
-													</dl>
-												</div>
-											</section>
-										</div>
-									</div>
-									<div class="agree_actions">
-										<div class="agree_checkbox">
-											<input type="checkbox" id="agree" name="user_agree" required=""
-												value="同意する">
-											<label for="agree">I agree to the privacy policy</label>
-										</div>
-										<div class="error_message" id="agree_error"></div>
-									</div>
-								</div>
+    <script>
+      // 1. 入力画面 → 確認画面へ切り替え
+      function showConfirm() {
+        // 入力値を取得
+        const name = document.getElementById('name').value
+        const email = document.getElementById('email').value
+        const company = document.getElementById('company').value
+        const address = document.getElementById('address').value
+        const tel = document.getElementById('tel').value
+        const message = document.getElementById('message').value
+        const agreeCheckbox = document.getElementById('agree')
+        const agreeTextForDisplay = agreeCheckbox.checked ? 'agree' : 'Disagree'
 
-								<button type="button" class="button center"
-									onclick="showConfirm()"><span>Check your input</span></button>
-							</form>
-						</div>
+        // 簡易バリデーション（空なら進ませない）
+        if (!name || !email || !tel || !message || !agreeCheckbox) {
+          alert('Please fill in all required fields')
+          return
+        }
 
-						<p class="note">
-							If you have not received a response from us within a week, it is possible that the email was not received due to a malfunction of the email system. Please send the email again or contact us by phone.
-						</p>
-					</div>
-				</div>
-				<!-- /.inner_contact -->
+        const agreeText = agreeCheckbox.checked ? 'agree' : 'Disagree'
 
-				<!-- お問い合わせ内容の確認 -->
-				<div id="confirm-area" class="confirm inner_contact">
-					<h3 class="title_center mt48">Confirmation of inquiry details</h3>
-					<div class="form_wrapper">
-						<div class="form_steps">
-							<ol class="form_step_list">
-								<li class="form_step"><span class="en">01.</span>Form entry</li>
-								<li class="form_step select"><span class="en">02.</span>Confirm the input information</li>
-								<li class="form_step"><span class="en">03.</span>The letter has been delivered.</li>
-							</ol>
-						</div>
-						<!-- /.form_steps -->
-						<div style="width: 100%;">
-							<p>Would you like to send the following?</p>
-							<div id="confirm_content" class="confirm_content mt48">
-								<p><strong>Name：</strong> <span id="conf_name"></span></p>
-								<p><strong>Company Name：</strong> <span id="conf_company"></span></p>
-								<p><strong>Address：</strong> <span id="conf_address"></span></p>
-								<p><strong>Phone Number：</strong> <span id="conf_tel"></span></p>
-								<p><strong>Email Address:</strong> <span id="conf_email"></span></p>
-								<p><strong>Inquiry/question:</strong> <br><span id="conf_message"
-										style="line-height: 1.5; margin-top: 8px; display: block;"></span></p>
-								<p><strong>Privacy Policy:</strong> <span id="conf_agree"></span></p>
-							</div>
-							<div class="confirm_buttons">
-								<button type="button" onclick="backToInput()" class="button"><span>Return</span></button>
-								<button type="button" onclick="sendMail()" class="button"><span>Send</span></button>
-								<p id="sending-msg" style="display:none;">Sending...</p>
+        // 確認画面のパーツに入力値をセット
+        document.getElementById('conf_name').innerText = name
+        document.getElementById('conf_company').innerText = company
+        document.getElementById('conf_address').innerText = address
+        document.getElementById('conf_tel').innerText = tel
+        document.getElementById('conf_email').innerText = email
+        document.getElementById('conf_message').innerText = message
+        document.getElementById('conf_agree').innerText = agreeTextForDisplay
 
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- お問い合わせ完了 -->
-				<div id="thanks-area" class="complete inner_contact">
-					<h3 class="title_center mt48">Inquiry completed</h3>
-					<div class="form_wrapper">
-						<div class="form_steps">
-							<ol class="form_step_list">
-								<li class="form_step"><span class="en">01.</span>Form entry</li>
-								<li class="form_step"><span class="en">02.</span>Confirm the input information</li>
-								<li class="form_step select"><span class="en">03.</span>The letter has been delivered.</li>
-							</ol>
-						</div>
-						<div>
-							<p style="line-height: 1.8; letter-spacing: 0.05em;">Your message has been sent.<br>Thank you for your inquiry.</p>
-							<p class="mt64"><a href="../index.html" class="button"><span>Back to top</span></a></p>
-						</div>
-					</div>
-				</div>
-			</section>
-		</section>
-		<!-- /.contents -->
-	</main>
-	<div id="footer_placeholder"></div>
+        // 表示の切り替え
+        document.getElementById('input-area').style.display = 'none'
+        document.getElementById('confirm-area').style.display = 'block'
 
-	<script>
-		// 1. 入力画面 → 確認画面へ切り替え
-		function showConfirm() {
-			// 入力値を取得
-			const name = document.getElementById('name').value;
-			const email = document.getElementById('email').value;
-			const company = document.getElementById('company').value;
-			const address = document.getElementById('address').value;
-			const tel = document.getElementById('tel').value;
-			const message = document.getElementById('message').value;
-			const agreeCheckbox = document.getElementById('agree');
-			const agreeTextForDisplay = agreeCheckbox.checked ? "agree" : "Disagree";
+        window.scrollTo(0, 0)
+      }
 
-			// 簡易バリデーション（空なら進ませない）
-			if (!name || !email || !tel || !message || !agreeCheckbox) {
-				alert('Please fill in all required fields');
-				return;
-			}
+      // 2. 確認画面 → 入力画面へ戻る
+      function backToInput() {
+        document.getElementById('confirm-area').style.display = 'none'
+        document.getElementById('input-area').style.display = 'block'
 
-			const agreeText = agreeCheckbox.checked ? "agree" : "Disagree";
+        window.scrollTo(0, 0)
+      }
 
-			// 確認画面のパーツに入力値をセット
-			document.getElementById('conf_name').innerText = name;
-			document.getElementById('conf_company').innerText = company;
-			document.getElementById('conf_address').innerText = address;
-			document.getElementById('conf_tel').innerText = tel;
-			document.getElementById('conf_email').innerText = email;
-			document.getElementById('conf_message').innerText = message;
-			document.getElementById('conf_agree').innerText = agreeTextForDisplay;
+      // 3. 送信処理（send_mail.phpへデータを送る）
+      function sendMail() {
+        // 送信中メッセージを出す
+        document.getElementById('sending-msg').style.display = 'block'
 
-			// 表示の切り替え
-			document.getElementById('input-area').style.display = 'none';
-			document.getElementById('confirm-area').style.display = 'block';
+        // フォームのデータを取得
+        const form = document.getElementById('contact_form')
+        const formData = new FormData(form)
 
-			window.scrollTo(0, 0);
-		}
+        // PHPへ送信（Fetch API）
+        fetch('form_handler/send_mail.php', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.text()) // PHPからの返事を受け取る
+          .then((data) => {
+            console.log(data) // デバッグ用
+            if (data.includes('success')) {
+              // 成功したら完了画面へ
+              document.getElementById('confirm-area').style.display = 'none'
+              document.getElementById('thanks-area').style.display = 'block'
 
-		// 2. 確認画面 → 入力画面へ戻る
-		function backToInput() {
-			document.getElementById('confirm-area').style.display = 'none';
-			document.getElementById('input-area').style.display = 'block';
-
-			window.scrollTo(0, 0);
-		}
-
-		// 3. 送信処理（send_mail.phpへデータを送る）
-		function sendMail() {
-			// 送信中メッセージを出す
-			document.getElementById('sending-msg').style.display = 'block';
-
-			// フォームのデータを取得
-			const form = document.getElementById('contact_form');
-			const formData = new FormData(form);
-
-			// PHPへ送信（Fetch API）
-			fetch('form_handler/send_mail.php', {
-				method: 'POST',
-				body: formData
-			})
-				.then(response => response.text()) // PHPからの返事を受け取る
-				.then(data => {
-					console.log(data); // デバッグ用
-					if (data.includes('success')) {
-						// 成功したら完了画面へ
-						document.getElementById('confirm-area').style.display = 'none';
-						document.getElementById('thanks-area').style.display = 'block';
-
-						window.scrollTo(0, 0);
-					} else {
-						alert('Sending failed. Error: ' + data);
-						document.getElementById('sending-msg').style.display = 'none';
-					}
-				})
-				.catch(error => {
-					alert('A communication error occurred');
-					console.error('Error:', error);
-					document.getElementById('sending-msg').style.display = 'none';
-				});
-		}
-	</script>
-</body>
-
+              window.scrollTo(0, 0)
+            } else {
+              alert('Sending failed. Error: ' + data)
+              document.getElementById('sending-msg').style.display = 'none'
+            }
+          })
+          .catch((error) => {
+            alert('A communication error occurred')
+            console.error('Error:', error)
+            document.getElementById('sending-msg').style.display = 'none'
+          })
+      }
+    </script>
+  </body>
 </html>

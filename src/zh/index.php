@@ -12,7 +12,6 @@ $basePath = '../';
       name="description"
       content="Nabio有限公司 致力于开发和销售利用纳豆天然能量的产品。"
     />
-    <meta name="robots" content="noindex, nofollow" />
     <title>Nabio有限公司</title>
 
     <script src="../assets/js/main.js" type="module"></script>

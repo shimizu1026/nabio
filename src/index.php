@@ -12,7 +12,6 @@ $basePath = '';
       name="description"
       content="株式会社ナビオは、納豆の自然の力を活かした製品の開発・販売に取り組んでおります。"
     />
-    <meta name="robots" content="noindex, nofollow" />
     <title>株式会社ナビオ</title>
 
     <script src="assets/js/main.js" type="module"></script>
