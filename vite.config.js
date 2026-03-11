@@ -36,6 +36,7 @@ export default defineConfig({
 				contact: resolve(__dirname, './src/contact.html'),
 				faq: resolve(__dirname, './src/faq.html'),
 				products: resolve(__dirname, './src/products.html'),
+				page_404: resolve(__dirname, './src/404.html'),
 				// header: resolve(__dirname, "./src/components/header.html"),
 				// footer: resolve(__dirname, "./src/components/footer.html"),
 				// component_contact: resolve(__dirname, "./src/components/contact.html"),

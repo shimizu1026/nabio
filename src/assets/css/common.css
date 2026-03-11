@@ -1019,3 +1019,41 @@ body {
 		font-weight: var(--font-weight-sb);
 	}
 }
+
+.page_404 {
+	.sub_page .title {
+    & .title_en {
+        @media (max-width: 768px) {
+            font-size: calc(43 * var(--rem-ratio));
+        }
+    }
+}
+.sub_page .title {
+	@media (max-width: 768px) {
+		padding-top: 180px;
+		padding-left: 0;
+}
+}
+
+	.inner_outline {
+		max-width: var(--main-width);
+		margin-inline: auto;
+	}
+	.inner {
+		display: grid;
+		row-gap: 1.5rem;
+		margin-bottom: 4rem;
+
+		@media (max-width: 768px) {
+			padding: 0 1rem;
+		}
+	}
+	h2 {
+		font-size: calc(40 * var(--rem-ratio));
+		font-weight: 600;
+	}
+	.text {
+		line-height: 1.5;
+    letter-spacing: 0.05em;
+	}
+}
