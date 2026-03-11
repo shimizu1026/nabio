@@ -1,5 +1,5 @@
 <?php
-
+$config = require 'config.php';
 // 1. PHPMailerのメインクラスファイルを読み込む
 require_once 'vender/PHPMailer/src/PHPMailer.php';
 
@@ -50,28 +50,23 @@ try {
     // 共通サーバー設定
     // ------------------------------------
     $mail->isSMTP();
-    // $mail->Host      = 'sv14304.xserver.jp';
-    $mail->Host = 'cs363.xbit.jp';
+    $mail->Host = $config['smtp_host'];
     $mail->SMTPAuth = true;
-    $mail->Username = 'a.shimizu@nichibi.co.jp'; // SMTP認証ID お問い合わせフォームからの通知メールを送るための「送信専用アカウント」または「代表アドレス」送信に使うメールアドレス
-
-    //$mail->Username  = 'no-reply@natofemin.com';
-    $mail->Password = 'fu3XKMCb8iEp'; // SMTPパスワード
-    //$mail->Password  = 'nichibi3949';
+    $mail->Username = $config['smtp_user'];
+    $mail->Password = $config['smtp_pass'];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // SMTPS (Port 465)
     $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
 
     // 送信元設定 (両方のメールで共通) 送信に使うメールアドレスと一緒
-    // $mail->setFrom('nabio-test@nichibi.co.jp', 'Webサイト お問い合わせフォーム');
     $mail->setFrom('no-reply@natofemin.com', 'Webサイト お問い合わせフォーム');
 
     // ======================================
     // 1. 管理者へ送信
     // ======================================
     $mail->clearAllRecipients(); // 宛先をクリア
-    $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者'); // 管理者 受信する人のアドレス
-    //$mail->addAddress('tuhan@natofemin.com', '管理者');
+    // $mail->addAddress('a.shimizu@nichibi.co.jp', '管理者'); 管理者 受信する人のアドレス
+    $mail->addAddress('tuhan@natofemin.com', '管理者');
     $mail->Subject = '【Webサイト】新しいお問い合わせがありました';
     $mail->Body = $mail_body_content;
     $mail->addReplyTo($user_email, $user_name); // 返信先をフォーム入力者のアドレスにする
