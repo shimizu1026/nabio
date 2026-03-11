@@ -812,7 +812,7 @@ body {
 	margin-left: auto;
 
 	@media (max-width: 768px) {
-		margin-left: 0;
+		margin-inline: auto;
 	}
 
 }

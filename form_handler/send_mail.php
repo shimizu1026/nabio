@@ -78,7 +78,8 @@ try {
     // ======================================
     $mail->clearAllRecipients(); // 宛先をクリア
     $mail->addAddress($user_email, $user_name); // ユーザーのアドレス
-    $mail->Subject = '【株式会社】お問い合わせありがとうございます（自動返信）';
+    $mail->Subject =
+        '【株式会社ナビオ】お問い合わせありがとうございます（自動返信）';
 
     // ユーザー向け本文を整形
     $user_mail_body = "{$user_name} 様\n\n";
