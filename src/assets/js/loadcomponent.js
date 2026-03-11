@@ -95,6 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(html => {
                 footerContainer.innerHTML = html;
+                const tpl = document.getElementById('lang_links');
+                const target = document.getElementById('lang_links_target');
+                if (tpl && target) {
+                    target.replaceWith(tpl.content.cloneNode(true));
+                }
                 checkAllComponentsLoaded(); // 読み込み完了を通知
             })
             .catch(error => {
